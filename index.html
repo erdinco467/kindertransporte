@@ -1,0 +1,1096 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Die Kindertransporte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..700&family=Pinyon+Script&family=Oswald:wght@400..700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap">
+<style>
+/* Layout: a long scroll "dossier" in one narrow reading column; the banknote is the one bold element,
+   the workshop and timeline break out to full width. Engraved Didone display + book serif body. */
+:root {
+  --paper: #ecebe4;      /* linen rag paper, slightly cool */
+  --paper-2: #e2e1d8;
+  --ink: #17181c;        /* printing ink */
+  --ink-soft: #4a4c53;
+  --rule: #b9b8ae;
+  --stamp: #245866;      /* dark petrol, like old luggage labels */
+  --note: #f7f6f1;       /* the white of the "white fiver" */
+  --note-ink: #1d1e22;
+  --ok: #2f6b45;
+  --display: "Oswald", "Arial Narrow", sans-serif;
+  --body: "Libre Baskerville", Georgia, "Times New Roman", serif;
+  --script: "Pinyon Script", "Snell Roundhand", cursive;
+  --mono: "Special Elite", "Courier New", monospace;
+  --col: 40rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #16171b; --paper-2: #1e1f24; --ink: #e8e6dd; --ink-soft: #a9a8a0; --rule: #3a3b41;
+    --stamp: #8bbfcc; --note: #e9e7de; --note-ink: #1d1e22; --ok: #7cc196; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #16171b; --paper-2: #1e1f24; --ink: #e8e6dd; --ink-soft: #a9a8a0; --rule: #3a3b41;
+  --stamp: #8bbfcc; --note: #e9e7de; --note-ink: #1d1e22; --ok: #7cc196; color-scheme: dark;
+}
+
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+* { box-sizing: border-box; }
+body {
+  background: var(--paper); color: var(--ink);
+  font-family: var(--body); font-size: 1rem; line-height: 1.75;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  overflow-x: hidden;
+}
+/* faint paper fibres */
+body::after {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: .5;
+  background-image: repeating-linear-gradient(115deg, transparent 0 7px, color-mix(in srgb, var(--rule) 18%, transparent) 7px 8px);
+}
+main, header.site, footer { position: relative; z-index: 1; }
+a { color: inherit; text-decoration-color: var(--stamp); text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--stamp); outline-offset: 3px; }
+
+h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.08; text-transform: uppercase; letter-spacing: .01em; text-wrap: balance; margin: 0; }
+h2 { font-size: clamp(2rem, 5vw, 3.4rem); letter-spacing: -.01em; }
+h3 { font-size: 1.35rem; font-weight: 600; }
+p { margin: 0; }
+.col { max-width: var(--col); margin-inline: auto; }
+.wide { max-width: 72rem; margin-inline: auto; }
+section { padding-block: clamp(4rem, 10vw, 7.5rem); }
+.prose { display: grid; gap: 1.1rem; }
+.prose p { color: var(--ink); }
+.lede { font-size: 1.25rem; line-height: 1.55; }
+.kicker { font-family: var(--mono); font-size: .8rem; color: var(--stamp); letter-spacing: .04em; }
+.section-head { display: grid; gap: .9rem; margin-bottom: 2.2rem; }
+.muted { color: var(--ink-soft); }
+.small { font-size: .875rem; }
+
+/* ---------- nav ---------- */
+header.site {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
+  padding: .7rem max(16px, env(safe-area-inset-right, 0px)) .7rem max(16px, env(safe-area-inset-left, 0px));
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule);
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
+.brand { font-family: var(--display); font-weight: 700; font-size: 1.05rem; text-decoration: none; white-space: nowrap; }
+nav.toc { display: flex; gap: 1.1rem; overflow-x: auto; scrollbar-width: none; font-size: .9rem; }
+nav.toc a { text-decoration: none; color: var(--ink-soft); white-space: nowrap; }
+nav.toc a:hover, nav.toc a.on { color: var(--ink); }
+.progress { position: absolute; left: 0; bottom: -1px; height: 2px; background: var(--stamp); width: 0; }
+@media (max-width: 760px) { nav.toc { display: none; } }
+
+/* ---------- hero ---------- */
+.hero { padding-block: clamp(2.5rem, 7vw, 5rem) 3rem; display: grid; gap: 2.5rem; }
+@media (min-width: 1000px) {
+  .hero { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: center; gap: 3rem; }
+  .hero h1 { font-size: clamp(3.6rem, 7vw, 6.4rem) !important; }
+  .note-wrap { transform: rotate(-2deg); }
+}
+.hero h1 {
+  font-size: clamp(3.2rem, 13vw, 9.5rem); font-weight: 400; letter-spacing: -.02em; line-height: .92;
+}
+.hero h1 .sub { display: block; font-family: var(--mono); text-transform: none; font-weight: 400; font-size: .38em; letter-spacing: 0; margin-top: .6rem; color: var(--ink-soft); }
+.hero-text { display: grid; gap: 1.2rem; max-width: 44rem; }
+.serial { font-family: var(--mono); font-size: .85rem; color: var(--stamp); }
+
+.note-stage { position: relative; }
+.note-wrap {
+  position: relative; max-width: 100%; aspect-ratio: 1555 / 965; margin-inline: auto;
+  width: min(100%, 980px); touch-action: pan-y;
+  filter: drop-shadow(0 18px 30px color-mix(in srgb, var(--ink) 22%, transparent));
+}
+.note-wrap img { width: 100%; height: 100%; display: block; border-radius: 2px; }
+.loupe {
+  position: absolute; width: 190px; height: 190px; border-radius: 50%; pointer-events: none;
+  border: 3px solid var(--ink); box-shadow: 0 10px 30px rgba(0,0,0,.35), inset 0 0 0 6px rgba(255,255,255,.25);
+  overflow: hidden; opacity: 0; transform: translate(-50%, -50%); transition: opacity .2s; background: var(--note);
+}
+.loupe.on { opacity: 1; }
+.hotspot {
+  position: absolute; width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%;
+  border: 2px solid var(--stamp); background: color-mix(in srgb, var(--note) 70%, transparent);
+  color: var(--stamp); font: 600 .85rem var(--mono); cursor: pointer; display: grid; place-items: center;
+  animation: pulse 2.4s ease-in-out infinite;
+}
+.hotspot[aria-pressed="true"] { background: var(--stamp); color: var(--note); animation: none; }
+@keyframes pulse { 50% { box-shadow: 0 0 0 9px color-mix(in srgb, var(--stamp) 18%, transparent); } }
+.note-help { display: flex; flex-wrap: wrap; gap: .6rem 1.4rem; justify-content: space-between; align-items: baseline; margin-top: 1.8rem; }
+.feature-card {
+  margin-top: 1.2rem; border-left: 3px solid var(--stamp); padding: .4rem 0 .4rem 1.1rem; min-height: 6.5rem;
+  display: grid; gap: .35rem; max-width: 44rem;
+}
+.feature-card h3 { font-size: 1.15rem; }
+
+/* ---------- numbers ---------- */
+.ledger { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); border-top: 2px solid var(--ink); }
+.ledger > div { padding: 1.4rem 1rem 1.6rem 0; border-bottom: 1px solid var(--rule); display: grid; gap: .3rem; align-content: start; }
+.ledger .num { font-family: var(--display); font-size: clamp(2.6rem, 6vw, 3.6rem); line-height: 1; font-variant-numeric: lining-nums tabular-nums; }
+.ledger .lbl { color: var(--ink-soft); font-size: .95rem; max-width: 16rem; }
+
+
+/* ---------- immersion: file cover, year badge, vignette ---------- */
+.vignette { position: fixed; inset: 0; pointer-events: none; z-index: 2; background: radial-gradient(ellipse at 50% 45%, transparent 55%, color-mix(in srgb, var(--ink) 13%, transparent) 100%); }
+.intro { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 16px; background: #121316; }
+.intro[hidden] { display: none; }
+.folder { position: relative; width: min(520px, 100%); padding: 3.2rem 2rem 2.4rem; background: #b3b29c; color: #1d1e22; border-radius: 3px 10px 3px 3px; box-shadow: 0 30px 60px rgba(0,0,0,.55); text-align: center; }
+.folder::before { content: ""; position: absolute; inset: 10px; border: 1px solid rgba(29,30,34,.35); pointer-events: none; }
+.folder-tab { position: absolute; top: -26px; left: 0; background: #b3b29c; padding: .3rem 1rem; border-radius: 6px 6px 0 0; font: .8rem var(--mono); }
+.f-small { font: .9rem var(--mono); letter-spacing: .12em; text-transform: uppercase; margin: 0; }
+.f-title { font: 600 clamp(2rem, 8vw, 3.2rem)/1.05 var(--display); text-transform: uppercase; margin: 1.4rem 0 .8rem; }
+.f-meta { font: .95rem var(--mono); margin: 0 0 2rem; }
+.f-stamp { position: absolute; right: 1.2rem; bottom: 1.2rem; transform: rotate(-12deg); border: 4px double #a3262a; color: #a3262a; font: 700 1.4rem var(--display); letter-spacing: .1em; padding: .1rem .7rem; opacity: .85; }
+.f-open { font: inherit; font-family: var(--mono); font-size: 1rem; background: #1d1e22; color: #f7f6f1; border: 0; padding: .8rem 1.8rem; border-radius: 999px; cursor: pointer; }
+.f-open:hover, .f-open:focus-visible { background: #245866; }
+.f-hint { font: .8rem var(--mono); margin: 1rem 0 0; opacity: .7; }
+.yearbadge { font: 1rem/1 var(--mono); color: var(--stamp); border: 1px solid currentColor; padding: .25rem .5rem; margin-right: auto; margin-left: -.3rem; opacity: 0; transition: opacity .4s; white-space: nowrap; display: inline-block; overflow: hidden; }
+.yearbadge #yearNow { display: inline-block; }
+.yearbadge.on { opacity: 1; }
+@media (max-width: 600px) { .f-hint { display: none; } .f-stamp { bottom: .9rem; font-size: 1.1rem; } }
+.kicker.typing::after { content: "▌"; animation: blink .7s steps(1) infinite; margin-left: 1px; }
+@keyframes blink { 50% { opacity: 0; } }
+.quote .w { display: inline; }
+/* ---------- workshop steps ---------- */
+.workshop { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 3rem; align-items: start; }
+.steps { display: grid; gap: 0; counter-reset: step; }
+.step {
+  text-align: left; background: none; border: 0; border-top: 1px solid var(--rule); padding: 1.1rem 0; color: inherit;
+  font: inherit; cursor: pointer; display: grid; grid-template-columns: 2.4rem 1fr; gap: .2rem 1rem;
+}
+.step:last-child { border-bottom: 1px solid var(--rule); }
+.step .n { font-family: var(--display); font-size: 1.6rem; line-height: 1; color: var(--ink-soft); grid-row: span 2; }
+.step .t { font-family: var(--display); font-weight: 600; font-size: 1.2rem; }
+.step .d { color: var(--ink-soft); display: none; grid-column: 2; }
+.step[aria-expanded="true"] .n { color: var(--stamp); }
+.step[aria-expanded="true"] .d { display: block; color: var(--ink); }
+.plate { position: sticky; top: 6rem; border: 1px solid var(--rule); background: var(--paper-2); padding: 1.2rem; }
+.plate canvas { width: 100%; height: auto; aspect-ratio: 4 / 3; display: block; }
+.plate figcaption { font-size: .85rem; color: var(--ink-soft); margin-top: .7rem; }
+@media (max-width: 820px) { .workshop { grid-template-columns: 1fr; } .plate { position: static; padding: .4rem; margin-inline: -10px !important; } .plate figcaption { padding-inline: .5rem; } }
+
+/* ---------- people ---------- */
+.people { display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: 0 2.5rem; }
+.person { border-top: 1px solid var(--ink); padding: 1.1rem 0 1.6rem; display: grid; gap: .5rem; align-content: start; }
+.portrait { width: 100%; max-width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; object-position: 50% 20%; display: block; filter: grayscale(1) contrast(1.05); background: var(--paper-2); margin-bottom: .4rem; }
+.person img[src*="krueger"] { object-position: 82% 40%; }
+.portrait.none { display: grid; place-items: center; border: 1px dashed var(--rule); filter: none; }
+.portrait.none span { font-family: var(--mono); font-size: .78rem; color: var(--ink-soft); }
+.photo { margin: 0; display: grid; gap: .4rem; }
+.photo img { width: 100%; max-width: 100%; height: auto; display: block; }
+.photo figcaption { font-size: .82rem; color: var(--ink-soft); }
+.person .role { font-family: var(--mono); font-size: .78rem; color: var(--ink-soft); }
+.person .side { font-family: var(--mono); font-size: .75rem; padding: .1rem .45rem; border: 1px solid currentColor; justify-self: start; }
+.side.opfer { color: var(--ok); }
+.side.taeter { color: var(--stamp); }
+.person details summary { cursor: pointer; color: var(--stamp); font-size: .95rem; list-style: none; }
+.person details summary::-webkit-details-marker { display: none; }
+.person details summary::before { content: "+ "; font-family: var(--mono); }
+.person details[open] summary::before { content: "– "; }
+.person details p { margin-top: .6rem; }
+.filter { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.6rem; }
+.chip {
+  font: .9rem var(--body); padding: .35rem .9rem; border: 1px solid var(--rule); background: transparent; color: var(--ink);
+  border-radius: 999px; cursor: pointer;
+}
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+/* ---------- timeline (horizontal on desktop) ---------- */
+.tl-outer { overflow: hidden; margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); }
+.tl-track { display: flex; gap: 0; padding-inline: max(16px, env(safe-area-inset-left, 0px)); width: max-content; }
+.tl-item { width: min(24rem, 78vw); padding: 1.4rem 2rem 1.4rem 0; border-top: 2px solid var(--ink); position: relative; display: grid; gap: .5rem; align-content: start; }
+.tl-item::before { content: ""; position: absolute; top: -7px; left: 0; width: 12px; height: 12px; border-radius: 50%; background: var(--paper); border: 2px solid var(--ink); }
+.tl-item.key::before { background: var(--stamp); border-color: var(--stamp); }
+.tl-date { font-family: var(--display); font-size: 2.2rem; line-height: 1; font-variant-numeric: lining-nums; }
+.tl-date small { font-family: var(--mono); font-size: .8rem; display: block; color: var(--ink-soft); margin-top: .35rem; }
+.tl-sticky.on { position: sticky; top: 88px; }
+@media (max-width: 760px) {
+  .tl-outer { margin-inline: 0; }
+  .tl-track { flex-direction: column; width: auto; padding-inline: 0; }
+  .tl-item { width: auto; border-top: 0; border-left: 2px solid var(--ink); padding: 0 0 2rem 1.4rem; }
+  .tl-item::before { top: .3rem; left: -7px; }
+}
+
+/* ---------- route ---------- */
+.atlas { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 2.5rem; align-items: start; }
+@media (max-width: 860px) { .atlas { grid-template-columns: 1fr; } }
+.map-box { border: 1px solid var(--rule); background: var(--paper-2); position: relative; }
+.map-box svg { width: 100%; height: auto; display: block; }
+.map-box .land { fill: var(--paper); stroke: var(--rule); stroke-width: .8; }
+.map-box .land.reich { fill: color-mix(in srgb, var(--ink) 9%, var(--paper)); stroke: var(--ink-soft); }
+.map-box .cname { font: italic 13px var(--body); fill: var(--ink-soft); pointer-events: none; }
+.map-box .rt { fill: none; stroke: var(--stamp); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.map-box .pin { cursor: pointer; }
+.map-box .pin circle { fill: var(--paper); stroke: var(--ink); stroke-width: 2.5; transition: r .2s; }
+.map-box .pin.on circle { fill: var(--stamp); stroke: var(--stamp); }
+.map-box .pin text { font: 600 12px var(--mono); fill: var(--ink); pointer-events: none; }
+.map-box .pin.on text { fill: var(--paper); }
+.map-box .pin:focus-visible circle { stroke: var(--stamp); stroke-width: 4; }
+.map-legend { display: flex; gap: 1.2rem; flex-wrap: wrap; padding: .6rem .9rem; border-top: 1px solid var(--rule); }
+.lg { display: inline-block; width: 18px; height: 3px; background: var(--stamp); vertical-align: middle; margin-right: .3rem; }
+.lg.dot { width: 10px; height: 10px; border-radius: 50%; background: var(--paper); border: 2px solid var(--ink); }
+.lg.area { width: 14px; height: 10px; background: color-mix(in srgb, var(--ink) 9%, var(--paper)); border: 1px solid var(--ink-soft); }
+.places { display: grid; gap: 1.4rem; }
+.place-list { display: flex; flex-wrap: wrap; gap: .45rem; }
+.place-card { border-top: 2px solid var(--ink); padding-top: 1rem; display: grid; gap: .6rem; min-height: 16rem; }
+.place-card .meta { font-family: var(--mono); font-size: .8rem; color: var(--ink-soft); }
+.bank-steps { list-style: none; padding: 0; margin: 1.4rem 0 0; display: grid; border-top: 1px solid var(--ink); }
+.bank-steps li { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: 1rem; padding: .9rem 0; border-bottom: 1px solid var(--rule); }
+.bank-steps .by { font-family: var(--display); font-weight: 600; font-size: 1.15rem; font-variant-numeric: lining-nums; }
+@media (max-width: 480px) { .bank-steps li { grid-template-columns: 1fr; gap: .2rem; } }
+.place-card .visit { font-size: .92rem; background: var(--paper-2); padding: .8rem 1rem; display: grid; gap: .2rem; }
+
+/* ---------- money flow ---------- */
+.flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 2rem; }
+.flow > div { display: grid; gap: .5rem; align-content: start; }
+.flow .grade { font-family: var(--display); font-size: 2.6rem; line-height: 1; }
+
+/* ---------- dilemma ---------- */
+.quote { font-family: var(--body); font-style: italic; font-size: clamp(1.5rem, 3.4vw, 2.2rem); line-height: 1.3; border-left: 3px solid var(--stamp); padding-left: 1.4rem; }
+.dilemma { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--ink); margin-top: 2rem; }
+.dilemma > div { padding: 1.4rem; display: grid; gap: .5rem; align-content: start; }
+.dilemma > div + div { border-left: 1px solid var(--ink); }
+@media (max-width: 640px) { .dilemma { grid-template-columns: 1fr; } .dilemma > div + div { border-left: 0; border-top: 1px solid var(--ink); } }
+
+/* ---------- quiz ---------- */
+.quiz { border: 2px solid var(--ink); background: var(--note); color: var(--note-ink); padding: clamp(1.2rem, 4vw, 2.4rem); display: grid; gap: 1.2rem; position: relative; overflow: hidden; }
+.quiz .q-meta { display: flex; justify-content: space-between; font-family: var(--mono); font-size: .85rem; color: #5a5b60; }
+.quiz h3 { font-size: clamp(1.3rem, 3vw, 1.7rem); font-weight: 500; }
+.answers { display: grid; gap: .6rem; }
+.answer {
+  text-align: left; font: 1rem var(--body); padding: .8rem 1rem; border: 1px solid #b7b6ad; background: #fff; color: var(--note-ink);
+  cursor: pointer; border-radius: 2px;
+}
+.answer:hover:not(:disabled) { border-color: var(--note-ink); }
+.answer.right { border-color: #2f6b45; background: #e3efe6; }
+.answer.wrong { border-color: #a3262a; background: #f6e1e2; }
+.answer:disabled { cursor: default; }
+.explain { font-size: .95rem; color: #3d3e43; min-height: 1.5rem; }
+.quiz-actions { display: flex; gap: .8rem; flex-wrap: wrap; align-items: center; }
+.btn { font: 600 .95rem var(--body); padding: .7rem 1.3rem; background: var(--note-ink); color: var(--note); border: 0; cursor: pointer; }
+.btn[disabled] { opacity: .35; cursor: default; }
+.stamp-result {
+  font-family: var(--display); font-weight: 800; font-size: clamp(1.6rem, 5vw, 2.6rem); color: var(--stamp); border: 4px double var(--stamp);
+  padding: .3rem 1rem; transform: rotate(-6deg); justify-self: center; text-align: center;
+}
+
+/* ---------- sources ---------- */
+.src-section { padding-block: 3rem 4rem; border-top: 1px solid var(--rule); margin-top: 4rem; text-align: center; }
+.src-toggle { font: inherit; font-size: .95rem; letter-spacing: .04em; color: var(--ink); background: transparent; border: 1px solid var(--rule); border-radius: 999px; padding: .7rem 1.6rem; cursor: pointer; transition: background .2s, border-color .2s; }
+.src-toggle:hover, .src-toggle:focus-visible { border-color: var(--ink); }
+#srcBody { text-align: left; margin-top: 2.4rem; }
+.src-btns { display: flex; gap: .8rem; justify-content: center; flex-wrap: wrap; }
+.team { margin-top: 2rem; }
+.team-label { font: .8rem var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: .8rem; }
+.team-img { display: block; width: min(100%, 460px); height: auto; margin: 1.8rem auto 0; border: 1px solid var(--rule); }
+.team-names { list-style: none; padding: 0; margin: 0; display: flex; gap: .6rem 2.2rem; justify-content: center; flex-wrap: wrap; font: 600 1.9rem/1.2 var(--display); }
+.src-h { margin-bottom: 1.2rem; }
+.sources { display: grid; gap: .6rem; padding-left: 1.2rem; }
+.sources li { padding-left: .3rem; }
+footer { border-top: 1px solid var(--rule); padding-block: 2rem 3rem; font-size: .9rem; color: var(--ink-soft); }
+
+/* split-word headline reveal */
+.word { display: inline-block; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hotspot { animation: none; }
+  * { scroll-behavior: auto !important; }
+}
+/* ---------- Kindertransport additions ---------- */
+.folder.tag { background: #cdb88c; border-radius: 6px; clip-path: polygon(14% 0, 86% 0, 100% 9%, 100% 100%, 0 100%, 0 9%); padding-top: 4.2rem; }
+.folder.tag::before { inset: 12px; border-style: dashed; }
+.t-hole { position: absolute; top: 1.2rem; left: 50%; width: 26px; height: 26px; margin-left: -13px; border-radius: 50%; background: #0c0d10; box-shadow: 0 0 0 5px #a8925f; }
+.t-fields { display: grid; grid-template-columns: auto 1fr; gap: .45rem 1rem; text-align: left; max-width: 20rem; margin: 0 auto 1.6rem; font: 1rem var(--mono); }
+.t-fields dt { opacity: .7; }
+.t-fields dd { margin: 0; border-bottom: 1px solid rgba(29,30,34,.45); min-width: 8rem; }
+.hero-photo { margin: 0; justify-self: center; max-width: 30rem; background: var(--note); padding: .8rem .8rem 1rem; transform: rotate(1.6deg); box-shadow: 0 18px 34px color-mix(in srgb, var(--ink) 22%, transparent); display: grid; gap: .6rem; }
+.hero-photo img { width: 100%; height: auto; display: block; filter: grayscale(1) contrast(1.05); }
+.hero-photo figcaption { font: .82rem var(--mono); color: var(--note-ink); opacity: .8; }
+@media (min-width: 1000px) { .hero { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); } }
+.question { border-left: 3px solid var(--stamp); padding: .5rem 0 .5rem 1.1rem; display: grid; gap: .3rem; }
+.question p:last-child { font-style: italic; font-size: 1.12rem; }
+.q-label { font: .8rem var(--mono); color: var(--stamp); }
+.feelings { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 0 2rem; }
+.feelings > div { border-top: 2px solid var(--ink); padding: 1rem 0 1.4rem; display: grid; gap: .4rem; align-content: start; }
+.feelings h3 { font-size: 1.15rem; }
+.side.kind { color: var(--ok); }
+.side.helfer { color: var(--stamp); }
+.lg.sea { background: repeating-linear-gradient(90deg, var(--stamp) 0 5px, transparent 5px 9px); }
+.suitcase { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2rem; align-items: start; }
+@media (max-width: 640px) { .suitcase { grid-template-columns: 1fr; } }
+.items { display: flex; flex-wrap: wrap; gap: .5rem; }
+.item { font: .95rem var(--body); padding: .55rem .95rem; border: 1px solid var(--ink); background: var(--note); color: var(--note-ink); cursor: pointer; border-radius: 4px; }
+.item:hover { background: var(--paper-2); color: var(--ink); }
+.item[disabled] { cursor: default; opacity: .45; text-decoration: line-through; }
+.item.ok[disabled] { opacity: .45; text-decoration: none; }
+.case { border: 3px solid #6b4a2b; border-radius: 10px; padding: 1.6rem 1.2rem 1.2rem; position: relative; min-height: 13rem; background: color-mix(in srgb, #6b4a2b 8%, var(--paper)); }
+.case::before { content: ""; position: absolute; top: -16px; left: 50%; width: 70px; height: 14px; margin-left: -35px; border: 3px solid #6b4a2b; border-bottom: 0; border-radius: 8px 8px 0 0; }
+.case-label { font: .8rem var(--mono); color: var(--ink-soft); position: absolute; top: .4rem; right: .8rem; }
+.case-in { list-style: none; padding: 0; margin: 0 0 .8rem; display: flex; flex-wrap: wrap; gap: .4rem; }
+.case-in li:not(.muted) { font: .85rem var(--mono); padding: .2rem .6rem; border: 1px solid var(--ok); color: var(--ok); }
+.case-note { font-size: .95rem; border-top: 1px solid var(--rule); padding-top: .7rem; min-height: 3.2rem; }
+.case-note.no { color: #a3262a; }
+.letter { background: var(--note); color: var(--note-ink); border: 1px solid var(--rule); padding: clamp(1rem, 4vw, 1.8rem); display: grid; gap: .7rem; box-shadow: 0 10px 24px color-mix(in srgb, var(--ink) 12%, transparent); }
+.l-head { font: .85rem var(--mono); color: #a3262a; letter-spacing: .06em; text-transform: uppercase; }
+.letter label { color: #4a4c53; }
+.letter textarea { font: 1.05rem/1.5 var(--mono); width: 100%; resize: vertical; padding: .7rem; border: 1px solid #b9b8ae; background: #fffefa; color: #1d1e22; border-radius: 2px; }
+.l-foot { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; font: .9rem var(--mono); }
+.l-foot .over { color: #a3262a; }
+.l-sent { font-style: italic; border-top: 1px solid #b9b8ae; padding-top: .7rem; }
+.memorials { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 2rem; }
+.memorials img { aspect-ratio: 3 / 4; object-fit: cover; filter: grayscale(.3); }
+
+</style>
+<div class="intro" id="intro" hidden role="dialog" aria-modal="true" aria-label="Gepäckanhänger eines Kindes">
+  <div class="folder tag" id="folder">
+    <span class="t-hole" aria-hidden="true"></span>
+    <p class="f-small">Kindertransport</p>
+    <p class="f-title">Nr. 152</p>
+    <dl class="t-fields">
+      <dt>Name</dt><dd>&nbsp;</dd>
+      <dt>Alter</dt><dd>&nbsp;</dd>
+      <dt>Von</dt><dd>Wien</dd>
+      <dt>Nach</dt><dd>London</dd>
+    </dl>
+    <p class="f-meta">Dezember 1938</p>
+    <button class="f-open" id="introOpen">Reise beginnen</button>
+    <p class="f-hint">oder einfach scrollen</p>
+  </div>
+</div>
+<div class="vignette" aria-hidden="true"></div>
+
+<header class="site">
+  <a class="brand" href="#top">Kindertransporte</a>
+  <span class="yearbadge" id="yearBadge" aria-hidden="true"><span id="yearNow">1938</span></span>
+  <nav class="toc" aria-label="Kapitel">
+    <a href="#warum">Warum</a>
+    <a href="#reise">Die Reise</a>
+    <a href="#kinder">Die Kinder</a>
+    <a href="#familien">Familien</a>
+    <a href="#zeitleiste">Zeitleiste</a>
+    <a href="#heute">Heute</a>
+    <a href="#quiz">Quiz</a>
+  </nav>
+  <div class="progress" id="progress"></div>
+</header>
+
+<main id="top">
+
+<!-- ================= HERO ================= -->
+<section class="hero wide" data-year="1938" aria-labelledby="t-hero">
+  <div class="hero-text">
+    <p class="serial">Projektkurs Geschichte · 1938 – 1940</p>
+    <h1 id="t-hero">Die Kinder&shy;transporte<span class="sub">Rettung jüdischer Kinder vor dem Holocaust</span></h1>
+    <p class="lede">Zwischen Dezember 1938 und September 1939 brachten Züge und Schiffe rund 10.000 jüdische Kinder aus dem Deutschen Reich, Österreich, der Tschechoslowakei und Polen nach Großbritannien. Sie waren gerettet. Aber sie mussten allein fahren, ohne ihre Eltern.</p>
+    <div class="question">
+      <p class="q-label">Leitfrage</p>
+      <p>Wie retteten die Kindertransporte jüdische Kinder vor dem Holocaust – und welchen Preis mussten sie dafür zahlen?</p>
+    </div>
+  </div>
+  <figure class="hero-photo" id="heroPhoto">
+    <img src="img/ankunft.webp" width="937" height="1200" alt="Jüdische Kinder mit Mänteln, Mützen und Gepäck stehen nach der Ankunft in England an Deck eines Schiffes, daneben ein britischer Polizist">
+    <figcaption>Jüdische Kinder kommen mit einem Kindertransport in England an, 1938/39. Viele trugen eine Nummer um den Hals.</figcaption>
+  </figure>
+</section>
+
+<!-- ================= WHAT ================= -->
+<section id="was" data-year="1938/39" class="col" aria-labelledby="t-was">
+  <div class="section-head">
+    <p class="kicker">Kapitel 1 · Überblick</p>
+    <h2 id="t-was">Was waren die Kinder&shy;transporte?</h2>
+  </div>
+  <div class="prose">
+    <p class="lede">Die Kindertransporte waren eine Rettungsaktion. Jüdische Kinder durften ohne ihre Eltern nach Großbritannien einreisen und dort bei Pflegefamilien oder in Heimen leben.</p>
+    <p>Die Kinder waren zwischen wenigen Monaten und 17 Jahren alt. Für jedes Kind musste jemand in Großbritannien 50 Pfund als Sicherheit hinterlegen. Das Geld sollte später die Weiterreise bezahlen. Hilfsorganisationen und viele einzelne Menschen organisierten Listen, Papiere, Züge und Unterkünfte.</p>
+    <p>Kleinere Gruppen kamen auch in die Niederlande, nach Belgien, Frankreich, Schweden und in die Schweiz. Die meisten Kinder aber fuhren nach Großbritannien.</p>
+  </div>
+</section>
+
+<section class="wide" aria-labelledby="t-num" data-year="1938/39" style="padding-top:0">
+  <h2 id="t-num" class="col" style="font-size:1.4rem;margin-bottom:1.4rem;font-weight:600">Die Kindertransporte in Zahlen</h2>
+  <div class="ledger">
+    <div><span class="num" data-count="10000">10.000</span><span class="lbl">Kinder kamen ungefähr nach Großbritannien</span></div>
+    <div><span class="num" data-count="17">17</span><span class="lbl">Jahre war das höchste Alter, mit dem ein Kind mitfahren durfte</span></div>
+    <div><span class="num" data-count="10" data-suffix=" RM">10 RM</span><span class="lbl">Reichsmark Bargeld durfte jedes Kind höchstens mitnehmen</span></div>
+    <div><span class="num" data-count="1">1</span><span class="lbl">Koffer, dazu eine Tasche: mehr Gepäck war nicht erlaubt</span></div>
+  </div>
+</section>
+
+<!-- ================= WHY ================= -->
+<section id="warum" data-year="1933–38" class="col" aria-labelledby="t-warum">
+  <div class="section-head">
+    <p class="kicker">Kapitel 2 · 1933 bis 1938</p>
+    <h2 id="t-warum">Warum waren sie nötig?</h2>
+  </div>
+  <div class="prose">
+    <p class="lede">Ab 1933 nahm der NS-Staat Jüdinnen und Juden Schritt für Schritt ihre Rechte, ihre Arbeit und ihre Sicherheit. Im November 1938 schlug die Ausgrenzung in offene Gewalt um.</p>
+  </div>
+  <ol class="bank-steps">
+    <li><span class="by">1933</span><span>Die Nationalsozialisten kommen an die Macht. Jüdische Geschäfte werden boykottiert, jüdische Beamte entlassen.</span></li>
+    <li><span class="by">1935</span><span>Die „Nürnberger Gesetze“ machen Jüdinnen und Juden zu Menschen mit weniger Rechten. Ehen mit Nichtjuden werden verboten.</span></li>
+    <li><span class="by">März 1938</span><span>Österreich wird an das Deutsche Reich „angeschlossen“. Auch in Wien beginnt sofort die Verfolgung.</span></li>
+    <li><span class="by">Juli 1938</span><span>Auf der Konferenz von Évian beraten 32 Staaten über jüdische Flüchtlinge. Fast keiner will mehr Menschen aufnehmen.</span></li>
+    <li><span class="by">9./10. Nov. 1938</span><span>Im Novemberpogrom brennen Synagogen, Geschäfte und Wohnungen werden zerstört. Rund 30.000 jüdische Männer kommen in Konzentrationslager.</span></li>
+    <li><span class="by">15. Nov. 1938</span><span>Jüdische Kinder dürfen keine deutschen Schulen mehr besuchen.</span></li>
+  </ol>
+  <figure class="photo" style="margin-top:2.4rem">
+    <img src="img/pogrom.webp" width="787" height="538" alt="Passanten gehen in Magdeburg an einem jüdischen Geschäft mit zerstörten Schaufenstern vorbei" loading="lazy">
+    <figcaption>Ein zerstörtes jüdisches Geschäft in Magdeburg nach dem Novemberpogrom, November 1938.</figcaption>
+  </figure>
+  <div class="prose" style="margin-top:2rem">
+    <p>Nach dem Pogrom wollten viele jüdische Familien fliehen. Doch fast alle Länder hatten ihre Grenzen geschlossen. Jüdische Organisationen in Großbritannien baten ihre Regierung um Hilfe. Mitte November 1938 erlaubte die britische Regierung, dass Kinder ohne Visum einreisen dürfen. Ihre Eltern durften nicht mitkommen.</p>
+  </div>
+</section>
+
+<!-- ================= JOURNEY ================= -->
+<section id="reise" data-year="1938/39" class="wide" aria-labelledby="t-reise">
+  <div class="section-head col" style="margin-inline:0">
+    <p class="kicker">Kapitel 3 · Der Ablauf</p>
+    <h2 id="t-reise">Die Reise in die Sicherheit</h2>
+    <p class="lede" style="max-width:44rem">Die meisten Kinder fuhren mit dem Zug bis an die Nordsee und dann mit der Fähre nach England. Wähle einen Ort auf der Karte oder in der Liste.</p>
+  </div>
+  <div class="atlas">
+    <div class="map-box">
+      <svg id="mapSvg" viewBox="0 0 640 560" role="img" aria-label="Karte von Mitteleuropa und England mit den Wegen der Kindertransporte von Berlin, Wien und Prag über Hoek van Holland nach Harwich und London"></svg>
+      <div class="map-legend small muted"><span><i class="lg route"></i> Weg mit dem Zug</span><span><i class="lg sea"></i> Weg mit der Fähre</span><span><i class="lg area"></i> Deutsches Reich (heutige Grenzen)</span></div>
+    </div>
+    <div class="places">
+      <div class="place-list" id="placeList" role="group" aria-label="Orte der Reise"></div>
+      <div class="place-card" id="placeCard" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SUITCASE ================= -->
+<section class="col" data-year="1938/39" aria-labelledby="t-koffer" style="padding-top:0">
+  <div class="section-head">
+    <p class="kicker">Ausprobieren</p>
+    <h2 id="t-koffer" style="font-size:clamp(1.6rem,4vw,2.4rem)">Was darf in den Koffer?</h2>
+    <p>Jedes Kind durfte nur einen Koffer und eine Tasche mitnehmen. Tippe auf einen Gegenstand und finde heraus, ob er mitdurfte.</p>
+  </div>
+  <div class="suitcase">
+    <div class="items" id="items" role="group" aria-label="Gegenstände"></div>
+    <div class="case" id="caseBox">
+      <p class="case-label">Koffer</p>
+      <ul class="case-in" id="caseIn" aria-live="polite"><li class="muted small">Noch leer.</li></ul>
+      <p class="case-note" id="caseNote" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CHILDREN ================= -->
+<section id="kinder" data-year="1938–45" class="wide" aria-labelledby="t-kinder">
+  <div class="section-head col" style="margin-inline:0">
+    <p class="kicker">Kapitel 4 · Schicksale</p>
+    <h2 id="t-kinder">Was erlebten die Kinder?</h2>
+    <p class="lede" style="max-width:44rem">Die Kinder kamen in ein Land, dessen Sprache die meisten nicht verstanden. Manche fanden liebevolle Pflegefamilien. Andere lebten in Heimen oder mussten früh arbeiten. Fast alle hatten Heimweh und Angst um ihre Familien.</p>
+  </div>
+  <div class="feelings">
+    <div><h3>Abschied</h3><p>Am Bahnhof sahen viele Kinder ihre Eltern zum letzten Mal. Oft durften die Eltern nicht mit auf den Bahnsteig.</p></div>
+    <div><h3>Fremdes Land</h3><p>Neue Sprache, neues Essen, neue Schule. Manche Kinder wurden in Familien aufgenommen, die eine andere Religion hatten.</p></div>
+    <div><h3>„Feindliche Ausländer“</h3><p>Als der Krieg begann, galten Deutsche und Österreicher in Großbritannien als verdächtig. 1940 wurden ältere Jungen ab 16 Jahren zum Teil in Lagern interniert.</p></div>
+    <div><h3>Warten auf Nachricht</h3><p>Ab September 1939 kamen kaum noch Briefe. Viele Kinder erfuhren erst nach 1945, was mit ihren Familien geschehen war.</p></div>
+  </div>
+
+  <div class="filter" role="group" aria-label="Personen filtern" style="margin-top:3rem">
+    <button class="chip" aria-pressed="true" data-filter="all">Alle</button>
+    <button class="chip" aria-pressed="false" data-filter="kind">Kinder der Transporte</button>
+    <button class="chip" aria-pressed="false" data-filter="helfer">Helferin und Helfer</button>
+  </div>
+  <div class="people" id="people">
+    <article class="person" data-side="kind">
+      <img class="portrait" src="img/dubs.webp" alt="Porträt von Alf Dubs als älterer Mann im Anzug" loading="lazy" width="1200" height="1200">
+      <span class="side kind">Kind eines Transports</span>
+      <h3>Alf Dubs</h3>
+      <p class="role">geboren 1932 in Prag</p>
+      <p>Alf Dubs fuhr 1939 mit sechs Jahren in einem der Züge, die Nicholas Winton organisiert hatte. Später wurde er Politiker in Großbritannien.</p>
+      <details><summary>Mehr lesen</summary><p>Sein Vater war schon vorher nach London geflohen, seine Mutter kam kurz nach ihm. Die Familie hatte damit großes Glück. 2016 setzte Alf Dubs im britischen Parlament durch, dass Großbritannien allein reisende Flüchtlingskinder aus Europa aufnimmt.</p></details>
+    </article>
+    <article class="person" data-side="kind">
+      <div class="portrait none"><span>Kein freies Foto</span></div>
+      <span class="side kind">Kind eines Transports</span>
+      <h3>Lore Segal</h3>
+      <p class="role">1928 – 2024 · aus Wien</p>
+      <p>Lore Segal war zehn Jahre alt, als sie im Dezember 1938 mit dem ersten Transport aus Wien nach England fuhr. Sie lebte danach bei mehreren Pflegefamilien.</p>
+      <details><summary>Mehr lesen</summary><p>Ihren Eltern gelang später die Flucht nach England, wo sie als Hausangestellte arbeiten mussten. Lore Segal wurde Schriftstellerin in den USA. In ihrem Buch „Wo andere Leute wohnen“ erzählt sie von ihrer Zeit als Kind in fremden Familien.</p></details>
+    </article>
+    <article class="person" data-side="kind">
+      <div class="portrait none"><span>Kein freies Foto</span></div>
+      <span class="side kind">Kind eines Transports</span>
+      <h3>Frank Auerbach</h3>
+      <p class="role">1931 – 2024 · aus Berlin</p>
+      <p>Frank Auerbach kam 1939 mit sieben Jahren nach England. Er besuchte dort ein Internat für geflüchtete Kinder.</p>
+      <details><summary>Mehr lesen</summary><p>Seine Eltern blieben in Berlin. Sie wurden 1942 nach Auschwitz deportiert und ermordet. Frank Auerbach wurde einer der bekanntesten Maler Großbritanniens.</p></details>
+    </article>
+    <article class="person" data-side="kind">
+      <div class="portrait none"><span>Kein freies Foto</span></div>
+      <span class="side kind">Kind eines Transports</span>
+      <h3>Ruth Westheimer</h3>
+      <p class="role">1928 – 2024 · aus der Nähe von Frankfurt</p>
+      <p>Ruth Westheimer hieß als Kind Karola Siegel. Im Januar 1939 kam sie mit einem Kindertransport in ein Kinderheim in der Schweiz.</p>
+      <details><summary>Mehr lesen</summary><p>Ihr Vater war nach dem Novemberpogrom verhaftet worden. Ihre Eltern wurden im Holocaust ermordet. Später wurde sie in den USA als Psychologin und Fernsehmoderatorin bekannt.</p></details>
+    </article>
+    <article class="person" data-side="helfer">
+      <img class="portrait" src="img/winton.webp" alt="Nicholas Winton im Jahr 1938 mit einem kleinen Jungen auf dem Arm, der ein Schild umhängen hat" loading="lazy" width="1024" height="844">
+      <span class="side helfer">Helfer</span>
+      <h3>Nicholas Winton</h3>
+      <p class="role">1909 – 2015 · Börsenmakler aus London</p>
+      <p>Nicholas Winton organisierte 1939 Züge aus Prag. So kamen 669 Kinder aus der Tschechoslowakei nach Großbritannien.</p>
+      <details><summary>Mehr lesen</summary><p>Er suchte Pflegefamilien, besorgte Papiere und sammelte Geld. Ein neunter Zug mit rund 250 Kindern sollte am 1. September 1939 abfahren. Wegen des Kriegsbeginns fuhr er nie. Jahrzehntelang sprach Winton kaum über seine Hilfe. Erst 1988 wurde sie durch eine Fernsehsendung bekannt.</p></details>
+    </article>
+    <article class="person" data-side="helfer">
+      <div class="portrait none"><span>Kein freies Foto</span></div>
+      <span class="side helfer">Helferin</span>
+      <h3>Truus Wijsmuller</h3>
+      <p class="role">1896 – 1978 · aus Amsterdam</p>
+      <p>Die Niederländerin Truus Wijsmuller verhandelte im Dezember 1938 in Wien direkt mit dem SS-Mann Adolf Eichmann. Danach durften rund 600 Kinder aus Wien ausreisen.</p>
+      <details><summary>Mehr lesen</summary><p>Sie begleitete viele Transporte selbst. Im Mai 1940, kurz vor der Besetzung der Niederlande, brachte sie noch über 70 Kinder auf das letzte Schiff nach England. Israel ehrte sie als „Gerechte unter den Völkern“.</p></details>
+    </article>
+  </div>
+</section>
+
+<!-- ================= LETTER ================= -->
+<section class="col" data-year="1939–45" aria-labelledby="t-brief" style="padding-top:0">
+  <div class="section-head">
+    <p class="kicker">Ausprobieren</p>
+    <h2 id="t-brief" style="font-size:clamp(1.6rem,4vw,2.4rem)">Ein Brief mit 25 Wörtern</h2>
+    <p>Nach Kriegsbeginn konnten viele Kinder ihren Eltern nur noch über das Rote Kreuz schreiben. Diese Nachrichten durften höchstens 25 Wörter haben. Die Antwort kam oft erst nach Monaten, manchmal nie.</p>
+  </div>
+  <div class="letter" id="letter">
+    <p class="l-head">Rotes Kreuz · Nachricht an die Familie</p>
+    <label for="letterText" class="small muted">Was würdest du deinen Eltern schreiben?</label>
+    <textarea id="letterText" rows="4" placeholder="Liebe Mama, lieber Papa, …"></textarea>
+    <div class="l-foot"><span id="wordCount" aria-live="polite">0 von 25 Wörtern</span><button class="btn" id="letterSend" disabled>Abschicken</button></div>
+    <p class="l-sent" id="letterSent" hidden>Abgeschickt. Jetzt beginnt das Warten. Viele Kinder bekamen auf ihre letzte Nachricht nie eine Antwort.</p>
+  </div>
+</section>
+
+<!-- ================= FAMILIES ================= -->
+<section id="familien" data-year="1939–45" class="col" aria-labelledby="t-fam">
+  <div class="section-head">
+    <p class="kicker">Kapitel 5 · Der Preis der Rettung</p>
+    <h2 id="t-fam">Was geschah mit den Familien?</h2>
+  </div>
+  <div class="prose">
+    <p class="lede">Die Eltern hofften, bald nachkommen zu können. Für die meisten wurde daraus nichts.</p>
+    <p>Mit dem Beginn des Zweiten Weltkriegs am 1. September 1939 war die Flucht aus dem Deutschen Reich kaum noch möglich. Ab Oktober 1941 deportierten die Nationalsozialisten Jüdinnen und Juden aus Deutschland, Österreich und der Tschechoslowakei in Ghettos und Vernichtungslager.</p>
+    <p>Die meisten Kinder der Kindertransporte sahen ihre Eltern nie wieder. Viele waren nach dem Krieg die einzigen Überlebenden ihrer ganzen Familie.</p>
+  </div>
+  <p class="quote" style="margin-block:2.6rem">Gerettet wurden die Kinder. Ihre Eltern, Großeltern und Geschwister blieben zurück.</p>
+  <div class="dilemma">
+    <div><h3>Gerettet</h3><p>Rund 10.000 Kinder überlebten in Großbritannien den Holocaust. Ohne die Transporte wären die meisten von ihnen ermordet worden.</p></div>
+    <div><h3>Getrennt</h3><p>Die Kinder mussten ihre Familie, ihre Sprache und ihre Heimat verlieren. Sie wuchsen bei Fremden auf und trugen diesen Verlust ihr Leben lang.</p></div>
+  </div>
+  <div class="ledger" style="margin-top:2.6rem">
+    <div><span class="num" data-count="10000">10.000</span><span class="lbl">jüdische Kinder wurden durch die Kindertransporte nach Großbritannien gerettet</span></div>
+    <div><span class="num" data-count="1.5" data-dec="1" data-suffix=" Mio.">1,5 Mio.</span><span class="lbl">jüdische Kinder wurden im Holocaust ermordet, nach Schätzungen bis zu dieser Zahl</span></div>
+    <div><span class="num" data-count="6" data-suffix=" Mio.">6 Mio.</span><span class="lbl">Jüdinnen und Juden wurden insgesamt ermordet, ungefähr</span></div>
+  </div>
+</section>
+
+<!-- ================= TIMELINE ================= -->
+<section id="zeitleiste" data-year="" aria-labelledby="t-tl" class="tl-section">
+  <div class="tl-sticky" id="tlSticky">
+  <div class="section-head wide">
+    <p class="kicker">1933 – 2016</p>
+    <h2 id="t-tl">Zeitleiste</h2>
+  </div>
+  <div class="tl-outer" id="tlOuter">
+    <div class="tl-track" id="tlTrack">
+      <div class="tl-item"><p class="tl-date">1933<small>30. Januar</small></p><p>Adolf Hitler wird Reichskanzler. Die Verfolgung der Jüdinnen und Juden beginnt.</p></div>
+      <div class="tl-item"><p class="tl-date">1935<small>September</small></p><p>Die „Nürnberger Gesetze“ nehmen Jüdinnen und Juden viele Rechte.</p></div>
+      <div class="tl-item"><p class="tl-date">1938<small>Juli</small></p><p>Konferenz von Évian: Fast kein Land will mehr jüdische Flüchtlinge aufnehmen.</p></div>
+      <div class="tl-item key"><p class="tl-date">1938<small>9./10. November</small></p><p>Novemberpogrom. Synagogen brennen, rund 30.000 jüdische Männer werden verhaftet.</p></div>
+      <div class="tl-item"><p class="tl-date">1938<small>Mitte November</small></p><p>Die britische Regierung erlaubt die Einreise jüdischer Kinder ohne ihre Eltern.</p></div>
+      <div class="tl-item key"><p class="tl-date">1938<small>1./2. Dezember</small></p><p>Der erste Transport mit fast 200 Kindern fährt von Berlin ab und kommt in Harwich an.</p></div>
+      <div class="tl-item"><p class="tl-date">1938<small>10. Dezember</small></p><p>Der erste Transport aus Wien. Truus Wijsmuller hatte ihn mit Adolf Eichmann ausgehandelt.</p></div>
+      <div class="tl-item"><p class="tl-date">1939<small>März bis August</small></p><p>Acht Züge aus Prag bringen 669 Kinder nach Großbritannien. Organisiert hat sie Nicholas Winton.</p></div>
+      <div class="tl-item key"><p class="tl-date">1939<small>1. September</small></p><p>Der Zweite Weltkrieg beginnt. Die Transporte aus dem Deutschen Reich enden. Ein Zug in Prag fährt nicht mehr ab.</p></div>
+      <div class="tl-item"><p class="tl-date">1940<small>14. Mai</small></p><p>Das Schiff „Bodegraven“ verlässt die Niederlande mit über 70 Kindern. Es ist der letzte bekannte Kindertransport nach England.</p></div>
+      <div class="tl-item key"><p class="tl-date">1941<small>Oktober</small></p><p>Die Deportationen aus Deutschland beginnen. Viele Eltern der geretteten Kinder werden ermordet.</p></div>
+      <div class="tl-item"><p class="tl-date">1988<small>Fernsehen</small></p><p>In einer britischen Fernsehsendung wird die Hilfe von Nicholas Winton bekannt.</p></div>
+      <div class="tl-item"><p class="tl-date">2008<small>Berlin und Wien</small></p><p>An den Bahnhöfen Friedrichstraße und Westbahnhof werden Denkmäler für die Kindertransporte eingeweiht.</p></div>
+      <div class="tl-item"><p class="tl-date">2016<small>London</small></p><p>Auf Initiative von Alf Dubs beschließt das britische Parlament, allein reisende Flüchtlingskinder aufzunehmen.</p></div>
+    </div>
+  </div>
+  </div>
+  <div class="tl-run" id="tlRun" aria-hidden="true"></div>
+</section>
+
+<!-- ================= TODAY ================= -->
+<section id="heute" data-year="heute" class="wide" aria-labelledby="t-heute">
+  <div class="section-head col" style="margin-inline:0">
+    <p class="kicker">Kapitel 6 · Erinnerung</p>
+    <h2 id="t-heute">Erinnerung heute</h2>
+    <p class="lede" style="max-width:44rem">An drei Bahnhöfen erinnern Denkmäler an die Kindertransporte. Zwei davon schuf der Bildhauer Frank Meisler. Er war selbst 1939 als Kind mit einem Transport aus Danzig nach England gekommen.</p>
+  </div>
+  <div class="memorials">
+    <figure class="photo">
+      <img src="img/denkmal-berlin.webp" width="900" height="1200" alt="Bronzefiguren von Kindern mit Koffern vor dem Bahnhof Friedrichstraße in Berlin" loading="lazy">
+      <figcaption><strong>Berlin, Bahnhof Friedrichstraße:</strong> „Züge in das Leben – Züge in den Tod“ von Frank Meisler, 2008. Eine Gruppe von Kindern steht für die Geretteten, die andere für die Kinder, die deportiert wurden.</figcaption>
+    </figure>
+    <figure class="photo">
+      <img src="img/denkmal-london.webp" width="693" height="1200" alt="Bronzefiguren von Kindern mit Koffern auf Bahnschienen vor der Liverpool Street Station in London" loading="lazy">
+      <figcaption><strong>London, Liverpool Street Station:</strong> „Kindertransport – Die Ankunft“ von Frank Meisler, 2006. Hier holten Pflegefamilien die Kinder ab.</figcaption>
+    </figure>
+    <figure class="photo">
+      <img src="img/denkmal-wien.webp" width="900" height="1200" alt="Bronzefigur eines Mädchens, das auf einem echten alten Koffer sitzt, im Wiener Westbahnhof" loading="lazy">
+      <figcaption><strong>Wien, Westbahnhof:</strong> „Für das Kind“ von Flor Kent, 2008. Das Mädchen sitzt auf einem Koffer.</figcaption>
+    </figure>
+  </div>
+  <div class="prose col" style="margin:3rem 0 0">
+    <h3>Warum ist das Thema heute noch wichtig?</h3>
+    <p>Die Kindertransporte zeigen, dass Hilfe möglich war, als viele Länder wegsahen. Sie zeigen aber auch, wie wenig getan wurde: Die Eltern ließ man zurück.</p>
+    <p>Heute leben nur noch wenige Menschen, die als Kinder mit einem Transport kamen. Ihre Berichte sind in Büchern, Interviews und Museen gesammelt. Auch heute fliehen Kinder allein vor Krieg und Verfolgung. Darum erinnern Politiker wie Alf Dubs immer wieder an die Kindertransporte.</p>
+  </div>
+</section>
+
+<!-- ================= QUIZ ================= -->
+<section id="quiz" class="col" aria-labelledby="t-quiz">
+  <div class="section-head">
+    <p class="kicker">Teste dein Wissen</p>
+    <h2 id="t-quiz">Was weißt du noch?</h2>
+  </div>
+  <div class="quiz" id="quizBox">
+    <div class="q-meta"><span id="qCount">Frage 1 von 10</span><span id="qScore">0 richtig</span></div>
+    <h3 id="qText">…</h3>
+    <div class="answers" id="qAnswers"></div>
+    <p class="explain" id="qExplain" aria-live="polite"></p>
+    <div class="quiz-actions"><button class="btn" id="qNext" disabled>Nächste Frage</button></div>
+  </div>
+</section>
+
+<!-- ================= SOURCES ================= -->
+<section id="quellen" class="col src-section" aria-label="Quellen">
+  <div class="src-btns">
+    <button class="src-toggle" id="srcToggle" aria-expanded="false" aria-controls="srcBody">Quellen anzeigen</button>
+    <button class="src-toggle" id="teamToggle" aria-expanded="false" aria-controls="teamBody">Projektgruppe</button>
+  </div>
+  <div id="teamBody" class="team" hidden>
+    <p class="team-label">Erstellt von</p>
+    <ul class="team-names" translate="no"><li>Jackie</li><li>Arda</li><li>Erdinc</li><li>ron</li></ul>
+    <img class="team-img" src="img/team.webp" width="923" height="1093" loading="lazy" alt="JoJo-Meme „Iced teas, four of 'em“: vier Figuren aus JoJo's Bizarre Adventure an einer Bar, darüber die Namen Jackie, Arda, Erdinc und ron.">
+  </div>
+  <div id="srcBody" hidden>
+  <h2 class="src-h">Quellen</h2>
+  <ol class="sources">
+    <li>United States Holocaust Memorial Museum: Holocaust Encyclopedia, Artikel „Kindertransport, 1938–40“.</li>
+    <li>Wikipedia: Artikel „Kindertransport“ (deutsch) und „Nicholas Winton“.</li>
+    <li>Association of Jewish Refugees (AJR), London: Informationen zu den Kindertransporten und Berichte von Überlebenden.</li>
+    <li>Lore Segal: Wo andere Leute wohnen. Roman, erstmals 1964 („Other People’s Houses“).</li>
+    <li>Bundeszentrale für politische Bildung: Informationen zum Novemberpogrom 1938.</li>
+  </ol>
+  <h3 class="src-h" style="margin-top:2rem;font-size:1.1rem">Bilder</h3>
+  <ol class="sources small">
+    <li>Ankunft in England (oben): Wide World Photo, 1938/39, gemeinfrei, Wikimedia Commons „Kindertransport-arrive-uk.jpg“.</li>
+    <li>Magdeburg nach dem Novemberpogrom: Bundesarchiv, Bild 146-1970-083-42, CC BY-SA 3.0 DE.</li>
+    <li>Jüdische Flüchtlingskinder in England: Bundesarchiv, Bild 183-1987-0928-501, CC BY-SA 3.0 DE.</li>
+    <li>Ankunft jüdischer Flüchtlinge in London: Bundesarchiv, Bild 183-S69279, CC BY-SA 3.0 DE.</li>
+    <li>Nicholas Winton 1938: Associated Press, gemeinfrei, Wikimedia Commons.</li>
+    <li>Alf Dubs: Chris McAndrew, offizielles Porträt des britischen Oberhauses, CC BY 3.0.</li>
+    <li>Denkmal Berlin: Avi1111 (Dr. Avishai Teicher), CC BY-SA 4.0, Wikimedia Commons.</li>
+    <li>Denkmal London: Matt Brown, 2024, CC BY 2.0, Wikimedia Commons.</li>
+    <li>Denkmal Wien: Wikimedia-Commons-Nutzer „Kindertransport“, CC BY-SA 3.0, „Fürdaskindvienna.JPG“.</li>
+    <li>Karte: Natural Earth (gemeinfrei), heutige Grenzen.</li>
+  </ol>
+  </div>
+</section>
+
+</main>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script type="application/json" id="geoData">{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"n":"Großbritannien","id":"826"},"geometry":{"type":"MultiPolygon","coordinates":[[[[-2.67,51.62],[-2.74,51.58],[-2.98,51.54],[-3.08,51.5],[-3.26,51.4],[-3.29,51.39],[-3.56,51.41],[-3.76,51.54],[-3.89,51.59],[-3.94,51.6],[-4,51.58],[-4.12,51.57],[-4.24,51.57],[-4.17,51.63],[-4.09,51.66],[-4.28,51.68],[-4.33,51.7],[-4.39,51.74],[-4.53,51.75],[-4.6,51.74],[-4.72,51.68],[-4.9,51.63],[-5.12,51.71],[-5.17,51.74],[-5.17,51.81],[-5.2,51.86],[-5.26,51.88],[-5.18,51.95],[-5.09,52],[-4.88,52.04],[-4.56,52.15],[-4.38,52.2],[-4.22,52.28],[-4.15,52.33],[-4.1,52.39],[-4.05,52.47],[-3.98,52.54],[-4.05,52.56],[-4.08,52.61],[-4.07,52.66],[-4.04,52.7],[-4.07,52.76],[-4.12,52.82],[-4.11,52.87],[-4.1,52.92],[-4.23,52.91],[-4.36,52.9],[-4.47,52.86],[-4.58,52.82],[-4.68,52.81],[-4.68,52.84],[-4.64,52.89],[-4.53,52.96],[-4.4,53.01],[-4.36,53.06],[-4.33,53.1],[-4.27,53.14],[-4.11,53.22],[-3.81,53.3],[-3.76,53.31],[-3.65,53.3],[-3.53,53.31],[-3.43,53.34],[-3.32,53.35],[-3.1,53.26],[-3.17,53.39],[-3.07,53.43],[-2.92,53.3],[-2.86,53.29],[-2.75,53.31],[-2.8,53.33],[-2.85,53.33],[-2.91,53.35],[-2.97,53.39],[-3.07,53.51],[-3.06,53.59],[-3,53.66],[-2.93,53.73],[-2.98,53.75],[-3.03,53.77],[-3.04,53.84],[-3.03,53.91],[-2.9,53.96],[-2.86,54.04],[-2.85,54.14],[-2.87,54.18],[-2.99,54.17],[-3.05,54.15],[-3.11,54.13],[-3.17,54.13],[-3.32,54.23],[-3.41,54.31],[-3.57,54.47],[-3.59,54.56],[-3.47,54.77],[-3.27,54.91],[-3.04,54.95],[-3.08,54.96],[-3.43,54.96],[-3.55,54.95],[-3.66,54.89],[-3.72,54.88],[-3.78,54.87],[-3.84,54.84],[-3.9,54.8],[-3.96,54.78],[-4.08,54.79],[-4.13,54.78],[-4.17,54.8],[-4.21,54.84],[-4.25,54.85],[-4.3,54.84],[-4.41,54.79],[-4.52,54.76],[-4.65,54.79],[-4.82,54.85],[-4.85,54.83],[-4.89,54.77],[-4.91,54.69],[-5.03,54.76],[-5.14,54.86],[-5.17,54.92],[-5.17,54.99],[-5.12,55.01],[-5.06,54.99],[-4.97,55.15],[-4.79,55.36],[-4.72,55.42],[-4.68,55.5],[-4.69,55.55],[-4.73,55.6],[-4.89,55.7],[-4.89,55.78],[-4.87,55.87],[-4.83,55.93],[-4.81,55.94],[-4.58,55.94],[-4.67,55.97],[-4.84,56.05],[-4.84,56.08],[-4.8,56.16],[-4.82,56.15],[-4.85,56.12],[-4.93,56.03],[-4.97,56.01],[-5.09,55.99],[-5.11,55.95],[-5.14,55.93],[-5.2,55.93],[-5.21,55.89],[-5.23,55.89],[-5.25,55.93],[-5.25,56],[-5.22,56.07],[-5.18,56.12],[-5,56.23],[-5.09,56.2],[-5.28,56.09],[-5.38,56.02],[-5.41,56],[-5.42,55.97],[-5.42,55.95],[-5.37,55.83],[-5.39,55.77],[-5.56,55.39],[-5.59,55.35],[-5.62,55.33],[-5.65,55.33],[-5.73,55.33],[-5.77,55.36],[-5.77,55.39],[-5.75,55.44],[-5.68,55.62],[-5.65,55.67],[-5.6,55.72],[-5.51,55.8],[-5.51,55.81],[-5.57,55.79],[-5.6,55.8],[-5.62,55.81],[-5.61,56.05],[-5.56,56.13],[-5.54,56.25],[-5.49,56.35],[-5.43,56.42],[-5.39,56.51],[-5.33,56.56],[-5.31,56.62],[-5.24,56.69],[-5.19,56.76],[-5.22,56.75],[-5.56,56.57],[-5.65,56.53],[-5.77,56.54],[-5.87,56.56],[-5.94,56.61],[-5.97,56.69],[-6.06,56.69],[-6.13,56.71],[-6.13,56.72],[-6.04,56.76],[-5.88,56.78],[-5.73,56.85],[-5.86,56.9],[-5.85,56.92],[-5.74,56.96],[-5.59,57.1],[-5.56,57.23],[-5.63,57.29],[-5.66,57.33],[-5.79,57.38],[-5.82,57.44],[-5.8,57.47],[-5.76,57.5],[-5.69,57.52],[-5.58,57.55],[-5.68,57.57],[-5.72,57.6],[-5.74,57.64],[-5.74,57.67],[-5.69,57.78],[-5.66,57.82],[-5.61,57.88],[-5.35,57.88],[-5.32,57.9],[-5.29,57.91],[-5.16,57.88],[-5.18,57.91],[-5.39,58.04],[-5.41,58.07],[-5.35,58.14],[-5.35,58.18],[-5.36,58.21],[-5.34,58.24],[-5.27,58.25],[-5.06,58.25],[-5.01,58.26],[-5.03,58.3],[-5.08,58.35],[-5.09,58.38],[-5.08,58.42],[-5.07,58.49],[-5.07,58.52],[-5.02,58.57],[-4.98,58.58],[-4.92,58.59],[-4.81,58.57],[-4.76,58.55],[-4.71,58.51],[-4.68,58.51],[-4.53,58.56],[-4.49,58.57],[-4.43,58.51],[-4.19,58.56],[-3.86,58.58],[-3.66,58.61],[-3.45,58.62],[-3.26,58.65],[-3.05,58.63],[-3.05,58.62],[-3.06,58.59],[-3.11,58.52],[-3.1,58.43],[-3.11,58.41],[-3.14,58.38],[-3.21,58.32],[-3.41,58.24],[-3.77,58.05],[-3.99,57.96],[-4.02,57.91],[-4.03,57.85],[-3.91,57.84],[-3.86,57.82],[-3.89,57.79],[-4.08,57.68],[-4.13,57.58],[-3.99,57.58],[-3.87,57.6],[-3.63,57.66],[-3.4,57.71],[-3.3,57.71],[-3.08,57.67],[-3.04,57.67],[-2.95,57.69],[-2.86,57.69],[-2.24,57.68],[-2.08,57.7],[-1.96,57.68],[-1.87,57.61],[-1.78,57.49],[-1.78,57.47],[-1.83,57.42],[-1.94,57.35],[-2.02,57.26],[-2.05,57.21],[-2.06,57.15],[-2.09,57.1],[-2.26,56.86],[-2.43,56.73],[-2.5,56.64],[-2.59,56.56],[-2.68,56.51],[-2.77,56.48],[-3.05,56.45],[-3.12,56.43],[-3.21,56.38],[-3.31,56.36],[-3.2,56.37],[-3.09,56.39],[-2.89,56.4],[-2.65,56.32],[-2.67,56.25],[-2.77,56.2],[-2.98,56.19],[-3.18,56.08],[-3.27,56.05],[-3.36,56.03],[-3.48,56.03],[-3.7,56.06],[-3.79,56.09],[-3.7,56.04],[-3.61,56.02],[-3.05,55.95],[-3.02,55.96],[-2.84,56.03],[-2.6,56.03],[-2.15,55.9],[-2.02,55.81],[-1.83,55.67],[-1.73,55.62],[-1.65,55.57],[-1.61,55.5],[-1.52,55.26],[-1.42,55.03],[-1.29,54.77],[-1.23,54.7],[-1.15,54.66],[-0.76,54.54],[-0.67,54.5],[-0.52,54.39],[-0.37,54.28],[-0.23,54.19],[-0.08,54.12],[-0.16,54.08],[-0.21,54.02],[-0.17,53.94],[-0.11,53.87],[0.01,53.74],[0.12,53.61],[0.08,53.63],[0.04,53.64],[-0.02,53.64],[-0.07,53.64],[-0.17,53.68],[-0.27,53.74],[-0.46,53.72],[-0.57,53.72],[-0.66,53.72],[-0.48,53.7],[-0.29,53.69],[0.13,53.47],[0.27,53.34],[0.35,53.16],[0.3,53.08],[0.21,53.03],[0.12,52.97],[0.05,52.91],[0.28,52.81],[0.33,52.81],[0.38,52.83],[0.43,52.86],[0.52,52.94],[0.56,52.97],[0.7,52.98],[0.83,52.97],[0.95,52.95],[1.06,52.96],[1.27,52.92],[1.38,52.89],[1.66,52.75],[1.72,52.68],[1.74,52.58],[1.75,52.47],[1.7,52.37],[1.65,52.28],[1.61,52.16],[1.59,52.12],[1.56,52.09],[1.41,51.99],[1.32,51.96],[1.28,51.97],[1.23,51.97],[1.23,51.95],[1.27,51.9],[1.28,51.84],[1.19,51.8],[1.1,51.79],[0.96,51.81],[0.75,51.73],[0.9,51.69],[0.93,51.65],[0.89,51.57],[0.8,51.54],[0.7,51.52],[0.59,51.52],[0.51,51.5],[0.42,51.47],[0.53,51.49],[0.6,51.47],[0.65,51.41],[0.69,51.39],[0.89,51.36],[1.01,51.36],[1.26,51.38],[1.37,51.37],[1.42,51.36],[1.42,51.31],[1.4,51.18],[1.37,51.16],[1.05,51.05],[0.98,50.97],[0.96,50.93],[0.77,50.93],[0.69,50.89],[0.53,50.85],[0.42,50.82],[0.3,50.78],[0.2,50.76],[-0.2,50.82],[-0.45,50.81],[-0.79,50.76],[-0.87,50.77],[-1,50.82],[-1.13,50.84],[-1.28,50.86],[-1.42,50.9],[-1.33,50.82],[-1.52,50.75],[-1.6,50.73],[-1.69,50.74],[-1.87,50.71],[-2.03,50.72],[-2.01,50.67],[-1.96,50.63],[-2,50.61],[-2.04,50.6],[-2.35,50.64],[-2.4,50.63],[-2.43,50.6],[-2.55,50.62],[-2.66,50.67],[-2.78,50.71],[-2.9,50.72],[-3,50.72],[-3.4,50.63],[-3.49,50.55],[-3.53,50.43],[-3.58,50.32],[-3.68,50.24],[-3.79,50.23],[-3.9,50.29],[-4.1,50.35],[-4.17,50.39],[-4.2,50.39],[-4.22,50.38],[-4.3,50.36],[-4.38,50.36],[-4.51,50.34],[-4.73,50.29],[-4.82,50.26],[-5.01,50.16],[-5.05,50.13],[-5.12,50.04],[-5.23,50.02],[-5.32,50.08],[-5.43,50.11],[-5.55,50.08],[-5.62,50.05],[-5.65,50.08],[-5.66,50.13],[-5.57,50.2],[-5.34,50.25],[-5.14,50.37],[-5.04,50.45],[-5.01,50.5],[-4.96,50.52],[-4.89,50.53],[-4.86,50.58],[-4.58,50.78],[-4.56,50.82],[-4.55,50.9],[-4.52,50.98],[-4.3,51.03],[-4.19,51.19],[-4.16,51.2],[-3.84,51.23],[-3.61,51.23],[-3.38,51.2],[-3.26,51.19],[-3.14,51.21],[-3.04,51.25],[-2.88,51.41],[-2.79,51.47],[-2.69,51.54],[-2.59,51.61],[-2.43,51.74],[-2.54,51.7],[-2.67,51.62]]],[[[-4.2,53.32],[-4.16,53.3],[-4.05,53.31],[-4.08,53.26],[-4.2,53.22],[-4.28,53.17],[-4.37,53.13],[-4.42,53.18],[-4.47,53.18],[-4.55,53.26],[-4.57,53.39],[-4.46,53.42],[-4.31,53.42],[-4.2,53.32]]],[[[-2.55,59.23],[-2.66,59.23],[-2.6,59.29],[-2.54,59.3],[-2.41,59.3],[-2.43,59.27],[-2.55,59.23]]],[[[-1.04,60.51],[-1.07,60.5],[-1.16,60.6],[-1.09,60.72],[-1.01,60.72],[-0.99,60.69],[-1,60.66],[-1.05,60.65],[-1.05,60.65],[-1.04,60.59],[-1.04,60.53],[-1.04,60.51]]],[[[-1.31,60.54],[-1.29,60.47],[-1.24,60.48],[-1.16,60.42],[-1.12,60.42],[-1.05,60.44],[-1.07,60.38],[-1.13,60.21],[-1.15,60.18],[-1.16,60.12],[-1.18,60.11],[-1.2,60.01],[-1.24,59.97],[-1.28,59.89],[-1.3,59.88],[-1.36,59.91],[-1.3,60.04],[-1.28,60.11],[-1.29,60.15],[-1.32,60.19],[-1.41,60.19],[-1.48,60.17],[-1.5,60.19],[-1.5,60.22],[-1.52,60.23],[-1.61,60.23],[-1.64,60.24],[-1.66,60.26],[-1.67,60.28],[-1.58,60.3],[-1.5,60.29],[-1.37,60.33],[-1.45,60.47],[-1.55,60.48],[-1.57,60.5],[-1.55,60.52],[-1.5,60.53],[-1.41,60.6],[-1.36,60.61],[-1.3,60.61],[-1.31,60.54]]],[[[-0.78,60.81],[-0.78,60.8],[-0.83,60.72],[-0.83,60.68],[-0.91,60.69],[-0.92,60.7],[-0.94,60.75],[-0.93,60.8],[-0.92,60.81],[-0.89,60.82],[-0.87,60.81],[-0.82,60.83],[-0.8,60.83],[-0.78,60.81]]],[[[-3.17,58.79],[-3.22,58.78],[-3.28,58.78],[-3.37,58.84],[-3.4,58.88],[-3.39,58.91],[-3.36,58.92],[-3.27,58.9],[-3.23,58.86],[-3.22,58.83],[-3.21,58.81],[-3.16,58.8],[-3.17,58.79]]],[[[-2.93,58.74],[-2.94,58.74],[-2.98,58.76],[-3.04,58.82],[-2.94,58.84],[-2.9,58.83],[-2.91,58.8],[-2.93,58.74]]],[[[-3.06,59.03],[-3.07,59.01],[-2.99,59.01],[-2.89,58.98],[-2.82,58.98],[-2.76,58.96],[-2.79,58.91],[-2.83,58.89],[-2.86,58.89],[-2.99,58.94],[-3.17,58.92],[-3.2,58.93],[-3.22,58.94],[-3.23,58.96],[-3.23,58.99],[-3.24,59],[-3.3,58.97],[-3.33,58.97],[-3.35,58.99],[-3.35,59.02],[-3.35,59.06],[-3.31,59.13],[-3.25,59.14],[-3.16,59.14],[-3.05,59.1],[-3.02,59.08],[-3.02,59.06],[-3.06,59.03]]],[[[-2.73,59.19],[-2.82,59.16],[-2.85,59.18],[-2.86,59.25],[-2.96,59.27],[-3.02,59.29],[-3.05,59.32],[-3.04,59.33],[-2.98,59.35],[-2.86,59.29],[-2.81,59.24],[-2.73,59.23],[-2.72,59.22],[-2.73,59.19]]],[[[-6.61,56.59],[-6.67,56.58],[-6.67,56.59],[-6.57,56.66],[-6.51,56.67],[-6.49,56.67],[-6.53,56.63],[-6.61,56.59]]],[[[-5.11,55.45],[-5.23,55.45],[-5.28,55.46],[-5.33,55.48],[-5.39,55.62],[-5.37,55.67],[-5.34,55.69],[-5.32,55.71],[-5.25,55.72],[-5.19,55.69],[-5.16,55.67],[-5.11,55.57],[-5.1,55.49],[-5.11,55.45]]],[[[-5.78,56.34],[-6.18,56.29],[-6.31,56.29],[-6.33,56.32],[-6.3,56.34],[-6.19,56.36],[-6.14,56.49],[-6.31,56.55],[-6.32,56.57],[-6.31,56.6],[-6.29,56.61],[-6.18,56.64],[-6.14,56.65],[-6.1,56.65],[-6.03,56.61],[-5.95,56.54],[-5.84,56.52],[-5.76,56.49],[-5.78,56.34]]],[[[-6.13,55.93],[-6.09,55.8],[-6.06,55.72],[-6.06,55.7],[-6.09,55.66],[-6.25,55.61],[-6.31,55.61],[-6.31,55.62],[-6.27,55.67],[-6.3,55.73],[-6.29,55.77],[-6.3,55.78],[-6.33,55.77],[-6.45,55.7],[-6.49,55.7],[-6.5,55.71],[-6.47,55.77],[-6.46,55.81],[-6.45,55.83],[-6.41,55.85],[-6.37,55.87],[-6.35,55.87],[-6.31,55.86],[-6.22,55.91],[-6.13,55.93]]],[[[-5.97,55.81],[-5.99,55.8],[-6.04,55.81],[-6.06,55.82],[-6.07,55.85],[-6.07,55.89],[-6.04,55.93],[-5.91,55.97],[-5.97,55.99],[-5.97,56],[-5.94,56.05],[-5.8,56.11],[-5.76,56.12],[-5.73,56.12],[-5.8,56.01],[-5.97,55.81]]],[[[-6.2,58.36],[-6.33,58.19],[-6.37,58.18],[-6.42,58.14],[-6.55,58.09],[-6.44,58.09],[-6.4,58.08],[-6.4,58.04],[-6.42,58.02],[-6.58,57.94],[-6.68,57.91],[-6.8,57.83],[-6.85,57.83],[-6.91,57.77],[-6.96,57.75],[-6.98,57.75],[-7.01,57.76],[-7.08,57.81],[-6.96,57.87],[-6.94,57.89],[-6.86,57.92],[-6.86,57.93],[-7,57.97],[-7.06,58],[-7.05,58.02],[-6.99,58.05],[-7.02,58.05],[-7.04,58.07],[-7.08,58.08],[-7.09,58.1],[-7.09,58.14],[-7.09,58.18],[-7.04,58.2],[-7.03,58.22],[-7.01,58.23],[-6.95,58.22],[-6.89,58.18],[-6.81,58.2],[-6.73,58.19],[-6.72,58.2],[-6.79,58.28],[-6.78,58.3],[-6.74,58.32],[-6.54,58.38],[-6.3,58.49],[-6.24,58.5],[-6.22,58.49],[-6.19,58.43],[-6.2,58.36]]],[[[-6.28,56.96],[-6.31,56.95],[-6.35,56.95],[-6.38,56.97],[-6.43,57.02],[-6.32,57.05],[-6.28,57.03],[-6.26,57.01],[-6.26,56.98],[-6.28,56.96]]],[[[-6.14,57.51],[-6.15,57.46],[-6.17,57.41],[-6.14,57.35],[-6.14,57.31],[-6.09,57.3],[-6.07,57.28],[-5.88,57.26],[-5.7,57.27],[-5.67,57.25],[-5.67,57.23],[-5.7,57.2],[-5.79,57.15],[-5.91,57.06],[-5.95,57.05],[-5.99,57.04],[-6.01,57.05],[-6.04,57.2],[-6.16,57.18],[-6.27,57.18],[-6.32,57.2],[-6.36,57.24],[-6.44,57.33],[-6.68,57.36],[-6.74,57.41],[-6.76,57.44],[-6.75,57.46],[-6.71,57.5],[-6.64,57.48],[-6.6,57.49],[-6.58,57.51],[-6.58,57.52],[-6.62,57.55],[-6.62,57.56],[-6.38,57.6],[-6.36,57.67],[-6.31,57.67],[-6.25,57.65],[-6.17,57.59],[-6.14,57.51]]],[[[-7.21,57.68],[-7.09,57.63],[-7.18,57.53],[-7.32,57.53],[-7.52,57.6],[-7.52,57.62],[-7.5,57.64],[-7.47,57.65],[-7.44,57.66],[-7.39,57.64],[-7.32,57.66],[-7.27,57.66],[-7.21,57.68]]],[[[-7.25,57.12],[-7.29,57.11],[-7.35,57.12],[-7.38,57.13],[-7.41,57.19],[-7.42,57.23],[-7.41,57.3],[-7.41,57.38],[-7.3,57.38],[-7.27,57.37],[-7.25,57.13],[-7.25,57.12]]],[[[-7.42,56.97],[-7.5,56.95],[-7.54,56.96],[-7.54,56.97],[-7.52,57.01],[-7.45,57.02],[-7.41,57],[-7.4,56.98],[-7.42,56.97]]],[[[-6.22,54.09],[-6.3,54.09],[-6.36,54.08],[-6.4,54.06],[-6.44,54.06],[-6.55,54.06],[-6.65,54.06],[-6.67,54.08],[-6.65,54.16],[-6.67,54.18],[-6.77,54.2],[-6.8,54.21],[-6.86,54.27],[-6.87,54.29],[-6.88,54.33],[-6.94,54.37],[-7.01,54.41],[-7.05,54.41],[-7.13,54.35],[-7.2,54.3],[-7.18,54.28],[-7.16,54.24],[-7.19,54.21],[-7.31,54.16],[-7.32,54.13],[-7.36,54.12],[-7.41,54.14],[-7.54,54.13],[-7.61,54.14],[-7.68,54.19],[-7.85,54.22],[-7.89,54.28],[-7.92,54.3],[-8.12,54.41],[-8.15,54.45],[-8.12,54.48],[-8.04,54.51],[-7.79,54.57],[-7.75,54.59],[-7.75,54.62],[-7.82,54.64],[-7.89,54.67],[-7.91,54.68],[-7.91,54.7],[-7.87,54.72],[-7.8,54.72],[-7.74,54.71],[-7.69,54.73],[-7.61,54.75],[-7.55,54.77],[-7.5,54.83],[-7.45,54.88],[-7.45,54.91],[-7.4,55],[-7.38,55.03],[-7.22,55.09],[-7.18,55.06],[-7.1,55.05],[-7.03,55.08],[-6.95,55.18],[-6.89,55.19],[-6.82,55.18],[-6.7,55.19],[-6.47,55.24],[-6.37,55.24],[-6.23,55.22],[-6.13,55.22],[-6.04,55.14],[-5.99,55.03],[-5.87,54.92],[-5.72,54.82],[-5.71,54.76],[-5.77,54.72],[-5.88,54.68],[-5.88,54.64],[-5.81,54.66],[-5.74,54.67],[-5.58,54.66],[-5.53,54.62],[-5.49,54.55],[-5.47,54.5],[-5.48,54.44],[-5.52,54.46],[-5.57,54.51],[-5.61,54.54],[-5.67,54.55],[-5.65,54.48],[-5.66,54.38],[-5.63,54.37],[-5.56,54.37],[-5.61,54.27],[-5.71,54.25],[-5.83,54.24],[-5.86,54.2],[-5.88,54.16],[-5.94,54.09],[-6.02,54.05],[-6.12,54.06],[-6.22,54.09]]],[[[-1.06,50.69],[-1.15,50.66],[-1.18,50.62],[-1.2,50.6],[-1.25,50.59],[-1.31,50.59],[-1.51,50.67],[-1.56,50.67],[-1.52,50.7],[-1.38,50.73],[-1.31,50.77],[-1.14,50.74],[-1.06,50.69]]]]}},{"type":"Feature","properties":{"n":"Schweiz","id":"756"},"geometry":{"type":"Polygon","coordinates":[[[9.52,47.52],[9.55,47.51],[9.62,47.47],[9.61,47.39],[9.53,47.27],[9.48,47.17],[9.48,47.1],[9.49,47.06],[9.5,47.06],[9.58,47.06],[9.62,47.06],[9.74,47.04],[9.84,47.01],[9.87,46.98],[9.88,46.94],[10,46.88],[10.13,46.85],[10.18,46.86],[10.35,46.99],[10.42,46.96],[10.46,46.9],[10.45,46.87],[10.41,46.74],[10.4,46.66],[10.44,46.62],[10.44,46.58],[10.43,46.55],[10.36,46.55],[10.27,46.57],[10.2,46.62],[10.14,46.61],[10.09,46.6],[10.06,46.55],[10.04,46.48],[10.05,46.45],[10.08,46.42],[10.11,46.36],[10.13,46.29],[10.15,46.25],[10.13,46.24],[10.08,46.23],[10.04,46.24],[9.97,46.33],[9.94,46.36],[9.88,46.37],[9.79,46.35],[9.64,46.3],[9.58,46.3],[9.53,46.31],[9.48,46.35],[9.44,46.43],[9.43,46.48],[9.4,46.48],[9.3,46.5],[9.26,46.48],[9.26,46.39],[9.25,46.29],[9.2,46.22],[9.07,46.1],[9.02,46.05],[9,46.02],[9,45.98],[9.02,45.93],[9.05,45.88],[9.02,45.85],[8.96,45.83],[8.9,45.86],[8.89,45.92],[8.78,46],[8.83,46.06],[8.82,46.08],[8.64,46.11],[8.57,46.16],[8.46,46.25],[8.44,46.28],[8.44,46.4],[8.44,46.43],[8.42,46.45],[8.37,46.45],[8.3,46.4],[8.23,46.34],[8.09,46.27],[8.08,46.26],[8.13,46.19],[8.12,46.16],[8.02,46.05],[7.99,46.02],[7.85,45.95],[7.79,45.92],[7.59,45.97],[7.54,45.98],[7.45,45.94],[7.33,45.91],[7.13,45.88],[7.05,45.9],[7.02,45.93],[7,45.96],[6.95,46.02],[6.9,46.05],[6.86,46.09],[6.81,46.13],[6.77,46.16],[6.82,46.28],[6.78,46.31],[6.77,46.37],[6.78,46.41],[6.76,46.42],[6.58,46.44],[6.43,46.43],[6.32,46.39],[6.23,46.33],[6.22,46.32],[6.23,46.31],[6.27,46.25],[6.2,46.19],[6.09,46.15],[6.01,46.14],[5.97,46.15],[5.97,46.21],[6.04,46.24],[6.1,46.28],[6.11,46.34],[6.12,46.38],[6.06,46.43],[6.07,46.46],[6.11,46.52],[6.13,46.57],[6.16,46.61],[6.28,46.68],[6.41,46.75],[6.43,46.83],[6.44,46.93],[6.46,46.95],[6.63,47],[6.67,47.03],[6.69,47.06],[6.82,47.16],[6.95,47.27],[6.98,47.3],[7,47.32],[7,47.34],[6.99,47.35],[6.92,47.36],[6.9,47.39],[6.97,47.45],[7.05,47.49],[7.14,47.49],[7.17,47.47],[7.17,47.45],[7.2,47.43],[7.27,47.43],[7.34,47.43],[7.42,47.46],[7.47,47.51],[7.49,47.55],[7.62,47.59],[7.7,47.57],[7.93,47.56],[8.09,47.58],[8.2,47.61],[8.33,47.61],[8.42,47.59],[8.43,47.59],[8.45,47.6],[8.48,47.61],[8.56,47.62],[8.57,47.64],[8.57,47.65],[8.55,47.66],[8.45,47.65],[8.41,47.66],[8.4,47.69],[8.44,47.73],[8.51,47.77],[8.57,47.78],[8.62,47.77],[8.73,47.7],[8.75,47.7],[8.77,47.71],[8.79,47.72],[8.83,47.7],[8.87,47.66],[8.88,47.66],[9.13,47.67],[9.18,47.67],[9.35,47.6],[9.52,47.52]]]}},{"type":"Feature","properties":{"n":"Schweden","id":"752"},"geometry":{"type":"MultiPolygon","coordinates":[[[[19.07,57.84],[18.99,57.81],[18.95,57.74],[18.88,57.73],[18.82,57.71],[18.79,57.48],[18.91,57.4],[18.84,57.39],[18.78,57.36],[18.74,57.32],[18.7,57.24],[18.54,57.2],[18.48,57.16],[18.39,57.09],[18.34,56.98],[18.25,56.93],[18.15,56.92],[18.21,57.01],[18.29,57.08],[18.21,57.13],[18.16,57.21],[18.11,57.27],[18.15,57.34],[18.13,57.45],[18.14,57.56],[18.2,57.61],[18.28,57.66],[18.41,57.76],[18.54,57.83],[18.72,57.86],[18.8,57.83],[18.84,57.9],[18.9,57.92],[18.96,57.9],[19.07,57.84]]],[[[16.53,56.29],[16.48,56.24],[16.43,56.24],[16.4,56.31],[16.39,56.48],[16.41,56.57],[16.63,56.88],[16.73,56.9],[16.86,57.09],[16.9,57.17],[16.96,57.25],[17,57.32],[17.03,57.34],[17.09,57.33],[17.12,57.32],[17.05,57.28],[17.06,57.23],[17.06,57.21],[16.88,56.98],[16.84,56.84],[16.78,56.8],[16.53,56.29]]],[[[11.39,59.04],[11.47,58.91],[11.54,58.89],[11.64,58.93],[11.71,59.02],[11.75,59.16],[11.8,59.29],[11.75,59.43],[11.68,59.56],[11.68,59.59],[11.84,59.7],[11.88,59.78],[11.93,59.86],[11.99,59.89],[12.07,59.9],[12.17,59.91],[12.29,59.97],[12.4,60.04],[12.49,60.11],[12.52,60.24],[12.52,60.31],[12.55,60.35],[12.59,60.45],[12.56,60.55],[12.44,60.69],[12.31,60.89],[12.3,61],[12.35,61.02],[12.47,61.04],[12.68,61.05],[12.71,61.06],[12.73,61.11],[12.77,61.17],[12.83,61.22],[12.86,61.29],[12.88,61.35],[12.76,61.45],[12.59,61.54],[12.49,61.57],[12.29,61.65],[12.16,61.72],[12.23,61.98],[12.29,62.17],[12.3,62.21],[12.3,62.28],[12.12,62.59],[12.12,62.66],[12.14,62.72],[12.12,62.83],[12.11,62.92],[12.14,62.95],[12.22,63],[12.14,63.08],[12.14,63.09],[12,63.29],[12.21,63.49],[12.17,63.6],[12.3,63.67],[12.53,63.84],[12.66,63.94],[12.69,63.96],[12.79,64],[12.99,64.05],[13.2,64.07],[13.3,64.07],[13.67,64.04],[13.96,64.01],[14,64.04],[14.06,64.1],[14.14,64.17],[14.15,64.26],[14.12,64.39],[14.08,64.46],[13.87,64.51],[13.65,64.58],[13.92,64.8],[14.11,64.95],[14.35,65.17],[14.43,65.26],[14.48,65.3],[14.55,65.65],[14.6,65.74],[14.64,65.79],[14.64,65.85],[14.61,65.93],[14.54,66.13],[14.92,66.15],[15.04,66.17],[15.15,66.19],[15.37,66.25],[15.49,66.31],[15.42,66.49],[15.56,66.55],[15.89,66.77],[16.24,66.98],[16.4,67.06],[16.42,67.09],[16.44,67.15],[16.36,67.25],[16.28,67.31],[16.13,67.43],[16.19,67.51],[16.31,67.52],[16.46,67.55],[16.57,67.62],[16.59,67.63],[16.79,67.9],[17.17,68.03],[17.33,68.1],[17.57,68.05],[17.92,67.97],[18.07,68.09],[18.12,68.13],[18.18,68.2],[18.16,68.32],[18.15,68.47],[18.16,68.53],[18.3,68.56],[18.38,68.56],[18.77,68.5],[18.87,68.5],[19.05,68.49],[19.26,68.47],[19.69,68.39],[19.87,68.36],[19.97,68.36],[20.06,68.39],[20.24,68.48],[19.97,68.54],[20.15,68.61],[20.24,68.67],[20.32,68.75],[20.35,68.85],[20.34,68.9],[20.28,68.93],[20.12,69.02],[20.49,69.03],[20.62,69.04],[20.9,68.98],[20.91,68.97],[20.91,68.94],[20.92,68.91],[21.18,68.83],[21.26,68.79],[21.42,68.72],[21.47,68.69],[21.62,68.65],[21.72,68.61],[21.85,68.57],[22,68.52],[22.2,68.48],[22.36,68.46],[22.78,68.39],[22.85,68.37],[22.97,68.32],[23.1,68.26],[23.18,68.14],[23.32,68.13],[23.36,68.09],[23.47,68.02],[23.64,67.95],[23.63,67.93],[23.5,67.87],[23.49,67.8],[23.5,67.7],[23.54,67.61],[23.54,67.59],[23.5,67.56],[23.47,67.52],[23.45,67.48],[23.46,67.46],[23.47,67.45],[23.54,67.45],[23.66,67.44],[23.73,67.42],[23.78,67.33],[23.76,67.31],[23.66,67.27],[23.63,67.23],[23.62,67.18],[23.64,67.13],[23.68,67.07],[23.76,67],[23.87,66.93],[23.94,66.88],[23.97,66.84],[23.99,66.81],[23.94,66.78],[23.9,66.71],[23.88,66.63],[23.87,66.58],[23.77,66.51],[23.7,66.48],[23.68,66.44],[23.67,66.38],[23.69,66.3],[23.7,66.25],[23.72,66.22],[23.75,66.19],[23.91,66.15],[24,66.06],[24.05,65.99],[24.15,65.81],[23.89,65.78],[23.69,65.83],[23.59,65.81],[23.42,65.8],[23.22,65.79],[23.15,65.75],[23.1,65.74],[22.92,65.79],[22.75,65.87],[22.62,65.81],[22.54,65.8],[22.47,65.85],[22.4,65.86],[22.37,65.84],[22.34,65.79],[22.29,65.75],[22.28,65.73],[22.27,65.62],[22.25,65.6],[22.09,65.61],[22.1,65.58],[22.13,65.57],[22.15,65.55],[22.09,65.53],[21.92,65.53],[21.9,65.51],[21.95,65.47],[21.92,65.44],[21.88,65.42],[21.68,65.4],[21.57,65.41],[21.53,65.39],[21.52,65.36],[21.54,65.33],[21.59,65.32],[21.61,65.3],[21.61,65.26],[21.57,65.26],[21.45,65.32],[21.41,65.32],[21.44,65.28],[21.5,65.24],[21.54,65.21],[21.58,65.16],[21.57,65.13],[21.43,65.01],[21.29,64.94],[21.2,64.88],[21.14,64.81],[21.21,64.77],[21.28,64.72],[21.33,64.63],[21.39,64.54],[21.52,64.46],[21.49,64.42],[21.47,64.38],[21.26,64.3],[21.02,64.18],[20.76,63.87],[20.68,63.83],[20.45,63.77],[20.37,63.72],[20.21,63.66],[19.91,63.61],[19.78,63.54],[19.72,63.46],[19.65,63.46],[19.59,63.49],[19.5,63.51],[19.49,63.46],[19.5,63.42],[19.36,63.48],[19.29,63.43],[19.24,63.35],[19.04,63.24],[18.82,63.26],[18.79,63.24],[18.85,63.22],[18.86,63.21],[18.82,63.2],[18.76,63.2],[18.67,63.18],[18.61,63.18],[18.58,63.13],[18.53,63.06],[18.41,63.04],[18.34,63.03],[18.31,63],[18.5,62.99],[18.49,62.96],[18.48,62.93],[18.46,62.9],[18.25,62.85],[18.21,62.81],[18.17,62.79],[18.07,62.79],[18.08,62.81],[18.09,62.84],[17.95,62.83],[17.91,62.89],[17.88,62.87],[17.89,62.83],[17.93,62.79],[17.97,62.72],[17.94,62.68],[17.9,62.66],[17.93,62.64],[18.01,62.63],[18.04,62.6],[17.95,62.58],[17.83,62.5],[17.72,62.5],[17.65,62.45],[17.57,62.45],[17.51,62.48],[17.41,62.51],[17.38,62.46],[17.37,62.43],[17.43,62.34],[17.53,62.26],[17.63,62.23],[17.56,62.21],[17.51,62.17],[17.45,62.02],[17.41,61.97],[17.38,61.87],[17.4,61.78],[17.42,61.74],[17.47,61.68],[17.34,61.69],[17.2,61.72],[17.22,61.66],[17.13,61.57],[17.15,61.51],[17.16,61.46],[17.14,61.38],[17.18,61.36],[17.2,61.31],[17.16,61.28],[17.18,61.25],[17.18,61.15],[17.21,60.99],[17.2,60.95],[17.28,60.81],[17.26,60.76],[17.25,60.7],[17.36,60.64],[17.46,60.64],[17.56,60.64],[17.59,60.63],[17.63,60.59],[17.66,60.54],[17.74,60.54],[17.87,60.58],[17.96,60.59],[18.01,60.51],[18.16,60.41],[18.25,60.36],[18.4,60.34],[18.56,60.25],[18.53,60.15],[18.6,60.12],[18.79,60.08],[18.85,60.03],[18.88,59.98],[18.93,59.94],[18.99,59.83],[18.97,59.76],[18.89,59.73],[18.72,59.66],[18.64,59.6],[18.58,59.57],[18.4,59.49],[18.34,59.48],[18.28,59.44],[18.22,59.42],[18.16,59.43],[17.97,59.36],[17.98,59.33],[18.13,59.32],[18.21,59.33],[18.27,59.37],[18.34,59.38],[18.39,59.37],[18.46,59.4],[18.51,59.41],[18.56,59.39],[18.62,59.33],[18.5,59.29],[18.42,59.29],[18.37,59.18],[18.32,59.13],[18.29,59.11],[18.1,59.06],[17.97,59],[17.83,58.96],[17.76,58.97],[17.67,58.92],[17.46,58.86],[17.35,58.78],[17.1,58.71],[16.98,58.65],[16.64,58.65],[16.32,58.66],[16.21,58.64],[16.32,58.63],[16.39,58.6],[16.48,58.61],[16.68,58.6],[16.79,58.59],[16.93,58.49],[16.82,58.46],[16.65,58.43],[16.72,58.3],[16.77,58.21],[16.7,58.16],[16.7,57.92],[16.6,57.91],[16.55,57.81],[16.59,57.76],[16.58,57.64],[16.61,57.57],[16.65,57.5],[16.63,57.43],[16.48,57.26],[16.48,57.19],[16.51,57.14],[16.53,57.07],[16.46,56.93],[16.41,56.81],[16.35,56.71],[16.22,56.59],[16.15,56.5],[16,56.22],[15.92,56.17],[15.83,56.13],[15.72,56.16],[15.63,56.19],[15.51,56.18],[15.33,56.15],[15.05,56.17],[14.78,56.16],[14.72,56.13],[14.75,56.03],[14.65,56.02],[14.56,56.05],[14.47,56.01],[14.4,55.98],[14.26,55.89],[14.21,55.83],[14.2,55.73],[14.28,55.64],[14.34,55.53],[14.18,55.4],[14.08,55.39],[13.81,55.43],[13.32,55.35],[12.89,55.41],[12.94,55.48],[12.94,55.53],[12.96,55.61],[12.98,55.69],[12.97,55.75],[12.94,55.81],[12.84,55.88],[12.59,56.14],[12.52,56.25],[12.47,56.29],[12.51,56.29],[12.71,56.23],[12.75,56.24],[12.8,56.26],[12.74,56.35],[12.69,56.38],[12.66,56.44],[12.77,56.46],[12.86,56.45],[12.92,56.52],[12.88,56.62],[12.79,56.65],[12.72,56.66],[12.57,56.82],[12.42,56.91],[12.15,57.23],[12.05,57.45],[11.96,57.43],[11.92,57.52],[11.89,57.61],[11.88,57.68],[11.73,57.72],[11.73,57.76],[11.7,57.97],[11.55,58],[11.45,58.12],[11.43,58.34],[11.33,58.38],[11.25,58.37],[11.25,58.42],[11.27,58.48],[11.22,58.68],[11.21,58.87],[11.17,58.92],[11.15,58.99],[11.17,59.05],[11.19,59.08],[11.3,59.09],[11.39,59.04]]],[[[19.16,57.92],[19.14,57.86],[19.09,57.87],[19.04,57.91],[19.14,57.98],[19.28,57.98],[19.33,57.96],[19.16,57.92]]],[[[18.42,59.03],[18.37,59.02],[18.35,59.02],[18.38,59.07],[18.4,59.09],[18.47,59.11],[18.48,59.1],[18.42,59.03]]],[[[18.6,59.47],[18.57,59.44],[18.55,59.48],[18.56,59.49],[18.57,59.53],[18.62,59.55],[18.7,59.54],[18.7,59.52],[18.62,59.49],[18.6,59.47]]]]}},{"type":"Feature","properties":{"n":"Slowakei","id":"703"},"geometry":{"type":"Polygon","coordinates":[[[22.54,49.07],[22.52,49.03],[22.48,48.98],[22.43,48.93],[22.39,48.87],[22.33,48.75],[22.3,48.69],[22.14,48.57],[22.13,48.41],[22.11,48.39],[21.77,48.34],[21.72,48.35],[21.67,48.38],[21.65,48.4],[21.63,48.42],[21.6,48.46],[21.56,48.5],[21.5,48.52],[21.45,48.55],[21.38,48.55],[21.2,48.51],[21.07,48.51],[20.98,48.52],[20.87,48.55],[20.64,48.55],[20.49,48.53],[20.48,48.5],[20.33,48.3],[20.13,48.22],[19.95,48.15],[19.9,48.13],[19.81,48.16],[19.71,48.2],[19.63,48.22],[19.56,48.21],[19.5,48.16],[19.47,48.11],[19.27,48.07],[18.91,48.05],[18.79,48],[18.75,47.94],[18.75,47.89],[18.78,47.85],[18.74,47.81],[18.73,47.79],[18.48,47.78],[18.15,47.76],[17.95,47.77],[17.76,47.77],[17.63,47.81],[17.48,47.89],[17.32,47.99],[17.3,47.99],[17.28,48],[17.17,48.01],[17.15,48.01],[17.09,48.04],[17.07,48.08],[16.97,48.2],[16.86,48.39],[16.86,48.44],[16.9,48.5],[16.94,48.55],[16.95,48.59],[16.95,48.6],[16.99,48.68],[17.06,48.78],[17.13,48.84],[17.19,48.86],[17.3,48.84],[17.48,48.83],[17.62,48.84],[17.76,48.89],[17.83,48.93],[17.89,48.97],[17.91,49],[17.94,49.01],[18.05,49.04],[18.08,49.07],[18.1,49.12],[18.11,49.18],[18.13,49.23],[18.16,49.26],[18.37,49.34],[18.38,49.36],[18.42,49.39],[18.48,49.42],[18.53,49.46],[18.6,49.49],[18.68,49.49],[18.75,49.49],[18.81,49.51],[18.83,49.51],[18.94,49.5],[18.96,49.45],[18.97,49.4],[19.15,49.4],[19.25,49.51],[19.3,49.53],[19.39,49.56],[19.44,49.6],[19.48,49.58],[19.54,49.5],[19.59,49.45],[19.63,49.42],[19.63,49.41],[19.67,49.4],[19.73,49.39],[19.77,49.37],[19.79,49.32],[19.79,49.27],[19.77,49.24],[19.76,49.2],[19.8,49.19],[19.87,49.2],[19.92,49.22],[20.06,49.18],[20.11,49.27],[20.16,49.32],[20.24,49.34],[20.3,49.37],[20.36,49.38],[20.4,49.38],[20.42,49.39],[20.48,49.39],[20.53,49.38],[20.62,49.39],[20.73,49.37],[20.8,49.33],[20.87,49.32],[20.95,49.32],[21,49.34],[21.08,49.42],[21.14,49.42],[21.22,49.43],[21.35,49.43],[21.64,49.41],[21.71,49.38],[21.89,49.34],[21.97,49.3],[22,49.25],[22.02,49.21],[22.2,49.15],[22.47,49.08],[22.54,49.07]]]}},{"type":"Feature","properties":{"n":"Slowenien","id":"705"},"geometry":{"type":"Polygon","coordinates":[[[16.52,46.5],[16.43,46.52],[16.32,46.53],[16.3,46.52],[16.26,46.51],[16.24,46.48],[16.25,46.39],[16.23,46.37],[16.1,46.38],[16.07,46.37],[16,46.31],[15.93,46.28],[15.85,46.26],[15.78,46.23],[15.71,46.21],[15.64,46.2],[15.61,46.17],[15.59,46.14],[15.6,46.11],[15.67,46.05],[15.68,45.98],[15.67,45.9],[15.65,45.86],[15.63,45.83],[15.45,45.8],[15.28,45.73],[15.27,45.72],[15.35,45.66],[15.36,45.65],[15.29,45.61],[15.28,45.58],[15.29,45.54],[15.33,45.5],[15.34,45.47],[15.24,45.44],[15.11,45.45],[14.96,45.5],[14.9,45.49],[14.85,45.47],[14.79,45.48],[14.73,45.51],[14.65,45.57],[14.61,45.61],[14.59,45.65],[14.57,45.66],[14.54,45.65],[14.51,45.6],[14.43,45.51],[14.37,45.48],[14.28,45.49],[14.16,45.49],[14.09,45.48],[13.99,45.51],[13.97,45.5],[13.97,45.48],[13.93,45.45],[13.88,45.43],[13.61,45.48],[13.58,45.52],[13.64,45.54],[13.72,45.59],[13.78,45.58],[13.84,45.59],[13.88,45.61],[13.83,45.68],[13.72,45.76],[13.66,45.79],[13.58,45.81],[13.57,45.83],[13.61,45.96],[13.6,45.98],[13.51,45.97],[13.49,45.99],[13.48,46.01],[13.49,46.04],[13.55,46.09],[13.62,46.13],[13.64,46.16],[13.63,46.18],[13.55,46.2],[13.49,46.22],[13.45,46.22],[13.42,46.21],[13.4,46.23],[13.38,46.26],[13.4,46.32],[13.48,46.37],[13.56,46.41],[13.64,46.45],[13.68,46.46],[13.7,46.52],[13.74,46.52],[13.83,46.51],[13.93,46.5],[14.02,46.48],[14.1,46.46],[14.27,46.44],[14.42,46.43],[14.47,46.42],[14.5,46.42],[14.55,46.4],[14.58,46.41],[14.6,46.44],[14.68,46.46],[14.76,46.5],[14.81,46.54],[14.84,46.58],[14.89,46.61],[14.95,46.61],[15,46.63],[15.22,46.64],[15.44,46.63],[15.55,46.65],[15.63,46.7],[15.76,46.71],[15.77,46.71],[15.96,46.68],[15.97,46.7],[15.98,46.71],[15.98,46.8],[16.04,46.84],[16.09,46.86],[16.28,46.86],[16.31,46.83],[16.32,46.78],[16.34,46.72],[16.37,46.7],[16.39,46.68],[16.38,46.64],[16.42,46.61],[16.5,46.52],[16.52,46.5]]]}},{"type":"Feature","properties":{"n":"Polen","id":"616"},"geometry":{"type":"Polygon","coordinates":[[[23.6,51.52],[23.66,51.45],[23.68,51.4],[23.66,51.35],[23.66,51.31],[23.71,51.26],[23.86,51.13],[23.94,50.99],[23.99,50.94],[24.1,50.87],[24.1,50.84],[24.06,50.82],[24.02,50.82],[24,50.81],[23.98,50.79],[24.01,50.76],[24.05,50.72],[24.09,50.62],[24.09,50.53],[24.05,50.51],[24,50.46],[23.97,50.41],[23.71,50.38],[23.65,50.33],[23.51,50.23],[23.41,50.17],[23.27,50.07],[23.03,49.9],[22.95,49.83],[22.89,49.77],[22.71,49.61],[22.65,49.54],[22.66,49.48],[22.72,49.35],[22.73,49.29],[22.72,49.24],[22.7,49.19],[22.71,49.17],[22.76,49.14],[22.85,49.08],[22.85,49.06],[22.84,49.04],[22.81,49.02],[22.7,49.04],[22.58,49.08],[22.54,49.07],[22.47,49.08],[22.2,49.15],[22.02,49.21],[22,49.25],[21.97,49.3],[21.89,49.34],[21.71,49.38],[21.64,49.41],[21.35,49.43],[21.22,49.43],[21.14,49.42],[21.08,49.42],[21,49.34],[20.95,49.32],[20.87,49.32],[20.8,49.33],[20.73,49.37],[20.62,49.39],[20.53,49.38],[20.48,49.39],[20.42,49.39],[20.4,49.38],[20.36,49.38],[20.3,49.37],[20.24,49.34],[20.16,49.32],[20.11,49.27],[20.06,49.18],[19.92,49.22],[19.87,49.2],[19.8,49.19],[19.76,49.2],[19.77,49.24],[19.79,49.27],[19.79,49.32],[19.77,49.37],[19.73,49.39],[19.67,49.4],[19.63,49.41],[19.63,49.42],[19.59,49.45],[19.54,49.5],[19.48,49.58],[19.44,49.6],[19.39,49.56],[19.3,49.53],[19.25,49.51],[19.15,49.4],[18.97,49.4],[18.96,49.45],[18.94,49.5],[18.83,49.51],[18.83,49.54],[18.81,49.61],[18.6,49.76],[18.57,49.82],[18.58,49.84],[18.56,49.88],[18.52,49.9],[18.35,49.93],[18.3,49.91],[18.26,49.93],[18.2,49.96],[18.1,49.99],[18.09,50.01],[18.05,50.03],[18.03,50.04],[18.02,50.02],[17.98,50],[17.88,49.97],[17.83,49.98],[17.79,50.01],[17.75,50.06],[17.68,50.1],[17.63,50.12],[17.6,50.14],[17.59,50.16],[17.71,50.19],[17.74,50.23],[17.72,50.3],[17.7,50.31],[17.66,50.28],[17.56,50.26],[17.46,50.25],[17.42,50.25],[17.15,50.38],[16.98,50.42],[16.88,50.43],[16.87,50.41],[16.91,50.34],[16.99,50.26],[16.99,50.24],[16.9,50.2],[16.84,50.19],[16.78,50.16],[16.72,50.12],[16.68,50.1],[16.64,50.1],[16.6,50.12],[16.49,50.25],[16.35,50.34],[16.34,50.37],[16.29,50.37],[16.23,50.39],[16.21,50.42],[16.24,50.45],[16.28,50.48],[16.36,50.5],[16.38,50.52],[16.39,50.54],[16.42,50.57],[16.41,50.58],[16.36,50.62],[16.28,50.66],[16.07,50.63],[16.01,50.61],[15.98,50.63],[15.95,50.67],[15.89,50.68],[15.82,50.71],[15.73,50.74],[15.64,50.75],[15.46,50.79],[15.4,50.8],[15.36,50.81],[15.31,50.85],[15.28,50.88],[15.26,50.96],[15.13,50.99],[14.99,51.01],[14.99,51],[14.99,50.93],[14.98,50.89],[14.9,50.86],[14.81,50.86],[14.82,50.87],[14.92,51.01],[14.96,51.09],[15.02,51.25],[14.95,51.38],[14.93,51.43],[14.91,51.46],[14.73,51.52],[14.71,51.54],[14.74,51.63],[14.73,51.66],[14.68,51.7],[14.63,51.77],[14.6,51.83],[14.68,51.91],[14.69,51.96],[14.73,52.03],[14.75,52.07],[14.75,52.08],[14.7,52.11],[14.69,52.15],[14.7,52.21],[14.68,52.25],[14.61,52.28],[14.57,52.31],[14.55,52.36],[14.57,52.43],[14.62,52.53],[14.51,52.64],[14.25,52.78],[14.13,52.88],[14.14,52.93],[14.19,52.98],[14.29,53.03],[14.37,53.1],[14.41,53.2],[14.41,53.22],[14.42,53.28],[14.3,53.56],[14.28,53.62],[14.27,53.71],[14.26,53.73],[14.49,53.67],[14.58,53.64],[14.57,53.68],[14.55,53.71],[14.56,53.75],[14.56,53.82],[14.35,53.86],[14.21,53.87],[14.2,53.92],[14.21,53.95],[14.25,53.93],[14.38,53.92],[14.72,54.02],[15.29,54.14],[15.9,54.25],[16.04,54.27],[16.19,54.29],[16.24,54.33],[16.29,54.36],[16.37,54.44],[16.56,54.55],[16.89,54.6],[17.01,54.65],[17.26,54.73],[17.84,54.82],[18.08,54.84],[18.32,54.84],[18.53,54.77],[18.76,54.68],[18.8,54.63],[18.68,54.67],[18.5,54.74],[18.44,54.75],[18.59,54.51],[18.67,54.43],[18.84,54.37],[18.98,54.35],[19.41,54.39],[19.56,54.43],[19.6,54.46],[19.64,54.45],[19.92,54.43],[20.21,54.42],[20.67,54.41],[21.14,54.39],[21.63,54.38],[22.17,54.36],[22.73,54.35],[22.76,54.36],[22.82,54.4],[22.89,54.39],[22.98,54.37],[23.02,54.35],[23.03,54.33],[23.04,54.3],[23.09,54.3],[23.17,54.28],[23.28,54.24],[23.37,54.2],[23.45,54.14],[23.48,54.08],[23.48,54.01],[23.48,53.96],[23.48,53.94],[23.6,53.6],[23.79,53.27],[23.86,53.11],[23.89,53.03],[23.91,52.91],[23.92,52.82],[23.92,52.77],[23.9,52.7],[23.84,52.66],[23.48,52.55],[23.41,52.52],[23.3,52.43],[23.2,52.34],[23.18,52.31],[23.18,52.29],[23.2,52.26],[23.33,52.21],[23.46,52.17],[23.5,52.14],[23.6,52.1],[23.63,52.07],[23.65,52.04],[23.65,51.97],[23.61,51.88],[23.63,51.81],[23.58,51.76],[23.55,51.71],[23.54,51.62],[23.6,51.52]]]}},{"type":"Feature","properties":{"n":"Niederlande","id":"528"},"geometry":{"type":"MultiPolygon","coordinates":[[[[5.99,50.75],[5.89,50.75],[5.8,50.75],[5.75,50.76],[5.69,50.78],[5.67,50.81],[5.64,50.84],[5.65,50.87],[5.74,50.93],[5.75,50.95],[5.74,50.96],[5.75,50.99],[5.82,51.09],[5.83,51.13],[5.8,51.15],[5.75,51.17],[5.61,51.2],[5.54,51.24],[5.51,51.28],[5.48,51.29],[5.43,51.27],[5.31,51.26],[5.21,51.28],[5.1,51.35],[5.07,51.41],[5.06,51.45],[5.03,51.47],[4.99,51.45],[4.94,51.41],[4.85,51.4],[4.82,51.41],[4.82,51.43],[4.81,51.45],[4.78,51.48],[4.76,51.49],[4.64,51.42],[4.59,51.42],[4.53,51.45],[4.5,51.47],[4.44,51.46],[4.38,51.43],[4.4,51.37],[4.37,51.36],[4.3,51.36],[4.22,51.39],[4.14,51.4],[4.01,51.44],[3.82,51.41],[3.69,51.45],[3.59,51.45],[3.52,51.49],[3.45,51.54],[3.5,51.58],[3.55,51.59],[3.74,51.6],[3.89,51.57],[4.14,51.46],[4.21,51.46],[4.28,51.47],[4.24,51.5],[4.17,51.52],[4.08,51.55],[4.01,51.6],[4.18,51.61],[4.16,51.63],[4.13,51.67],[3.95,51.81],[3.98,51.85],[4.03,51.93],[4.08,51.99],[4.13,52.01],[4.21,52.06],[4.38,52.2],[4.48,52.31],[4.56,52.44],[4.68,52.81],[4.71,52.87],[4.77,52.94],[4.84,52.93],[4.89,52.91],[5.06,52.96],[5.36,53.1],[5.45,53.21],[5.53,53.27],[5.87,53.38],[6.06,53.41],[6.35,53.42],[6.56,53.43],[6.82,53.44],[6.91,53.38],[6.97,53.33],[7.06,53.3],[7.2,53.28],[7.19,53.19],[7.19,53],[7.18,52.97],[7.12,52.89],[7.05,52.75],[7.03,52.65],[7.01,52.63],[6.75,52.63],[6.71,52.62],[6.71,52.6],[6.72,52.57],[6.71,52.55],[6.69,52.53],[6.7,52.5],[6.75,52.46],[6.83,52.44],[6.92,52.44],[6.97,52.44],[7,52.42],[7.04,52.38],[7.03,52.33],[7.02,52.27],[6.98,52.21],[6.86,52.14],[6.8,52.11],[6.75,52.1],[6.72,52.08],[6.71,52.06],[6.72,52.04],[6.8,51.98],[6.8,51.97],[6.77,51.94],[6.74,51.91],[6.52,51.85],[6.42,51.86],[6.37,51.83],[6.36,51.82],[6.3,51.85],[6.17,51.88],[6.12,51.87],[6.09,51.85],[6.01,51.83],[5.95,51.8],[5.95,51.76],[6.05,51.66],[6.09,51.64],[6.09,51.6],[6.14,51.55],[6.19,51.49],[6.2,51.45],[6.19,51.41],[6.17,51.36],[6.08,51.22],[6.08,51.2],[6.08,51.18],[6.11,51.17],[6.14,51.16],[6.13,51.15],[5.96,51.06],[5.94,51.04],[5.87,51.05],[5.86,51.03],[5.87,51.01],[5.9,50.98],[5.96,50.97],[6.01,50.95],[6.05,50.91],[5.99,50.75]]],[[[4.22,51.39],[4.21,51.35],[4.17,51.31],[4.04,51.25],[3.9,51.21],[3.83,51.21],[3.78,51.23],[3.76,51.25],[3.68,51.28],[3.58,51.29],[3.52,51.26],[3.47,51.24],[3.43,51.25],[3.4,51.26],[3.38,51.29],[3.35,51.38],[3.43,51.39],[3.59,51.4],[3.72,51.37],[3.88,51.36],[4.01,51.4],[4.11,51.36],[4.22,51.39]]],[[[6.33,53.51],[6.19,53.48],[6.16,53.48],[6.17,53.49],[6.29,53.51],[6.33,53.51]]],[[[5.93,53.46],[5.73,53.44],[5.66,53.46],[5.65,53.47],[5.71,53.47],[5.88,53.47],[5.93,53.46],[5.93,53.46]]],[[[5.11,53.31],[4.92,53.24],[4.91,53.25],[5.03,53.31],[5.11,53.31]]],[[[5.33,53.39],[5.23,53.38],[5.19,53.39],[5.42,53.43],[5.56,53.44],[5.58,53.44],[5.33,53.39]]],[[[4.89,53.07],[4.79,53],[4.73,53.02],[4.71,53.04],[4.74,53.09],[4.89,53.18],[4.89,53.07]]],[[[3.95,51.74],[4.05,51.68],[4.07,51.67],[4.07,51.65],[3.95,51.63],[3.82,51.69],[3.73,51.68],[3.7,51.71],[3.7,51.73],[3.79,51.75],[3.95,51.74]]],[[[6.73,53.58],[6.64,53.58],[6.67,53.6],[6.76,53.63],[6.8,53.63],[6.73,53.58]]],[[[-68.2,12.14],[-68.25,12.03],[-68.28,12.08],[-68.29,12.17],[-68.31,12.21],[-68.35,12.23],[-68.37,12.26],[-68.37,12.3],[-68.22,12.23],[-68.2,12.14]]],[[[-62.94,17.5],[-62.96,17.48],[-62.98,17.48],[-63,17.5],[-63,17.53],[-62.98,17.52],[-62.97,17.52],[-62.97,17.51],[-62.94,17.5]]],[[[-63.23,17.62],[-63.24,17.62],[-63.25,17.63],[-63.25,17.65],[-63.24,17.65],[-63.23,17.65],[-63.23,17.63],[-63.23,17.62]]]]}},{"type":"Feature","properties":{"n":"Luxemburg","id":"442"},"geometry":{"type":"Polygon","coordinates":[[[6.12,50.12],[6.11,50.09],[6.11,50.03],[6.14,49.97],[6.2,49.92],[6.26,49.87],[6.32,49.84],[6.44,49.8],[6.49,49.8],[6.49,49.75],[6.49,49.71],[6.45,49.68],[6.41,49.65],[6.38,49.6],[6.35,49.51],[6.35,49.45],[6.28,49.48],[6.24,49.49],[6.18,49.5],[6.12,49.49],[6.08,49.45],[6.01,49.45],[5.96,49.45],[5.93,49.48],[5.9,49.49],[5.82,49.5],[5.79,49.54],[5.82,49.55],[5.84,49.58],[5.86,49.61],[5.88,49.65],[5.81,49.73],[5.79,49.76],[5.73,49.81],[5.73,49.83],[5.74,49.86],[5.74,49.88],[5.74,49.92],[5.79,49.96],[5.82,50.01],[5.87,50.08],[5.98,50.17],[6.05,50.15],[6.09,50.15],[6.11,50.12],[6.12,50.12]]]}},{"type":"Feature","properties":{"n":"Italien","id":"380"},"geometry":{"type":"MultiPolygon","coordinates":[[[[7.02,45.93],[7.05,45.9],[7.13,45.88],[7.33,45.91],[7.45,45.94],[7.54,45.98],[7.59,45.97],[7.79,45.92],[7.85,45.95],[7.99,46.02],[8.02,46.05],[8.12,46.16],[8.13,46.19],[8.08,46.26],[8.09,46.27],[8.23,46.34],[8.3,46.4],[8.37,46.45],[8.42,46.45],[8.44,46.43],[8.44,46.4],[8.44,46.28],[8.46,46.25],[8.57,46.16],[8.64,46.11],[8.82,46.08],[8.83,46.06],[8.78,46],[8.89,45.92],[8.9,45.86],[8.96,45.83],[9.02,45.85],[9.05,45.88],[9.02,45.93],[9,45.98],[9,46.02],[9.02,46.05],[9.07,46.1],[9.2,46.22],[9.25,46.29],[9.26,46.39],[9.26,46.48],[9.3,46.5],[9.4,46.48],[9.43,46.48],[9.44,46.43],[9.48,46.35],[9.53,46.31],[9.58,46.3],[9.64,46.3],[9.79,46.35],[9.88,46.37],[9.94,46.36],[9.97,46.33],[10.04,46.24],[10.08,46.23],[10.13,46.24],[10.15,46.25],[10.13,46.29],[10.11,46.36],[10.08,46.42],[10.05,46.45],[10.04,46.48],[10.06,46.55],[10.09,46.6],[10.14,46.61],[10.2,46.62],[10.27,46.57],[10.36,46.55],[10.43,46.55],[10.44,46.58],[10.44,46.62],[10.4,46.66],[10.41,46.74],[10.45,46.87],[10.48,46.86],[10.58,46.85],[10.69,46.85],[10.76,46.79],[10.83,46.78],[10.93,46.77],[10.99,46.78],[11.03,46.8],[11.06,46.86],[11.13,46.94],[11.24,46.98],[11.43,46.98],[11.53,47],[11.63,47],[11.7,46.98],[11.77,46.99],[11.97,47.04],[12.17,47.08],[12.2,47.08],[12.2,47.06],[12.17,47.03],[12.13,46.99],[12.16,46.94],[12.27,46.84],[12.33,46.76],[12.39,46.7],[12.48,46.67],[12.6,46.65],[12.7,46.65],[12.81,46.63],[13.17,46.57],[13.35,46.56],[13.49,46.56],[13.7,46.52],[13.68,46.46],[13.64,46.45],[13.56,46.41],[13.48,46.37],[13.4,46.32],[13.38,46.26],[13.4,46.23],[13.42,46.21],[13.45,46.22],[13.49,46.22],[13.55,46.2],[13.63,46.18],[13.64,46.16],[13.62,46.13],[13.55,46.09],[13.49,46.04],[13.48,46.01],[13.49,45.99],[13.51,45.97],[13.6,45.98],[13.61,45.96],[13.57,45.83],[13.58,45.81],[13.66,45.79],[13.72,45.76],[13.83,45.68],[13.88,45.61],[13.84,45.59],[13.78,45.58],[13.72,45.59],[13.78,45.63],[13.63,45.77],[13.56,45.77],[13.47,45.71],[13.21,45.77],[13.16,45.75],[13.12,45.7],[13.03,45.64],[12.9,45.61],[12.76,45.54],[12.61,45.5],[12.5,45.46],[12.43,45.47],[12.54,45.54],[12.49,45.55],[12.35,45.49],[12.27,45.45],[12.25,45.37],[12.22,45.24],[12.29,45.21],[12.39,45.04],[12.52,44.97],[12.5,44.9],[12.47,44.85],[12.39,44.8],[12.32,44.83],[12.28,44.83],[12.25,44.72],[12.31,44.43],[12.4,44.22],[12.49,44.14],[12.69,43.99],[12.91,43.92],[13.3,43.69],[13.51,43.61],[13.56,43.57],[13.69,43.39],[13.8,43.18],[13.92,42.85],[14.01,42.69],[14.18,42.51],[14.54,42.24],[14.87,42.05],[15.17,41.93],[15.41,41.91],[15.96,41.94],[16.06,41.93],[16.17,41.9],[16.19,41.81],[16.15,41.76],[16.03,41.7],[15.91,41.62],[15.9,41.51],[16.01,41.44],[16.55,41.23],[17.1,41.06],[17.27,40.98],[17.47,40.84],[17.96,40.65],[18.03,40.56],[18.33,40.37],[18.46,40.22],[18.48,40.1],[18.42,39.99],[18.39,39.9],[18.34,39.82],[18.22,39.85],[18.08,39.94],[17.87,40.28],[17.48,40.31],[17.4,40.34],[17.26,40.4],[17.25,40.44],[17.21,40.49],[17.18,40.5],[17.03,40.51],[16.93,40.46],[16.81,40.33],[16.67,40.14],[16.53,39.86],[16.52,39.75],[16.6,39.64],[16.82,39.58],[17,39.48],[17.11,39.38],[17.12,39.14],[17.17,39],[17.1,38.92],[16.95,38.94],[16.76,38.89],[16.62,38.8],[16.56,38.72],[16.57,38.49],[16.54,38.41],[16.28,38.25],[16.14,38.09],[16.11,38.02],[16.06,37.94],[15.72,37.94],[15.65,38.03],[15.64,38.18],[15.7,38.26],[15.82,38.3],[15.9,38.48],[15.88,38.61],[15.93,38.67],[15.97,38.71],[16.07,38.74],[16.2,38.76],[16.21,38.94],[16.11,39.02],[16.07,39.14],[16.02,39.35],[15.85,39.63],[15.76,39.87],[15.69,39.99],[15.59,40.05],[15.39,40.05],[15.29,40.07],[14.95,40.24],[14.93,40.27],[14.93,40.31],[14.99,40.38],[14.95,40.47],[14.91,40.56],[14.84,40.63],[14.77,40.67],[14.61,40.64],[14.56,40.63],[14.46,40.63],[14.38,40.6],[14.34,40.6],[14.46,40.73],[14.43,40.76],[14.31,40.81],[14.15,40.82],[14.1,40.83],[14.07,40.79],[14.05,40.81],[14.05,40.87],[13.86,41.13],[13.73,41.24],[13.67,41.26],[13.56,41.23],[13.36,41.28],[13.25,41.29],[13.19,41.28],[13.09,41.24],[13.04,41.27],[13.02,41.3],[12.85,41.41],[12.63,41.47],[12.21,41.81],[12.08,41.94],[11.81,42.08],[11.64,42.29],[11.5,42.36],[11.3,42.42],[11.25,42.42],[11.19,42.39],[11.14,42.39],[11.1,42.42],[11.14,42.44],[11.18,42.46],[11.17,42.53],[10.94,42.74],[10.8,42.8],[10.77,42.85],[10.74,42.9],[10.71,42.94],[10.64,42.96],[10.59,42.95],[10.51,42.97],[10.52,43.07],[10.53,43.14],[10.52,43.2],[10.45,43.37],[10.32,43.51],[10.25,43.85],[10.19,43.95],[10.05,44.02],[9.73,44.1],[9.29,44.32],[9.2,44.32],[8.93,44.41],[8.76,44.42],[8.55,44.35],[8.29,44.14],[8.08,43.92],[8,43.88],[7.73,43.8],[7.49,43.77],[7.49,43.82],[7.48,43.86],[7.52,43.91],[7.59,43.96],[7.65,44.03],[7.68,44.08],[7.67,44.12],[7.64,44.16],[7.6,44.17],[7.37,44.13],[7.32,44.14],[7.15,44.2],[6.97,44.28],[6.9,44.34],[6.87,44.39],[6.89,44.43],[6.88,44.46],[6.84,44.51],[6.87,44.56],[6.93,44.63],[6.96,44.68],[7.01,44.69],[7.03,44.72],[6.99,44.83],[6.97,44.85],[6.94,44.86],[6.89,44.86],[6.8,44.88],[6.74,44.92],[6.72,44.97],[6.69,45.02],[6.63,45.07],[6.63,45.12],[6.69,45.14],[6.78,45.15],[6.84,45.13],[6.98,45.21],[7.03,45.22],[7.08,45.24],[7.12,45.35],[7.15,45.38],[7.16,45.4],[7.13,45.42],[7.01,45.5],[6.96,45.58],[6.88,45.67],[6.81,45.71],[6.79,45.74],[6.79,45.78],[6.81,45.81],[6.94,45.87],[7.02,45.93]],[[12.44,41.9],[12.44,41.91],[12.43,41.91],[12.43,41.9],[12.43,41.9],[12.44,41.9]],[[12.49,43.9],[12.52,43.95],[12.5,43.99],[12.44,43.98],[12.4,43.94],[12.43,43.89],[12.49,43.9]]],[[[10.4,42.86],[10.43,42.82],[10.43,42.8],[10.41,42.77],[10.42,42.71],[10.33,42.76],[10.21,42.74],[10.13,42.74],[10.11,42.78],[10.13,42.81],[10.25,42.82],[10.29,42.83],[10.36,42.82],[10.4,42.86]]],[[[13.94,40.71],[13.89,40.7],[13.87,40.71],[13.85,40.72],[13.87,40.76],[13.96,40.74],[13.96,40.72],[13.94,40.71]]],[[[12.05,36.76],[12,36.75],[11.94,36.78],[11.94,36.83],[11.95,36.84],[12.03,36.82],[12.05,36.78],[12.05,36.76]]],[[[15.58,38.22],[15.51,38.11],[15.47,38.06],[15.23,37.78],[15.21,37.72],[15.19,37.65],[15.17,37.59],[15.13,37.53],[15.1,37.46],[15.1,37.38],[15.12,37.34],[15.15,37.31],[15.19,37.28],[15.23,37.24],[15.17,37.21],[15.24,37.14],[15.29,37.1],[15.29,37.06],[15.29,37.01],[15.19,36.93],[15.14,36.89],[15.11,36.84],[15.1,36.78],[15.11,36.74],[15.11,36.69],[15,36.69],[14.89,36.72],[14.78,36.71],[14.61,36.77],[14.56,36.78],[14.5,36.8],[14.37,36.97],[14.26,37.05],[14.14,37.1],[14.02,37.11],[13.91,37.1],[13.8,37.14],[13.59,37.25],[13.36,37.35],[13.26,37.41],[13.22,37.45],[13.17,37.48],[13.04,37.51],[12.92,37.57],[12.87,37.57],[12.76,37.57],[12.7,37.57],[12.64,37.59],[12.53,37.67],[12.45,37.77],[12.44,37.82],[12.49,37.94],[12.55,38.05],[12.6,38.09],[12.66,38.11],[12.7,38.14],[12.74,38.18],[12.85,38.06],[12.9,38.03],[12.95,38.04],[13.05,38.08],[13.06,38.13],[13.16,38.19],[13.29,38.19],[13.35,38.18],[13.38,38.13],[13.43,38.11],[13.49,38.1],[13.68,38],[13.74,37.98],[13.79,37.98],[13.94,38.02],[14.05,38.04],[14.29,38.02],[14.42,38.04],[14.51,38.05],[14.64,38.09],[14.74,38.15],[14.79,38.17],[14.84,38.17],[14.98,38.17],[15.12,38.15],[15.18,38.17],[15.22,38.21],[15.28,38.23],[15.34,38.22],[15.5,38.29],[15.57,38.3],[15.63,38.27],[15.58,38.22]]],[[[9.63,40.88],[9.68,40.82],[9.79,40.56],[9.8,40.5],[9.78,40.44],[9.75,40.4],[9.64,40.27],[9.66,40.16],[9.7,40.09],[9.71,40.02],[9.69,39.92],[9.62,39.35],[9.59,39.25],[9.56,39.17],[9.49,39.14],[9.39,39.17],[9.26,39.22],[9.21,39.21],[9.15,39.2],[9.1,39.21],[9.06,39.24],[9.02,39.04],[8.97,38.96],[8.88,38.91],[8.8,38.91],[8.72,38.93],[8.65,38.93],[8.6,38.96],[8.55,39.03],[8.49,39.11],[8.42,39.21],[8.41,39.29],[8.4,39.48],[8.42,39.52],[8.45,39.56],[8.46,39.65],[8.45,39.72],[8.47,39.75],[8.51,39.72],[8.54,39.73],[8.54,39.77],[8.55,39.84],[8.49,39.9],[8.41,39.92],[8.4,39.98],[8.41,40.04],[8.45,40.08],[8.47,40.13],[8.47,40.29],[8.41,40.35],[8.39,40.44],[8.35,40.5],[8.3,40.56],[8.23,40.61],[8.19,40.65],[8.18,40.77],[8.2,40.87],[8.22,40.91],[8.25,40.91],[8.31,40.86],[8.36,40.85],[8.47,40.83],[8.57,40.85],[8.7,40.9],[8.82,40.95],[9,41.11],[9.11,41.14],[9.16,41.19],[9.18,41.24],[9.23,41.26],[9.28,41.2],[9.35,41.2],[9.46,41.15],[9.5,41.11],[9.54,41.05],[9.57,41.03],[9.61,41.02],[9.62,41.01],[9.59,40.99],[9.55,40.93],[9.57,40.91],[9.63,40.88]]],[[[8.48,39.07],[8.42,38.97],[8.36,39.04],[8.36,39.1],[8.37,39.12],[8.44,39.09],[8.48,39.07]]],[[[8.29,41.04],[8.25,40.99],[8.21,41],[8.22,41.03],[8.27,41.1],[8.32,41.12],[8.34,41.1],[8.32,41.06],[8.29,41.04]]]]}},{"type":"Feature","properties":{"n":"Irland","id":"372"},"geometry":{"type":"MultiPolygon","coordinates":[[[[-9.95,53.91],[-9.95,53.88],[-10.03,53.92],[-10.06,53.96],[-10.27,53.98],[-10.18,54.02],[-10.14,54.01],[-10,54],[-9.96,53.99],[-9.95,53.91]]],[[[-7.22,55.09],[-7.38,55.03],[-7.4,55],[-7.45,54.91],[-7.45,54.88],[-7.5,54.83],[-7.55,54.77],[-7.61,54.75],[-7.69,54.73],[-7.74,54.71],[-7.8,54.72],[-7.87,54.72],[-7.91,54.7],[-7.91,54.68],[-7.89,54.67],[-7.82,54.64],[-7.75,54.62],[-7.75,54.59],[-7.79,54.57],[-8.04,54.51],[-8.12,54.48],[-8.15,54.45],[-8.12,54.41],[-7.92,54.3],[-7.89,54.28],[-7.85,54.22],[-7.68,54.19],[-7.61,54.14],[-7.54,54.13],[-7.41,54.14],[-7.36,54.12],[-7.32,54.13],[-7.31,54.16],[-7.19,54.21],[-7.16,54.24],[-7.18,54.28],[-7.2,54.3],[-7.13,54.35],[-7.05,54.41],[-7.01,54.41],[-6.94,54.37],[-6.88,54.33],[-6.87,54.29],[-6.86,54.27],[-6.8,54.21],[-6.77,54.2],[-6.67,54.18],[-6.65,54.16],[-6.67,54.08],[-6.65,54.06],[-6.55,54.06],[-6.44,54.06],[-6.4,54.06],[-6.36,54.08],[-6.3,54.09],[-6.22,54.09],[-6.18,54.05],[-6.16,54.02],[-6.23,54],[-6.31,54.01],[-6.35,53.99],[-6.35,53.94],[-6.32,53.88],[-6.27,53.84],[-6.23,53.75],[-6.19,53.64],[-6.14,53.58],[-6.13,53.5],[-6.14,53.46],[-6.13,53.39],[-6.15,53.37],[-6.14,53.3],[-6.07,53.17],[-6.05,53.09],[-6.03,52.93],[-6.07,52.87],[-6.13,52.81],[-6.17,52.74],[-6.2,52.66],[-6.22,52.54],[-6.35,52.4],[-6.4,52.37],[-6.46,52.34],[-6.32,52.25],[-6.44,52.2],[-6.56,52.19],[-6.7,52.21],[-6.78,52.21],[-6.86,52.18],[-6.89,52.16],[-6.91,52.17],[-6.96,52.25],[-7,52.17],[-7.08,52.14],[-7.22,52.14],[-7.44,52.12],[-7.53,52.1],[-7.56,52.06],[-7.59,52.02],[-7.63,51.99],[-7.67,51.98],[-7.84,51.95],[-7.87,51.93],[-7.95,51.87],[-8.06,51.83],[-8.15,51.81],[-8.22,51.85],[-8.25,51.88],[-8.29,51.89],[-8.41,51.89],[-8.37,51.88],[-8.35,51.85],[-8.34,51.79],[-8.35,51.74],[-8.41,51.71],[-8.48,51.71],[-8.59,51.65],[-8.74,51.64],[-8.81,51.58],[-9.3,51.5],[-9.32,51.5],[-9.39,51.52],[-9.46,51.53],[-9.53,51.52],[-9.74,51.47],[-9.84,51.48],[-9.71,51.6],[-9.54,51.66],[-9.52,51.68],[-9.58,51.69],[-9.9,51.65],[-10.01,51.61],[-10.12,51.6],[-10.07,51.66],[-9.93,51.73],[-9.85,51.77],[-9.8,51.78],[-9.75,51.82],[-9.6,51.87],[-10.09,51.77],[-10.21,51.78],[-10.24,51.81],[-10.34,51.8],[-10.38,51.87],[-10.23,51.97],[-10.15,52.02],[-10.04,52.04],[-9.95,52.08],[-9.91,52.12],[-9.96,52.14],[-10.25,52.13],[-10.39,52.13],[-10.38,52.17],[-10.36,52.21],[-10.21,52.27],[-10.13,52.28],[-10.06,52.28],[-9.99,52.26],[-9.94,52.24],[-9.77,52.25],[-9.84,52.29],[-9.85,52.38],[-9.91,52.4],[-9.84,52.44],[-9.76,52.47],[-9.63,52.55],[-9.59,52.56],[-9.33,52.58],[-9.06,52.62],[-8.78,52.68],[-8.92,52.71],[-8.99,52.76],[-9.1,52.67],[-9.17,52.63],[-9.39,52.62],[-9.46,52.63],[-9.56,52.65],[-9.59,52.64],[-9.62,52.62],[-9.77,52.58],[-9.92,52.57],[-9.74,52.65],[-9.52,52.78],[-9.47,52.82],[-9.39,52.9],[-9.42,52.93],[-9.46,52.95],[-9.3,53.1],[-9.24,53.12],[-9.14,53.13],[-9.06,53.15],[-9.03,53.15],[-9,53.16],[-8.93,53.21],[-9.03,53.24],[-9.14,53.25],[-9.47,53.24],[-9.51,53.24],[-9.56,53.25],[-9.58,53.27],[-9.6,53.32],[-9.62,53.33],[-9.7,53.33],[-9.77,53.32],[-9.83,53.32],[-9.88,53.34],[-9.79,53.39],[-9.9,53.41],[-10,53.4],[-10.09,53.41],[-10.09,53.45],[-10.05,53.48],[-10.11,53.51],[-10.12,53.55],[-10.06,53.57],[-10,53.56],[-9.88,53.59],[-9.72,53.6],[-9.86,53.63],[-9.91,53.66],[-9.91,53.7],[-9.9,53.73],[-9.74,53.78],[-9.58,53.8],[-9.59,53.84],[-9.58,53.88],[-9.75,53.89],[-9.91,53.86],[-9.89,53.94],[-9.86,54],[-9.85,54.05],[-9.86,54.09],[-9.93,54.08],[-9.95,54.14],[-9.98,54.19],[-10.09,54.16],[-10.09,54.22],[-10.06,54.26],[-10,54.28],[-9.93,54.27],[-9.83,54.27],[-9.72,54.3],[-9.56,54.31],[-9.32,54.3],[-9.15,54.21],[-9.1,54.22],[-9.03,54.28],[-9,54.29],[-8.75,54.26],[-8.59,54.23],[-8.54,54.24],[-8.57,54.3],[-8.62,54.35],[-8.56,54.4],[-8.47,54.44],[-8.42,54.46],[-8.29,54.49],[-8.23,54.51],[-8.19,54.58],[-8.13,54.64],[-8.46,54.61],[-8.76,54.68],[-8.71,54.73],[-8.65,54.76],[-8.54,54.78],[-8.53,54.81],[-8.47,54.83],[-8.38,54.89],[-8.41,54.96],[-8.39,55.02],[-8.33,55.06],[-8.3,55.11],[-8.27,55.15],[-8.14,55.16],[-8,55.2],[-7.96,55.19],[-7.8,55.2],[-7.75,55.19],[-7.76,55.25],[-7.67,55.26],[-7.63,55.24],[-7.61,55.2],[-7.57,55.17],[-7.56,55.12],[-7.59,55.08],[-7.63,55.05],[-7.59,55.02],[-7.66,54.97],[-7.58,54.99],[-7.48,55.05],[-7.48,55.09],[-7.5,55.14],[-7.53,55.19],[-7.52,55.25],[-7.46,55.28],[-7.3,55.3],[-7.37,55.36],[-7.31,55.37],[-7.25,55.35],[-7.16,55.3],[-7.06,55.27],[-6.96,55.24],[-7.06,55.18],[-7.17,55.14],[-7.22,55.09]]]]}},{"type":"Feature","properties":{"n":"Ungarn","id":"348"},"geometry":{"type":"Polygon","coordinates":[[[22.13,48.41],[22.23,48.41],[22.23,48.41],[22.25,48.41],[22.27,48.36],[22.27,48.36],[22.3,48.33],[22.32,48.29],[22.35,48.26],[22.42,48.24],[22.52,48.21],[22.58,48.13],[22.67,48.1],[22.68,48.1],[22.7,48.11],[22.77,48.11],[22.78,48.09],[22.84,48.06],[22.86,48.03],[22.85,48],[22.85,47.96],[22.88,47.95],[22.85,47.92],[22.68,47.8],[22.61,47.77],[22.56,47.76],[22.49,47.77],[22.42,47.76],[22.35,47.74],[22.29,47.73],[22.25,47.7],[22.19,47.63],[22.11,47.57],[22.04,47.54],[22,47.5],[21.99,47.4],[21.95,47.36],[21.9,47.33],[21.87,47.3],[21.79,47.14],[21.72,47.08],[21.66,47.04],[21.65,47.01],[21.65,46.96],[21.58,46.88],[21.49,46.79],[21.48,46.75],[21.5,46.7],[21.41,46.65],[21.36,46.62],[21.32,46.61],[21.3,46.57],[21.25,46.49],[21.26,46.45],[21.26,46.41],[21.19,46.39],[21.17,46.35],[21.15,46.31],[21.12,46.28],[21.04,46.24],[20.84,46.26],[20.76,46.25],[20.74,46.22],[20.73,46.19],[20.71,46.17],[20.66,46.15],[20.61,46.13],[20.51,46.17],[20.28,46.13],[20.24,46.11],[20.21,46.13],[20.16,46.14],[19.94,46.16],[19.85,46.15],[19.72,46.15],[19.61,46.17],[19.53,46.16],[19.46,46.09],[19.42,46.06],[19.39,46.05],[19.33,46.03],[19.28,46],[19.21,45.98],[19.15,45.99],[19.09,46.02],[19.07,46.01],[19.05,45.98],[19.02,45.96],[18.93,45.93],[18.91,45.93],[18.9,45.93],[18.83,45.91],[18.72,45.9],[18.66,45.91],[18.56,45.81],[18.53,45.8],[18.44,45.77],[18.36,45.75],[18.29,45.77],[18.26,45.77],[17.96,45.77],[17.81,45.79],[17.71,45.83],[17.64,45.87],[17.61,45.91],[17.53,45.94],[17.41,45.95],[17.31,46],[17.24,46.08],[17.15,46.14],[17.03,46.19],[16.94,46.25],[16.87,46.34],[16.75,46.42],[16.57,46.49],[16.52,46.5],[16.5,46.52],[16.42,46.61],[16.38,46.64],[16.39,46.68],[16.37,46.7],[16.34,46.72],[16.32,46.78],[16.31,46.83],[16.28,46.86],[16.09,46.86],[16.25,46.97],[16.33,47],[16.43,47],[16.45,47.01],[16.46,47.02],[16.48,47.06],[16.49,47.09],[16.49,47.12],[16.48,47.14],[16.44,47.15],[16.42,47.22],[16.44,47.25],[16.46,47.27],[16.44,47.37],[16.44,47.4],[16.52,47.4],[16.57,47.42],[16.62,47.45],[16.64,47.48],[16.68,47.54],[16.64,47.61],[16.43,47.66],[16.42,47.67],[16.47,47.7],[16.52,47.73],[16.55,47.75],[16.59,47.75],[16.65,47.74],[16.75,47.69],[16.79,47.68],[16.82,47.69],[16.86,47.7],[16.97,47.7],[17.07,47.71],[17.04,47.76],[17.04,47.8],[17.03,47.84],[17.04,47.87],[17.08,47.9],[17.09,47.96],[17.15,48.01],[17.17,48.01],[17.28,48],[17.3,47.99],[17.32,47.99],[17.48,47.89],[17.63,47.81],[17.76,47.77],[17.95,47.77],[18.15,47.76],[18.48,47.78],[18.73,47.79],[18.74,47.81],[18.78,47.85],[18.75,47.89],[18.75,47.94],[18.79,48],[18.91,48.05],[19.27,48.07],[19.47,48.11],[19.5,48.16],[19.56,48.21],[19.63,48.22],[19.71,48.2],[19.81,48.16],[19.9,48.13],[19.95,48.15],[20.13,48.22],[20.33,48.3],[20.48,48.5],[20.49,48.53],[20.64,48.55],[20.87,48.55],[20.98,48.52],[21.07,48.51],[21.2,48.51],[21.38,48.55],[21.45,48.55],[21.5,48.52],[21.56,48.5],[21.6,48.46],[21.63,48.42],[21.65,48.4],[21.67,48.38],[21.72,48.35],[21.77,48.34],[22.11,48.39],[22.13,48.41]]]}},{"type":"Feature","properties":{"n":"Deutschland","id":"276"},"geometry":{"type":"MultiPolygon","coordinates":[[[[9.52,47.52],[9.35,47.6],[9.18,47.67],[9.13,47.67],[8.88,47.66],[8.87,47.66],[8.83,47.7],[8.79,47.72],[8.77,47.71],[8.75,47.7],[8.73,47.7],[8.62,47.77],[8.57,47.78],[8.51,47.77],[8.44,47.73],[8.4,47.69],[8.41,47.66],[8.45,47.65],[8.55,47.66],[8.57,47.65],[8.57,47.64],[8.56,47.62],[8.48,47.61],[8.45,47.6],[8.43,47.59],[8.42,47.59],[8.33,47.61],[8.2,47.61],[8.09,47.58],[7.93,47.56],[7.7,47.57],[7.62,47.59],[7.57,47.61],[7.53,47.67],[7.54,47.77],[7.59,47.91],[7.61,48],[7.58,48.06],[7.62,48.16],[7.71,48.28],[7.76,48.41],[7.8,48.55],[7.84,48.64],[7.92,48.7],[8.12,48.87],[8.14,48.89],[8.13,48.97],[8.08,48.99],[8,49.01],[7.8,49.04],[7.61,49.06],[7.53,49.09],[7.45,49.15],[7.4,49.15],[7.31,49.13],[7.2,49.11],[7.12,49.13],[7.07,49.12],[7.04,49.11],[7.02,49.12],[7,49.18],[6.96,49.2],[6.89,49.21],[6.85,49.2],[6.82,49.17],[6.78,49.15],[6.73,49.16],[6.61,49.29],[6.58,49.32],[6.56,49.35],[6.54,49.4],[6.46,49.44],[6.38,49.46],[6.35,49.45],[6.35,49.51],[6.38,49.6],[6.41,49.65],[6.45,49.68],[6.49,49.71],[6.49,49.75],[6.49,49.8],[6.44,49.8],[6.32,49.84],[6.26,49.87],[6.2,49.92],[6.14,49.97],[6.11,50.03],[6.11,50.09],[6.12,50.12],[6.12,50.14],[6.18,50.23],[6.36,50.32],[6.35,50.4],[6.34,50.45],[6.29,50.49],[6.2,50.5],[6.18,50.52],[6.17,50.55],[6.24,50.6],[6.15,50.64],[6.12,50.68],[6.01,50.73],[5.99,50.75],[6.05,50.91],[6.01,50.95],[5.96,50.97],[5.9,50.98],[5.87,51.01],[5.86,51.03],[5.87,51.05],[5.94,51.04],[5.96,51.06],[6.13,51.15],[6.14,51.16],[6.11,51.17],[6.08,51.18],[6.08,51.2],[6.08,51.22],[6.17,51.36],[6.19,51.41],[6.2,51.45],[6.19,51.49],[6.14,51.55],[6.09,51.6],[6.09,51.64],[6.05,51.66],[5.95,51.76],[5.95,51.8],[6.01,51.83],[6.09,51.85],[6.12,51.87],[6.17,51.88],[6.3,51.85],[6.36,51.82],[6.37,51.83],[6.42,51.86],[6.52,51.85],[6.74,51.91],[6.77,51.94],[6.8,51.97],[6.8,51.98],[6.72,52.04],[6.71,52.06],[6.72,52.08],[6.75,52.1],[6.8,52.11],[6.86,52.14],[6.98,52.21],[7.02,52.27],[7.03,52.33],[7.04,52.38],[7,52.42],[6.97,52.44],[6.92,52.44],[6.83,52.44],[6.75,52.46],[6.7,52.5],[6.69,52.53],[6.71,52.55],[6.72,52.57],[6.71,52.6],[6.71,52.62],[6.75,52.63],[7.01,52.63],[7.03,52.65],[7.05,52.75],[7.12,52.89],[7.18,52.97],[7.19,53],[7.19,53.19],[7.2,53.28],[7.15,53.33],[7.05,53.38],[7.08,53.48],[7.11,53.56],[7.21,53.66],[7.28,53.68],[7.63,53.7],[8.01,53.69],[8.17,53.54],[8.11,53.47],[8.2,53.43],[8.25,53.45],[8.28,53.51],[8.3,53.58],[8.33,53.61],[8.45,53.55],[8.49,53.51],[8.49,53.39],[8.54,53.56],[8.51,53.67],[8.53,53.78],[8.58,53.84],[8.62,53.88],[8.9,53.84],[9.21,53.86],[9.32,53.81],[9.59,53.6],[9.67,53.57],[9.78,53.55],[9.63,53.6],[9.31,53.86],[9.22,53.89],[9.07,53.9],[8.98,53.93],[8.92,53.97],[8.9,54],[8.91,54.26],[8.85,54.3],[8.78,54.31],[8.74,54.3],[8.65,54.29],[8.63,54.35],[8.65,54.4],[8.83,54.43],[8.95,54.47],[8.96,54.54],[8.88,54.59],[8.79,54.7],[8.68,54.79],[8.67,54.9],[8.86,54.9],[8.9,54.9],[9.19,54.84],[9.25,54.81],[9.34,54.81],[9.5,54.84],[9.62,54.85],[9.66,54.83],[9.73,54.83],[9.74,54.83],[9.75,54.81],[9.89,54.78],[9.95,54.74],[10.02,54.67],[10.03,54.58],[9.94,54.51],[9.87,54.47],[10.14,54.49],[10.17,54.45],[10.21,54.41],[10.36,54.44],[10.73,54.32],[10.96,54.38],[11.01,54.38],[11.06,54.28],[11.01,54.18],[10.81,54.08],[10.86,54.01],[10.92,54],[11.1,54.01],[11.4,53.95],[11.46,53.96],[11.7,54.11],[11.8,54.14],[12.11,54.17],[12.17,54.23],[12.3,54.28],[12.38,54.35],[12.58,54.47],[12.78,54.45],[12.9,54.42],[13.03,54.41],[13.15,54.28],[13.45,54.14],[13.73,54.15],[13.82,54.02],[13.87,53.85],[13.95,53.8],[14.02,53.77],[14.25,53.73],[14.26,53.73],[14.27,53.71],[14.28,53.62],[14.3,53.56],[14.42,53.28],[14.41,53.22],[14.41,53.2],[14.37,53.1],[14.29,53.03],[14.19,52.98],[14.14,52.93],[14.13,52.88],[14.25,52.78],[14.51,52.64],[14.62,52.53],[14.57,52.43],[14.55,52.36],[14.57,52.31],[14.61,52.28],[14.68,52.25],[14.7,52.21],[14.69,52.15],[14.7,52.11],[14.75,52.08],[14.75,52.07],[14.73,52.03],[14.69,51.96],[14.68,51.91],[14.6,51.83],[14.63,51.77],[14.68,51.7],[14.73,51.66],[14.74,51.63],[14.71,51.54],[14.73,51.52],[14.91,51.46],[14.93,51.43],[14.95,51.38],[15.02,51.25],[14.96,51.09],[14.92,51.01],[14.82,50.87],[14.81,50.86],[14.8,50.84],[14.77,50.82],[14.72,50.82],[14.66,50.83],[14.61,50.86],[14.63,50.91],[14.6,50.92],[14.56,50.95],[14.55,50.99],[14.51,51.01],[14.37,51.03],[14.32,51.04],[14.28,51.03],[14.25,51],[14.27,50.98],[14.3,50.95],[14.38,50.91],[14.37,50.9],[14.2,50.86],[14.1,50.82],[14,50.8],[13.9,50.76],[13.7,50.72],[13.56,50.7],[13.53,50.69],[13.47,50.62],[13.44,50.6],[13.4,50.61],[13.38,50.62],[13.34,50.61],[13.31,50.59],[13.27,50.58],[13.24,50.58],[13.18,50.51],[13.02,50.49],[13,50.46],[12.97,50.42],[12.94,50.41],[12.87,50.42],[12.76,50.43],[12.71,50.41],[12.63,50.4],[12.55,50.39],[12.45,50.35],[12.36,50.27],[12.31,50.21],[12.28,50.18],[12.23,50.24],[12.17,50.29],[12.13,50.31],[12.1,50.31],[12.09,50.3],[12.09,50.27],[12.13,50.21],[12.17,50.18],[12.18,50.15],[12.21,50.1],[12.28,50.04],[12.39,50],[12.46,49.96],[12.51,49.9],[12.51,49.88],[12.5,49.85],[12.47,49.83],[12.45,49.8],[12.39,49.74],[12.41,49.71],[12.46,49.68],[12.5,49.64],[12.56,49.58],[12.63,49.46],[12.68,49.41],[12.75,49.37],[12.81,49.33],[12.92,49.33],[13.02,49.26],[13.14,49.16],[13.23,49.11],[13.29,49.1],[13.34,49.06],[13.38,49.01],[13.4,48.98],[13.44,48.96],[13.55,48.96],[13.69,48.88],[13.77,48.82],[13.82,48.77],[13.8,48.75],[13.8,48.69],[13.8,48.62],[13.79,48.59],[13.73,48.54],[13.69,48.53],[13.67,48.52],[13.49,48.58],[13.47,48.57],[13.46,48.57],[13.41,48.39],[13.38,48.36],[13.32,48.33],[13.21,48.3],[13.14,48.29],[13.08,48.28],[12.9,48.2],[12.81,48.16],[12.76,48.11],[12.76,48.08],[12.85,47.99],[12.95,47.89],[12.95,47.81],[12.91,47.75],[12.9,47.72],[12.93,47.71],[12.99,47.71],[13.03,47.7],[13.06,47.66],[13.05,47.58],[13.03,47.51],[13.02,47.48],[12.97,47.48],[12.88,47.51],[12.81,47.54],[12.78,47.56],[12.78,47.59],[12.8,47.61],[12.77,47.64],[12.68,47.67],[12.59,47.66],[12.53,47.64],[12.48,47.64],[12.44,47.67],[12.36,47.69],[12.27,47.7],[12.21,47.72],[12.2,47.71],[12.2,47.65],[12.18,47.62],[11.72,47.58],[11.57,47.55],[11.47,47.51],[11.39,47.49],[11.37,47.46],[11.3,47.42],[11.21,47.41],[11.19,47.42],[11.14,47.41],[11.04,47.39],[10.98,47.4],[10.95,47.43],[10.9,47.47],[10.87,47.5],[10.87,47.52],[10.74,47.52],[10.66,47.55],[10.48,47.54],[10.44,47.55],[10.43,47.54],[10.4,47.42],[10.37,47.37],[10.31,47.31],[10.24,47.28],[10.18,47.28],[10.19,47.32],[10.2,47.36],[10.16,47.37],[10.1,47.38],[10.07,47.39],[10.07,47.43],[10.06,47.45],[10.04,47.47],[9.97,47.5],[9.84,47.55],[9.75,47.58],[9.71,47.55],[9.65,47.53],[9.55,47.53],[9.52,47.52]]],[[[13.71,54.38],[13.74,54.31],[13.71,54.28],[13.6,54.34],[13.48,54.34],[13.42,54.25],[13.37,54.25],[13.19,54.33],[13.16,54.37],[13.16,54.4],[13.18,54.51],[13.18,54.54],[13.23,54.58],[13.24,54.64],[13.34,54.7],[13.42,54.7],[13.45,54.65],[13.49,54.62],[13.64,54.58],[13.66,54.56],[13.67,54.54],[13.6,54.49],[13.58,54.46],[13.6,54.42],[13.71,54.38]]],[[[14.21,53.95],[14.2,53.92],[14.21,53.87],[14.17,53.87],[14.05,53.86],[13.93,53.88],[13.9,53.94],[13.92,54],[13.87,54.04],[13.83,54.06],[13.82,54.09],[13.83,54.13],[14.04,54.03],[14.21,53.95]]],[[[11.28,54.42],[11.13,54.42],[11.07,54.46],[11.01,54.47],[11.04,54.52],[11.09,54.53],[11.23,54.5],[11.28,54.44],[11.28,54.42]]],[[[8.31,54.79],[8.29,54.77],[8.3,54.91],[8.4,55.06],[8.45,55.05],[8.4,55.01],[8.39,54.99],[8.37,54.93],[8.38,54.9],[8.63,54.89],[8.6,54.87],[8.35,54.85],[8.31,54.79]]],[[[8.59,54.71],[8.55,54.69],[8.45,54.69],[8.4,54.71],[8.42,54.74],[8.47,54.76],[8.51,54.76],[8.57,54.75],[8.59,54.71]]]]}},{"type":"Feature","properties":{"n":"Frankreich","id":"250"},"geometry":{"type":"MultiPolygon","coordinates":[[[[9.48,42.81],[9.46,42.66],[9.47,42.62],[9.51,42.58],[9.53,42.55],[9.56,42.16],[9.55,42.13],[9.43,41.97],[9.4,41.93],[9.39,41.73],[9.37,41.68],[9.33,41.63],[9.25,41.46],[9.19,41.39],[9,41.48],[8.89,41.52],[8.84,41.56],[8.81,41.59],[8.83,41.63],[8.88,41.67],[8.89,41.7],[8.77,41.74],[8.72,41.76],[8.72,41.8],[8.76,41.87],[8.74,41.93],[8.67,41.92],[8.62,41.93],[8.62,41.96],[8.65,42],[8.7,42.04],[8.7,42.1],[8.64,42.12],[8.59,42.16],[8.57,42.22],[8.61,42.26],[8.67,42.28],[8.63,42.34],[8.59,42.35],[8.57,42.36],[8.59,42.39],[8.64,42.43],[8.71,42.55],[8.81,42.61],[8.99,42.65],[9.05,42.66],[9.09,42.7],[9.14,42.73],[9.2,42.73],[9.25,42.71],[9.29,42.69],[9.32,42.71],[9.34,42.77],[9.32,42.81],[9.33,42.94],[9.36,43.02],[9.42,43.02],[9.46,42.98],[9.46,42.95],[9.48,42.86],[9.48,42.81]]],[[[7.62,47.59],[7.49,47.55],[7.47,47.51],[7.42,47.46],[7.34,47.43],[7.27,47.43],[7.2,47.43],[7.17,47.45],[7.17,47.47],[7.14,47.49],[7.05,47.49],[6.97,47.45],[6.9,47.39],[6.92,47.36],[6.99,47.35],[7,47.34],[7,47.32],[6.98,47.3],[6.95,47.27],[6.82,47.16],[6.69,47.06],[6.67,47.03],[6.63,47],[6.46,46.95],[6.44,46.93],[6.43,46.83],[6.41,46.75],[6.28,46.68],[6.16,46.61],[6.13,46.57],[6.11,46.52],[6.07,46.46],[6.06,46.43],[6.12,46.38],[6.11,46.34],[6.1,46.28],[6.04,46.24],[5.97,46.21],[5.97,46.15],[6.01,46.14],[6.09,46.15],[6.2,46.19],[6.27,46.25],[6.23,46.31],[6.22,46.32],[6.23,46.33],[6.32,46.39],[6.43,46.43],[6.58,46.44],[6.76,46.42],[6.78,46.41],[6.77,46.37],[6.78,46.31],[6.82,46.28],[6.77,46.16],[6.81,46.13],[6.86,46.09],[6.9,46.05],[6.95,46.02],[7,45.96],[7.02,45.93],[6.94,45.87],[6.81,45.81],[6.79,45.78],[6.79,45.74],[6.81,45.71],[6.88,45.67],[6.96,45.58],[7.01,45.5],[7.13,45.42],[7.16,45.4],[7.15,45.38],[7.12,45.35],[7.08,45.24],[7.03,45.22],[6.98,45.21],[6.84,45.13],[6.78,45.15],[6.69,45.14],[6.63,45.12],[6.63,45.07],[6.69,45.02],[6.72,44.97],[6.74,44.92],[6.8,44.88],[6.89,44.86],[6.94,44.86],[6.97,44.85],[6.99,44.83],[7.03,44.72],[7.01,44.69],[6.96,44.68],[6.93,44.63],[6.87,44.56],[6.84,44.51],[6.88,44.46],[6.89,44.43],[6.87,44.39],[6.9,44.34],[6.97,44.28],[7.15,44.2],[7.32,44.14],[7.37,44.13],[7.6,44.17],[7.64,44.16],[7.67,44.12],[7.68,44.08],[7.65,44.03],[7.59,43.96],[7.52,43.91],[7.48,43.86],[7.49,43.82],[7.49,43.77],[7.44,43.75],[7.44,43.76],[7.41,43.77],[7.4,43.77],[7.38,43.75],[7.38,43.73],[7.26,43.7],[7.18,43.66],[6.86,43.44],[6.72,43.37],[6.69,43.33],[6.66,43.26],[6.57,43.2],[6.49,43.17],[6.31,43.14],[6.11,43.07],[6.03,43.1],[5.81,43.1],[5.67,43.18],[5.41,43.23],[5.32,43.35],[5.2,43.35],[5.12,43.35],[5.07,43.37],[5.06,43.41],[5.06,43.44],[4.98,43.43],[4.91,43.43],[4.87,43.41],[4.84,43.39],[4.81,43.41],[4.79,43.4],[4.79,43.38],[4.71,43.37],[4.63,43.39],[4.41,43.45],[4.38,43.46],[4.22,43.48],[4.16,43.5],[4.11,43.56],[4.07,43.58],[4.05,43.59],[3.91,43.56],[3.86,43.52],[3.79,43.46],[3.26,43.19],[3.16,43.08],[3.05,42.91],[3.04,42.84],[3.09,42.59],[3.2,42.46],[3.21,42.43],[3.15,42.43],[3.05,42.45],[2.97,42.47],[2.89,42.46],[2.82,42.43],[2.75,42.41],[2.7,42.41],[2.67,42.39],[2.66,42.36],[2.65,42.34],[2.57,42.35],[2.37,42.39],[2.2,42.42],[2.1,42.39],[2.03,42.35],[1.99,42.36],[1.95,42.39],[1.93,42.43],[1.86,42.46],[1.7,42.5],[1.72,42.53],[1.74,42.56],[1.74,42.58],[1.71,42.6],[1.57,42.64],[1.5,42.64],[1.46,42.62],[1.43,42.6],[1.35,42.69],[1.29,42.71],[1.21,42.71],[1.11,42.74],[1.01,42.78],[0.77,42.84],[0.7,42.85],[0.67,42.84],[0.65,42.8],[0.64,42.7],[0.63,42.69],[0.52,42.69],[0.38,42.7],[0.31,42.69],[0.25,42.69],[0.2,42.72],[-0.04,42.69],[-0.08,42.7],[-0.14,42.75],[-0.21,42.79],[-0.26,42.8],[-0.3,42.83],[-0.34,42.83],[-0.4,42.81],[-0.48,42.8],[-0.55,42.8],[-0.59,42.8],[-0.74,42.91],[-0.76,42.94],[-0.84,42.95],[-0.93,42.95],[-1.18,43.02],[-1.29,43.06],[-1.3,43.08],[-1.3,43.1],[-1.32,43.1],[-1.35,43.06],[-1.37,43.04],[-1.4,43.03],[-1.43,43.04],[-1.46,43.05],[-1.48,43.07],[-1.46,43.11],[-1.42,43.15],[-1.41,43.2],[-1.41,43.24],[-1.47,43.27],[-1.56,43.28],[-1.63,43.28],[-1.71,43.31],[-1.76,43.32],[-1.79,43.37],[-1.79,43.41],[-1.63,43.44],[-1.49,43.56],[-1.34,44.02],[-1.24,44.56],[-1.17,44.66],[-1.08,44.69],[-1.15,44.76],[-1.2,44.73],[-1.22,44.69],[-1.24,44.67],[-1.19,45.16],[-1.15,45.34],[-1.08,45.53],[-0.94,45.46],[-0.83,45.38],[-0.77,45.31],[-0.69,45.09],[-0.64,45.05],[-0.55,45],[-0.58,45.05],[-0.64,45.09],[-0.73,45.38],[-0.79,45.47],[-0.88,45.54],[-1.17,45.69],[-1.2,45.71],[-1.21,45.77],[-1.11,45.77],[-1.03,45.74],[-1.04,45.77],[-1.07,45.81],[-1.1,45.92],[-1.14,46.2],[-1.13,46.25],[-1.15,46.31],[-1.24,46.32],[-1.31,46.33],[-1.39,46.35],[-1.79,46.52],[-1.92,46.69],[-2.06,46.81],[-2.09,46.87],[-2.09,46.92],[-2.02,47.04],[-2.08,47.11],[-2.14,47.13],[-2.2,47.16],[-2.15,47.22],[-2.11,47.26],[-2.03,47.27],[-1.92,47.26],[-1.82,47.23],[-1.74,47.22],[-1.97,47.31],[-2.35,47.28],[-2.44,47.29],[-2.5,47.31],[-2.53,47.38],[-2.48,47.41],[-2.43,47.47],[-2.48,47.51],[-2.55,47.53],[-2.67,47.53],[-2.77,47.51],[-2.8,47.54],[-2.73,47.6],[-2.79,47.63],[-2.86,47.61],[-2.96,47.6],[-3.07,47.62],[-3.16,47.69],[-3.22,47.69],[-3.26,47.69],[-3.33,47.71],[-3.4,47.72],[-3.44,47.71],[-3.51,47.75],[-3.9,47.84],[-4.07,47.85],[-4.22,47.81],[-4.31,47.82],[-4.38,47.88],[-4.43,47.97],[-4.68,48.04],[-4.63,48.09],[-4.51,48.1],[-4.38,48.13],[-4.33,48.17],[-4.43,48.22],[-4.51,48.23],[-4.55,48.25],[-4.58,48.29],[-4.53,48.31],[-4.5,48.3],[-4.4,48.29],[-4.24,48.3],[-4.3,48.35],[-4.37,48.36],[-4.39,48.37],[-4.52,48.37],[-4.58,48.36],[-4.72,48.36],[-4.75,48.41],[-4.76,48.45],[-4.72,48.54],[-4.53,48.62],[-4.06,48.71],[-3.86,48.7],[-3.71,48.71],[-3.54,48.76],[-3.47,48.81],[-3.23,48.84],[-3,48.79],[-2.79,48.6],[-2.69,48.54],[-2.45,48.65],[-2.08,48.65],[-2,48.58],[-1.97,48.63],[-1.91,48.7],[-1.85,48.67],[-1.82,48.63],[-1.44,48.64],[-1.38,48.65],[-1.48,48.7],[-1.56,48.8],[-1.58,49.2],[-1.69,49.31],[-1.81,49.49],[-1.87,49.59],[-1.87,49.63],[-1.86,49.68],[-1.7,49.68],[-1.59,49.67],[-1.37,49.71],[-1.26,49.68],[-1.27,49.6],[-1.23,49.49],[-1.19,49.45],[-1.14,49.39],[-0.96,49.39],[-0.77,49.36],[-0.52,49.36],[-0.16,49.3],[-0.01,49.33],[0.14,49.4],[0.42,49.45],[0.44,49.47],[0.28,49.46],[0.13,49.51],[0.11,49.56],[0.13,49.6],[0.19,49.7],[0.62,49.86],[0.92,49.91],[1.24,50],[1.41,50.09],[1.51,50.21],[1.55,50.23],[1.59,50.25],[1.55,50.29],[1.58,50.74],[1.61,50.82],[1.67,50.88],[1.77,50.93],[1.91,50.99],[2.45,51.07],[2.53,51.1],[2.54,51.05],[2.58,50.99],[2.6,50.96],[2.58,50.91],[2.6,50.88],[2.67,50.81],[2.76,50.75],[2.84,50.71],[2.86,50.72],[2.92,50.73],[3.02,50.77],[3.11,50.78],[3.16,50.75],[3.18,50.73],[3.23,50.66],[3.25,50.59],[3.27,50.53],[3.32,50.51],[3.48,50.5],[3.59,50.48],[3.63,50.46],[3.67,50.33],[3.69,50.31],[3.72,50.32],[3.75,50.34],[3.79,50.35],[3.86,50.34],[3.95,50.34],[4.04,50.32],[4.17,50.25],[4.17,50.22],[4.15,50.18],[4.13,50.14],[4.16,50.13],[4.19,50.09],[4.19,50.05],[4.15,50.02],[4.14,50],[4.14,49.98],[4.15,49.97],[4.18,49.96],[4.37,49.95],[4.55,49.96],[4.66,50],[4.67,50.05],[4.71,50.1],[4.77,50.14],[4.82,50.15],[4.86,50.14],[4.79,49.96],[4.84,49.91],[4.85,49.85],[4.87,49.79],[4.93,49.79],[5.01,49.78],[5.06,49.76],[5.12,49.72],[5.21,49.69],[5.28,49.68],[5.3,49.65],[5.36,49.62],[5.43,49.55],[5.51,49.51],[5.54,49.51],[5.61,49.53],[5.71,49.54],[5.79,49.54],[5.82,49.5],[5.9,49.49],[5.93,49.48],[5.96,49.45],[6.01,49.45],[6.08,49.45],[6.12,49.49],[6.18,49.5],[6.24,49.49],[6.28,49.48],[6.35,49.45],[6.38,49.46],[6.46,49.44],[6.54,49.4],[6.56,49.35],[6.58,49.32],[6.61,49.29],[6.73,49.16],[6.78,49.15],[6.82,49.17],[6.85,49.2],[6.89,49.21],[6.96,49.2],[7,49.18],[7.02,49.12],[7.04,49.11],[7.07,49.12],[7.12,49.13],[7.2,49.11],[7.31,49.13],[7.4,49.15],[7.45,49.15],[7.53,49.09],[7.61,49.06],[7.8,49.04],[8,49.01],[8.08,48.99],[8.13,48.97],[8.14,48.89],[8.12,48.87],[7.92,48.7],[7.84,48.64],[7.8,48.55],[7.76,48.41],[7.71,48.28],[7.62,48.16],[7.58,48.06],[7.61,48],[7.59,47.91],[7.54,47.77],[7.53,47.67],[7.57,47.61],[7.62,47.59]]],[[[-1.18,45.9],[-1.22,45.82],[-1.28,45.9],[-1.37,45.97],[-1.39,46.03],[-1.39,46.05],[-1.28,46],[-1.18,45.9]]],[[[45.18,-12.98],[45.12,-12.98],[45.09,-12.96],[45.07,-12.9],[45.09,-12.84],[45.09,-12.79],[45.04,-12.7],[45.09,-12.65],[45.14,-12.71],[45.16,-12.71],[45.22,-12.75],[45.2,-12.82],[45.21,-12.85],[45.18,-12.92],[45.18,-12.98]]],[[[55.8,-21.34],[55.65,-21.37],[55.56,-21.36],[55.36,-21.27],[55.31,-21.22],[55.23,-21.06],[55.25,-21],[55.31,-20.9],[55.45,-20.86],[55.6,-20.88],[55.66,-20.91],[55.74,-21.02],[55.84,-21.14],[55.82,-21.28],[55.8,-21.34]]],[[[-60.83,14.49],[-60.84,14.44],[-60.86,14.43],[-60.9,14.47],[-61.06,14.47],[-61.09,14.51],[-61.09,14.53],[-61.01,14.6],[-61.11,14.62],[-61.14,14.65],[-61.22,14.8],[-61.21,14.85],[-61.18,14.87],[-61.13,14.87],[-61.03,14.83],[-60.95,14.76],[-60.93,14.75],[-60.92,14.74],[-60.93,14.69],[-60.89,14.64],[-60.87,14.61],[-60.83,14.49]]],[[[-61.33,16.23],[-61.44,16.22],[-61.52,16.23],[-61.54,16.3],[-61.5,16.36],[-61.53,16.43],[-61.51,16.48],[-61.47,16.51],[-61.41,16.47],[-61.4,16.41],[-61.36,16.36],[-61.17,16.26],[-61.33,16.23]]],[[[-61.59,16.01],[-61.67,15.96],[-61.71,15.98],[-61.76,16.06],[-61.79,16.3],[-61.77,16.34],[-61.75,16.36],[-61.64,16.33],[-61.6,16.29],[-61.55,16.27],[-61.58,16.23],[-61.56,16.05],[-61.59,16.01]]],[[[-61.23,15.89],[-61.29,15.89],[-61.31,15.9],[-61.32,15.95],[-61.27,16],[-61.25,16.01],[-61.21,15.96],[-61.2,15.92],[-61.23,15.89]]],[[[-54.62,2.33],[-54.6,2.34],[-54.57,2.34],[-54.54,2.34],[-54.48,2.42],[-54.4,2.46],[-54.26,2.71],[-54.2,2.82],[-54.19,2.88],[-54.17,2.99],[-54.2,3.14],[-54.19,3.18],[-54.06,3.35],[-54.01,3.45],[-54.01,3.53],[-53.99,3.59],[-54.01,3.62],[-54.03,3.63],[-54.08,3.71],[-54.11,3.77],[-54.2,3.83],[-54.25,3.9],[-54.35,4.05],[-54.34,4.14],[-54.37,4.17],[-54.4,4.2],[-54.39,4.24],[-54.42,4.34],[-54.44,4.43],[-54.45,4.48],[-54.43,4.58],[-54.44,4.69],[-54.47,4.75],[-54.48,4.84],[-54.47,4.92],[-54.45,4.96],[-54.45,5.01],[-54.33,5.19],[-54.24,5.29],[-54.16,5.36],[-54.09,5.41],[-53.99,5.68],[-53.92,5.77],[-53.85,5.78],[-53.46,5.56],[-53.27,5.54],[-52.9,5.43],[-52.76,5.27],[-52.45,5.02],[-52.29,4.94],[-52.29,4.88],[-52.32,4.77],[-52.22,4.86],[-52.06,4.72],[-52.01,4.65],[-51.96,4.51],[-51.98,4.43],[-52,4.39],[-52,4.35],[-51.95,4.4],[-51.93,4.44],[-51.92,4.52],[-51.88,4.63],[-51.83,4.64],[-51.78,4.57],[-51.7,4.29],[-51.67,4.23],[-51.65,4.14],[-51.66,4.1],[-51.65,4.06],[-51.68,4.04],[-51.77,3.99],[-51.81,3.93],[-51.83,3.87],[-51.88,3.83],[-51.93,3.78],[-51.94,3.73],[-51.99,3.7],[-52,3.65],[-52.12,3.45],[-52.16,3.37],[-52.23,3.27],[-52.27,3.24],[-52.33,3.18],[-52.36,3.12],[-52.36,3.05],[-52.4,2.97],[-52.42,2.9],[-52.45,2.86],[-52.56,2.65],[-52.56,2.57],[-52.58,2.53],[-52.65,2.43],[-52.7,2.36],[-52.78,2.32],[-52.87,2.27],[-52.9,2.21],[-52.97,2.18],[-53.01,2.18],[-53.08,2.2],[-53.18,2.21],[-53.23,2.21],[-53.25,2.23],[-53.29,2.3],[-53.33,2.34],[-53.37,2.32],[-53.43,2.28],[-53.51,2.25],[-53.56,2.26],[-53.68,2.29],[-53.74,2.31],[-53.75,2.34],[-53.77,2.35],[-53.79,2.35],[-53.83,2.31],[-53.88,2.28],[-53.94,2.23],[-54.09,2.15],[-54.13,2.12],[-54.17,2.14],[-54.23,2.15],[-54.29,2.16],[-54.43,2.21],[-54.51,2.25],[-54.55,2.29],[-54.59,2.31],[-54.62,2.33]]]]}},{"type":"Feature","properties":{"n":"Dänemark","id":"208"},"geometry":{"type":"MultiPolygon","coordinates":[[[[12.57,55.79],[12.57,55.68],[12.54,55.66],[12.51,55.64],[12.41,55.62],[12.32,55.59],[12.24,55.54],[12.22,55.47],[12.27,55.41],[12.39,55.39],[12.41,55.29],[12.32,55.24],[12.09,55.19],[12.07,55.07],[12.07,54.98],[12.07,54.91],[12.05,54.81],[11.86,54.77],[11.74,54.92],[11.74,54.97],[11.7,55.04],[11.7,55.1],[11.66,55.19],[11.48,55.21],[11.41,55.21],[11.31,55.2],[11.29,55.2],[11.17,55.33],[11.19,55.47],[11.13,55.54],[11.12,55.57],[11.12,55.6],[11.07,55.63],[11.01,55.64],[10.98,55.72],[11.05,55.74],[11.22,55.73],[11.28,55.74],[11.32,55.75],[11.46,55.88],[11.46,55.91],[11.48,55.94],[11.63,55.96],[11.69,55.91],[11.68,55.83],[11.69,55.73],[11.78,55.7],[11.82,55.7],[11.86,55.77],[11.89,55.81],[11.92,55.83],[11.94,55.9],[11.91,55.94],[11.87,55.97],[12.04,56.05],[12.22,56.12],[12.32,56.12],[12.43,56.11],[12.53,56.08],[12.58,56.06],[12.61,56.03],[12.54,55.96],[12.53,55.92],[12.57,55.79]]],[[[9.74,54.83],[9.73,54.83],[9.66,54.83],[9.62,54.85],[9.5,54.84],[9.34,54.81],[9.25,54.81],[9.19,54.84],[8.9,54.9],[8.86,54.9],[8.67,54.9],[8.66,54.99],[8.64,55.05],[8.57,55.13],[8.67,55.16],[8.65,55.33],[8.62,55.42],[8.35,55.51],[8.13,55.6],[8.18,55.9],[8.2,55.98],[8.12,56.14],[8.13,56.32],[8.16,56.61],[8.23,56.62],[8.28,56.62],[8.47,56.56],[8.55,56.56],[8.61,56.51],[8.67,56.5],[8.72,56.54],[8.74,56.63],[8.89,56.73],[8.99,56.77],[9.07,56.79],[9.14,56.75],[9.2,56.7],[9.21,56.81],[9.25,57.01],[9.11,57.04],[8.99,57.02],[8.88,56.89],[8.77,56.72],[8.6,56.71],[8.47,56.66],[8.35,56.71],[8.27,56.75],[8.27,56.81],[8.29,56.85],[8.43,56.98],[8.62,57.11],[8.81,57.11],[8.95,57.15],[9.04,57.16],[9.3,57.15],[9.43,57.17],[9.55,57.23],[9.82,57.48],[9.96,57.58],[10.26,57.62],[10.53,57.73],[10.61,57.74],[10.48,57.65],[10.46,57.62],[10.45,57.56],[10.54,57.45],[10.52,57.38],[10.52,57.24],[10.44,57.17],[10.34,57.02],[10.29,57],[10.29,56.82],[10.3,56.78],[10.28,56.62],[10.38,56.55],[10.49,56.52],[10.85,56.52],[10.88,56.49],[10.93,56.44],[10.9,56.36],[10.86,56.3],[10.76,56.24],[10.62,56.2],[10.54,56.2],[10.43,56.28],[10.37,56.25],[10.32,56.21],[10.23,56.01],[10.18,55.87],[10.16,55.85],[10.11,55.87],[10.02,55.88],[9.91,55.84],[9.96,55.81],[10.02,55.76],[10,55.74],[9.9,55.71],[9.81,55.65],[9.77,55.61],[9.66,55.56],[9.59,55.49],[9.62,55.41],[9.64,55.34],[9.67,55.27],[9.64,55.21],[9.51,55.12],[9.46,55.04],[9.57,55.04],[9.65,55.02],[9.69,55],[9.73,54.97],[9.7,54.93],[9.74,54.83]]],[[[10.64,55.61],[10.69,55.56],[10.74,55.45],[10.82,55.32],[10.78,55.27],[10.81,55.2],[10.78,55.13],[10.63,55.05],[10.44,55.05],[10.25,55.09],[9.99,55.16],[9.97,55.21],[9.93,55.23],[9.86,55.36],[9.86,55.52],[10,55.54],[10.29,55.61],[10.35,55.6],[10.42,55.56],[10.51,55.56],[10.62,55.61],[10.64,55.61]]],[[[11.36,54.89],[11.54,54.83],[11.66,54.83],[11.74,54.81],[11.76,54.77],[11.77,54.68],[11.68,54.65],[11.59,54.66],[11.46,54.63],[11.04,54.77],[11.04,54.89],[11.06,54.94],[11.26,54.95],[11.36,54.89]]],[[[10.73,54.75],[10.69,54.75],[10.63,54.83],[10.62,54.85],[10.69,54.9],[10.74,54.96],[10.86,55.05],[10.92,55.16],[10.95,55.16],[10.92,55.06],[10.77,54.8],[10.73,54.75]]],[[[12.55,54.97],[12.51,54.95],[12.36,54.96],[12.18,54.89],[12.12,54.91],[12.14,54.96],[12.16,54.97],[12.22,54.99],[12.26,55.02],[12.27,55.06],[12.31,55.04],[12.42,55.03],[12.47,55.02],[12.51,55],[12.55,54.97]]],[[[12.67,55.6],[12.57,55.55],[12.55,55.56],[12.52,55.62],[12.57,55.65],[12.6,55.68],[12.62,55.68],[12.65,55.65],[12.67,55.6]]],[[[10.49,54.85],[10.42,54.84],[10.34,54.86],[10.22,54.94],[10.2,54.96],[10.27,54.95],[10.35,54.91],[10.41,54.9],[10.5,54.86],[10.49,54.85]]],[[[10.06,54.89],[9.96,54.87],[9.91,54.9],[9.8,54.91],[9.77,55.06],[9.78,55.07],[9.83,55.06],[10,54.99],[10.06,54.91],[10.06,54.89]]],[[[10.61,55.78],[10.59,55.76],[10.53,55.78],[10.52,55.85],[10.54,55.91],[10.52,55.96],[10.55,55.99],[10.64,55.91],[10.66,55.88],[10.63,55.83],[10.61,55.78]]],[[[11.05,57.25],[11.01,57.23],[10.87,57.26],[10.94,57.31],[11.09,57.33],[11.17,57.32],[11.08,57.28],[11.05,57.25]]],[[[15.09,55.02],[15.05,55],[14.88,55.03],[14.68,55.1],[14.72,55.24],[14.77,55.3],[15.13,55.14],[15.14,55.09],[15.09,55.02]]]]}},{"type":"Feature","properties":{"n":"Tschechien","id":"203"},"geometry":{"type":"Polygon","coordinates":[[[18.83,49.51],[18.81,49.51],[18.75,49.49],[18.68,49.49],[18.6,49.49],[18.53,49.46],[18.48,49.42],[18.42,49.39],[18.38,49.36],[18.37,49.34],[18.16,49.26],[18.13,49.23],[18.11,49.18],[18.1,49.12],[18.08,49.07],[18.05,49.04],[17.94,49.01],[17.91,49],[17.89,48.97],[17.83,48.93],[17.76,48.89],[17.62,48.84],[17.48,48.83],[17.3,48.84],[17.19,48.86],[17.13,48.84],[17.06,48.78],[16.99,48.68],[16.95,48.6],[16.93,48.62],[16.88,48.7],[16.83,48.71],[16.76,48.72],[16.71,48.73],[16.6,48.78],[16.54,48.8],[16.48,48.8],[16.41,48.77],[16.37,48.74],[16.22,48.74],[16.06,48.75],[15.82,48.86],[15.77,48.87],[15.7,48.86],[15.6,48.89],[15.4,48.96],[15.31,48.97],[15.25,48.96],[15.2,48.95],[15.16,48.95],[15.14,48.97],[15.07,49],[14.99,49],[14.97,48.98],[14.95,48.83],[14.92,48.77],[14.82,48.77],[14.79,48.75],[14.71,48.67],[14.69,48.6],[14.55,48.61],[14.49,48.63],[14.43,48.62],[14.37,48.58],[14.19,48.58],[14.05,48.6],[13.99,48.69],[13.92,48.73],[13.84,48.76],[13.82,48.77],[13.77,48.82],[13.69,48.88],[13.55,48.96],[13.44,48.96],[13.4,48.98],[13.38,49.01],[13.34,49.06],[13.29,49.1],[13.23,49.11],[13.14,49.16],[13.02,49.26],[12.92,49.33],[12.81,49.33],[12.75,49.37],[12.68,49.41],[12.63,49.46],[12.56,49.58],[12.5,49.64],[12.46,49.68],[12.41,49.71],[12.39,49.74],[12.45,49.8],[12.47,49.83],[12.5,49.85],[12.51,49.88],[12.51,49.9],[12.46,49.96],[12.39,50],[12.28,50.04],[12.21,50.1],[12.18,50.15],[12.17,50.18],[12.13,50.21],[12.09,50.27],[12.09,50.3],[12.1,50.31],[12.13,50.31],[12.17,50.29],[12.23,50.24],[12.28,50.18],[12.31,50.21],[12.36,50.27],[12.45,50.35],[12.55,50.39],[12.63,50.4],[12.71,50.41],[12.76,50.43],[12.87,50.42],[12.94,50.41],[12.97,50.42],[13,50.46],[13.02,50.49],[13.18,50.51],[13.24,50.58],[13.27,50.58],[13.31,50.59],[13.34,50.61],[13.38,50.62],[13.4,50.61],[13.44,50.6],[13.47,50.62],[13.53,50.69],[13.56,50.7],[13.7,50.72],[13.9,50.76],[14,50.8],[14.1,50.82],[14.2,50.86],[14.37,50.9],[14.38,50.91],[14.3,50.95],[14.27,50.98],[14.25,51],[14.28,51.03],[14.32,51.04],[14.37,51.03],[14.51,51.01],[14.55,50.99],[14.56,50.95],[14.6,50.92],[14.63,50.91],[14.61,50.86],[14.66,50.83],[14.72,50.82],[14.77,50.82],[14.8,50.84],[14.81,50.86],[14.9,50.86],[14.98,50.89],[14.99,50.93],[14.99,51],[14.99,51.01],[15.13,50.99],[15.26,50.96],[15.28,50.88],[15.31,50.85],[15.36,50.81],[15.4,50.8],[15.46,50.79],[15.64,50.75],[15.73,50.74],[15.82,50.71],[15.89,50.68],[15.95,50.67],[15.98,50.63],[16.01,50.61],[16.07,50.63],[16.28,50.66],[16.36,50.62],[16.41,50.58],[16.42,50.57],[16.39,50.54],[16.38,50.52],[16.36,50.5],[16.28,50.48],[16.24,50.45],[16.21,50.42],[16.23,50.39],[16.29,50.37],[16.34,50.37],[16.35,50.34],[16.49,50.25],[16.6,50.12],[16.64,50.1],[16.68,50.1],[16.72,50.12],[16.78,50.16],[16.84,50.19],[16.9,50.2],[16.99,50.24],[16.99,50.26],[16.91,50.34],[16.87,50.41],[16.88,50.43],[16.98,50.42],[17.15,50.38],[17.42,50.25],[17.46,50.25],[17.56,50.26],[17.66,50.28],[17.7,50.31],[17.72,50.3],[17.74,50.23],[17.71,50.19],[17.59,50.16],[17.6,50.14],[17.63,50.12],[17.68,50.1],[17.75,50.06],[17.79,50.01],[17.83,49.98],[17.88,49.97],[17.98,50],[18.02,50.02],[18.03,50.04],[18.05,50.03],[18.09,50.01],[18.1,49.99],[18.2,49.96],[18.26,49.93],[18.3,49.91],[18.35,49.93],[18.52,49.9],[18.56,49.88],[18.58,49.84],[18.57,49.82],[18.6,49.76],[18.81,49.61],[18.83,49.54],[18.83,49.51]]]}},{"type":"Feature","properties":{"n":"Belgien","id":"056"},"geometry":{"type":"Polygon","coordinates":[[[4.22,51.39],[4.3,51.36],[4.37,51.36],[4.4,51.37],[4.38,51.43],[4.44,51.46],[4.5,51.47],[4.53,51.45],[4.59,51.42],[4.64,51.42],[4.76,51.49],[4.78,51.48],[4.81,51.45],[4.82,51.43],[4.82,51.41],[4.85,51.4],[4.94,51.41],[4.99,51.45],[5.03,51.47],[5.06,51.45],[5.07,51.41],[5.1,51.35],[5.21,51.28],[5.31,51.26],[5.43,51.27],[5.48,51.29],[5.51,51.28],[5.54,51.24],[5.61,51.2],[5.75,51.17],[5.8,51.15],[5.83,51.13],[5.82,51.09],[5.75,50.99],[5.74,50.96],[5.75,50.95],[5.74,50.93],[5.65,50.87],[5.64,50.84],[5.67,50.81],[5.69,50.78],[5.75,50.76],[5.8,50.75],[5.89,50.75],[5.99,50.75],[6.01,50.73],[6.12,50.68],[6.15,50.64],[6.24,50.6],[6.17,50.55],[6.18,50.52],[6.2,50.5],[6.29,50.49],[6.34,50.45],[6.35,50.4],[6.36,50.32],[6.18,50.23],[6.12,50.14],[6.12,50.12],[6.11,50.12],[6.09,50.15],[6.05,50.15],[5.98,50.17],[5.87,50.08],[5.82,50.01],[5.79,49.96],[5.74,49.92],[5.74,49.88],[5.74,49.86],[5.73,49.83],[5.73,49.81],[5.79,49.76],[5.81,49.73],[5.88,49.65],[5.86,49.61],[5.84,49.58],[5.82,49.55],[5.79,49.54],[5.71,49.54],[5.61,49.53],[5.54,49.51],[5.51,49.51],[5.43,49.55],[5.36,49.62],[5.3,49.65],[5.28,49.68],[5.21,49.69],[5.12,49.72],[5.06,49.76],[5.01,49.78],[4.93,49.79],[4.87,49.79],[4.85,49.85],[4.84,49.91],[4.79,49.96],[4.86,50.14],[4.82,50.15],[4.77,50.14],[4.71,50.1],[4.67,50.05],[4.66,50],[4.55,49.96],[4.37,49.95],[4.18,49.96],[4.15,49.97],[4.14,49.98],[4.14,50],[4.15,50.02],[4.19,50.05],[4.19,50.09],[4.16,50.13],[4.13,50.14],[4.15,50.18],[4.17,50.22],[4.17,50.25],[4.04,50.32],[3.95,50.34],[3.86,50.34],[3.79,50.35],[3.75,50.34],[3.72,50.32],[3.69,50.31],[3.67,50.33],[3.63,50.46],[3.59,50.48],[3.48,50.5],[3.32,50.51],[3.27,50.53],[3.25,50.59],[3.23,50.66],[3.18,50.73],[3.16,50.75],[3.11,50.78],[3.02,50.77],[2.92,50.73],[2.86,50.72],[2.84,50.71],[2.76,50.75],[2.67,50.81],[2.6,50.88],[2.58,50.91],[2.6,50.96],[2.58,50.99],[2.54,51.05],[2.53,51.1],[2.96,51.26],[3.22,51.35],[3.35,51.38],[3.38,51.29],[3.4,51.26],[3.43,51.25],[3.47,51.24],[3.52,51.26],[3.58,51.29],[3.68,51.28],[3.76,51.25],[3.78,51.23],[3.83,51.21],[3.9,51.21],[4.04,51.25],[4.17,51.31],[4.21,51.35],[4.22,51.39]]]}},{"type":"Feature","properties":{"n":"Österreich","id":"040"},"geometry":{"type":"Polygon","coordinates":[[[9.53,47.27],[9.61,47.39],[9.62,47.47],[9.55,47.51],[9.52,47.52],[9.55,47.53],[9.65,47.53],[9.71,47.55],[9.75,47.58],[9.84,47.55],[9.97,47.5],[10.04,47.47],[10.06,47.45],[10.07,47.43],[10.07,47.39],[10.1,47.38],[10.16,47.37],[10.2,47.36],[10.19,47.32],[10.18,47.28],[10.24,47.28],[10.31,47.31],[10.37,47.37],[10.4,47.42],[10.43,47.54],[10.44,47.55],[10.48,47.54],[10.66,47.55],[10.74,47.52],[10.87,47.52],[10.87,47.5],[10.9,47.47],[10.95,47.43],[10.98,47.4],[11.04,47.39],[11.14,47.41],[11.19,47.42],[11.21,47.41],[11.3,47.42],[11.37,47.46],[11.39,47.49],[11.47,47.51],[11.57,47.55],[11.72,47.58],[12.18,47.62],[12.2,47.65],[12.2,47.71],[12.21,47.72],[12.27,47.7],[12.36,47.69],[12.44,47.67],[12.48,47.64],[12.53,47.64],[12.59,47.66],[12.68,47.67],[12.77,47.64],[12.8,47.61],[12.78,47.59],[12.78,47.56],[12.81,47.54],[12.88,47.51],[12.97,47.48],[13.02,47.48],[13.03,47.51],[13.05,47.58],[13.06,47.66],[13.03,47.7],[12.99,47.71],[12.93,47.71],[12.9,47.72],[12.91,47.75],[12.95,47.81],[12.95,47.89],[12.85,47.99],[12.76,48.08],[12.76,48.11],[12.81,48.16],[12.9,48.2],[13.08,48.28],[13.14,48.29],[13.21,48.3],[13.32,48.33],[13.38,48.36],[13.41,48.39],[13.46,48.57],[13.47,48.57],[13.49,48.58],[13.67,48.52],[13.69,48.53],[13.73,48.54],[13.79,48.59],[13.8,48.62],[13.8,48.69],[13.8,48.75],[13.82,48.77],[13.84,48.76],[13.92,48.73],[13.99,48.69],[14.05,48.6],[14.19,48.58],[14.37,48.58],[14.43,48.62],[14.49,48.63],[14.55,48.61],[14.69,48.6],[14.71,48.67],[14.79,48.75],[14.82,48.77],[14.92,48.77],[14.95,48.83],[14.97,48.98],[14.99,49],[15.07,49],[15.14,48.97],[15.16,48.95],[15.2,48.95],[15.25,48.96],[15.31,48.97],[15.4,48.96],[15.6,48.89],[15.7,48.86],[15.77,48.87],[15.82,48.86],[16.06,48.75],[16.22,48.74],[16.37,48.74],[16.41,48.77],[16.48,48.8],[16.54,48.8],[16.6,48.78],[16.71,48.73],[16.76,48.72],[16.83,48.71],[16.88,48.7],[16.93,48.62],[16.95,48.6],[16.95,48.59],[16.94,48.55],[16.9,48.5],[16.86,48.44],[16.86,48.39],[16.97,48.2],[17.07,48.08],[17.09,48.04],[17.15,48.01],[17.09,47.96],[17.08,47.9],[17.04,47.87],[17.03,47.84],[17.04,47.8],[17.04,47.76],[17.07,47.71],[16.97,47.7],[16.86,47.7],[16.82,47.69],[16.79,47.68],[16.75,47.69],[16.65,47.74],[16.59,47.75],[16.55,47.75],[16.52,47.73],[16.47,47.7],[16.42,47.67],[16.43,47.66],[16.64,47.61],[16.68,47.54],[16.64,47.48],[16.62,47.45],[16.57,47.42],[16.52,47.4],[16.44,47.4],[16.44,47.37],[16.46,47.27],[16.44,47.25],[16.42,47.22],[16.44,47.15],[16.48,47.14],[16.49,47.12],[16.49,47.09],[16.48,47.06],[16.46,47.02],[16.45,47.01],[16.43,47],[16.33,47],[16.25,46.97],[16.09,46.86],[16.04,46.84],[15.98,46.8],[15.98,46.71],[15.97,46.7],[15.96,46.68],[15.77,46.71],[15.76,46.71],[15.63,46.7],[15.55,46.65],[15.44,46.63],[15.22,46.64],[15,46.63],[14.95,46.61],[14.89,46.61],[14.84,46.58],[14.81,46.54],[14.76,46.5],[14.68,46.46],[14.6,46.44],[14.58,46.41],[14.55,46.4],[14.5,46.42],[14.47,46.42],[14.42,46.43],[14.27,46.44],[14.1,46.46],[14.02,46.48],[13.93,46.5],[13.83,46.51],[13.74,46.52],[13.7,46.52],[13.49,46.56],[13.35,46.56],[13.17,46.57],[12.81,46.63],[12.7,46.65],[12.6,46.65],[12.48,46.67],[12.39,46.7],[12.33,46.76],[12.27,46.84],[12.16,46.94],[12.13,46.99],[12.17,47.03],[12.2,47.06],[12.2,47.08],[12.17,47.08],[11.97,47.04],[11.77,46.99],[11.7,46.98],[11.63,47],[11.53,47],[11.43,46.98],[11.24,46.98],[11.13,46.94],[11.06,46.86],[11.03,46.8],[10.99,46.78],[10.93,46.77],[10.83,46.78],[10.76,46.79],[10.69,46.85],[10.58,46.85],[10.48,46.86],[10.45,46.87],[10.46,46.9],[10.42,46.96],[10.35,46.99],[10.18,46.86],[10.13,46.85],[10,46.88],[9.88,46.94],[9.87,46.98],[9.84,47.01],[9.74,47.04],[9.62,47.06],[9.58,47.06],[9.6,47.08],[9.61,47.11],[9.6,47.13],[9.57,47.16],[9.56,47.19],[9.55,47.21],[9.54,47.23],[9.54,47.25],[9.53,47.27]]]}}]}</script>
+<script>
+/* ---------- route map ---------- */
+(() => {
+  const P = [
+    { n: 'Berlin', lon: 13.382, lat: 52.503, when: '1. Dezember 1938', what: 'Der erste Transport',
+      text: 'Am 1. Dezember 1938 fuhr der erste Kindertransport aus Berlin ab. An Bord waren fast 200 Kinder. Bis September 1939 fuhren aus Berlin viele weitere Züge. Heute erinnert ein Denkmal am Bahnhof Friedrichstraße daran.',
+      img: ['img/denkmal-berlin.webp', 'Das Denkmal „Züge in das Leben – Züge in den Tod“ am Bahnhof Friedrichstraße'],
+      visit: ['Denkmal am Bahnhof Friedrichstraße', 'Georgenstraße, vor dem Eingang des Bahnhofs Friedrichstraße, 10117 Berlin.'] },
+    { n: 'Wien', lon: 16.338, lat: 48.196, when: '10. Dezember 1938', what: 'Abschied am Westbahnhof',
+      text: 'Nach dem „Anschluss“ im März 1938 wurden die Jüdinnen und Juden in Wien besonders schnell und brutal verfolgt. Am 10. Dezember 1938 fuhr der erste Transport mit rund 600 Kindern vom Westbahnhof ab. Viele Eltern durften nicht mit auf den Bahnsteig.',
+      img: ['img/denkmal-wien.webp', 'Das Denkmal „Für das Kind“ im Wiener Westbahnhof'],
+      visit: ['Denkmal „Für das Kind“', 'Westbahnhof, Europaplatz 2, 1150 Wien, Österreich.'] },
+    { n: 'Prag', lon: 14.435, lat: 50.083, when: 'März bis August 1939', what: 'Die Züge von Nicholas Winton',
+      text: 'Im März 1939 besetzte die Wehrmacht Prag. Schon vorher hatte der Brite Nicholas Winton begonnen, Kinder aus der Tschechoslowakei zu retten. Acht Züge brachten 669 Kinder über Deutschland und die Niederlande nach England. Der neunte Zug sollte am 1. September 1939 fahren. Er fuhr nie ab.',
+      visit: ['Denkmal für Nicholas Winton', 'Hauptbahnhof Prag (Praha hlavní nádraží), Tschechien.'] },
+    { n: 'Hoek van Holland', lon: 4.13, lat: 51.98, when: 'nach der Grenze', what: 'Endlich in Sicherheit',
+      text: 'Hinter der deutsch-niederländischen Grenze waren die Kinder in Sicherheit. Niederländische Helferinnen brachten ihnen Essen und Getränke. Im Hafen Hoek van Holland stiegen die Kinder auf die Fähre über die Nordsee.' },
+    { n: 'Harwich', lon: 1.284, lat: 51.946, when: 'am nächsten Morgen', what: 'Ankunft in England',
+      text: 'Nach der Nacht auf dem Schiff kamen die Kinder im Hafen von Harwich an. Kinder ohne Pflegefamilie kamen zuerst in ein Ferienlager in Dovercourt. Dort warteten sie im kalten Winter, bis eine Familie sie aufnahm.',
+      img: ['img/harwich.webp', 'Jüdische Flüchtlingskinder nach der Ankunft in England'] },
+    { n: 'London', lon: -0.081, lat: 51.518, when: 'Ende der Reise', what: 'Liverpool Street Station',
+      text: 'Die anderen Kinder fuhren mit dem Zug weiter zur Liverpool Street Station in London. Dort holten Pflegefamilien oder Verwandte sie ab. Für viele Kinder war das der Beginn eines völlig neuen Lebens.',
+      img: ['img/london.webp', 'Jüdische Flüchtlingskinder kommen in London an'],
+      visit: ['Denkmal „Kindertransport – Die Ankunft“', 'Vor der Liverpool Street Station, Hope Square, London, Großbritannien.'] },
+  ];
+  // train routes over land: [lon, lat] waypoints, ends at Hoek van Holland
+  const TRAIN = [
+    [[13.382, 52.503], [10.0, 52.4], [7.0, 52.25], [4.13, 51.98]],
+    [[16.338, 48.196], [13.0, 48.6], [11.08, 49.45], [8.7, 50.1], [6.96, 50.94], [5.8, 51.6], [4.13, 51.98]],
+    [[14.435, 50.083], [12.6, 49.9], [11.08, 49.45]],
+    [[1.284, 51.946], [0.5, 51.75], [-0.081, 51.518]],
+  ];
+  const SEA = [[4.13, 51.98], [2.7, 52.05], [1.284, 51.946]];
+  const svg = d3.select('#mapSvg');
+  if (svg.empty() || typeof d3 === 'undefined') return;
+  const geo = JSON.parse(document.getElementById('geoData').textContent);
+  const W = 640, H = 560;
+  const proj = d3.geoConicConformal().parallels([48, 54]).rotate([-8, 0]).clipExtent([[0, 0], [W, H]]);
+  const frame = { type: 'Feature', geometry: { type: 'MultiPoint', coordinates: [[-3.6, 54.6], [17.4, 54.6], [-2.6, 47.4], [17.2, 47.4]] } };
+  proj.fitExtent([[10, 10], [W - 10, H - 10]], frame);
+  const path = d3.geoPath(proj);
+  svg.append('g').selectAll('path').data(geo.features).join('path')
+    .attr('class', d => 'land' + (d.properties.id === '276' || d.properties.id === '040' ? ' reich' : '')).attr('d', path);
+  const labels = { '276': [10.0, 51.0], '040': [14.4, 47.6], '203': [15.3, 49.55], '616': [16.6, 52.6], '826': [-1.6, 53.1], '528': [5.6, 52.75], '056': [4.6, 50.6], '250': [3.2, 48.3], '208': [9.4, 54.15] };
+  svg.append('g').selectAll('text').data(geo.features.filter(f => labels[f.properties.id])).join('text')
+    .attr('class', 'cname').attr('text-anchor', 'middle')
+    .attr('x', d => proj(labels[d.properties.id])[0]).attr('y', d => proj(labels[d.properties.id])[1]).text(d => d.properties.n);
+  svg.append('text').attr('class', 'cname').attr('text-anchor', 'middle').attr('x', proj([2.7, 52.6])[0]).attr('y', proj([2.7, 52.6])[1]).text('Nordsee');
+  const line = d3.line().curve(d3.curveCatmullRom.alpha(.5));
+  const rts = TRAIN.map(r => svg.append('path').attr('class', 'rt').attr('d', line(r.map(c => proj(c)))));
+  const sea = svg.append('path').attr('class', 'rt').attr('stroke-dasharray', '6 7').attr('d', line(SEA.map(c => proj(c))));
+  const pins = svg.append('g').selectAll('g').data(P).join('g').attr('class', 'pin').attr('tabindex', 0).attr('role', 'button')
+    .attr('aria-label', d => d.n).attr('transform', d => `translate(${proj([d.lon, d.lat])})`);
+  pins.append('circle').attr('r', 11);
+  pins.append('text').attr('text-anchor', 'middle').attr('dy', 4).text((d, i) => i + 1);
+  // name tags next to pins, nudged so they do not cover routes
+  const off = { 'Berlin': [14, 4, 'start'], 'Wien': [-14, 18, 'end'], 'Prag': [14, 4, 'start'], 'Hoek van Holland': [0, 28, 'middle'], 'Harwich': [4, -18, 'middle'], 'London': [0, 26, 'middle'] };
+  svg.append('g').selectAll('text').data(P).join('text').attr('class', 'cname').style('font-style', 'normal').style('fill', 'var(--ink)')
+    .attr('text-anchor', d => off[d.n][2]).attr('x', d => proj([d.lon, d.lat])[0] + off[d.n][0]).attr('y', d => proj([d.lon, d.lat])[1] + off[d.n][1]).text(d => d.n);
+
+  const list = document.getElementById('placeList'), card = document.getElementById('placeCard');
+  P.forEach((p, i) => { const b = document.createElement('button'); b.className = 'chip'; b.textContent = `${i + 1} ${p.n}`; b.setAttribute('aria-pressed', 'false'); b.onclick = () => show(i); list.appendChild(b); });
+  const osm = p => `https://www.openstreetmap.org/?mlat=${p.lat}&mlon=${p.lon}#map=13/${p.lat}/${p.lon}`;
+  const show = i => {
+    const p = P[i];
+    pins.classed('on', (d, k) => k === i);
+    [...list.children].forEach((b, k) => b.setAttribute('aria-pressed', String(k === i)));
+    card.innerHTML = (p.img ? `<figure class="photo"><img src="${p.img[0]}" alt="${p.img[1]}"><figcaption>${p.img[1]}.</figcaption></figure>` : '') +
+      `<p class="meta">${i + 1} · ${p.when}</p><h3>${p.n}: ${p.what}</h3><p>${p.text}</p>` +
+      (p.visit ? `<div class="visit"><strong>Heute besuchen: ${p.visit[0]}</strong><span>${p.visit[1]}</span></div>` : '') +
+      `<p class="small"><a href="${osm(p)}" target="_blank" rel="noopener">In OpenStreetMap ansehen</a></p>`;
+  };
+  pins.on('click', (e, d) => show(P.indexOf(d))).on('keydown', (e, d) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(P.indexOf(d)); } });
+  show(0);
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    [...rts, sea].forEach(r => {
+      const len = r.node().getTotalLength();
+      if (r === sea) { gsap.fromTo(r.node(), { opacity: 0 }, { opacity: 1, scrollTrigger: { trigger: '#mapSvg', start: 'top 55%', end: 'center 45%', scrub: true } }); return; }
+      gsap.fromTo(r.node(), { strokeDasharray: len, strokeDashoffset: len }, { strokeDashoffset: 0, ease: 'none',
+        scrollTrigger: { trigger: '#mapSvg', start: 'top 75%', end: 'bottom 60%', scrub: true } });
+    });
+  }
+})();
+
+/* ---------- suitcase ---------- */
+(() => {
+  const ITEMS = [
+    ['Warme Kleidung', true, 'Ja. Kleidung war das Wichtigste im Koffer. Die Eltern nähten oft Namen in jedes Stück.'],
+    ['Ein Foto der Familie', true, 'Ja. Ein Foto war erlaubt. Für viele Kinder wurde es das letzte Bild ihrer Eltern.'],
+    ['10 Reichsmark', true, 'Ja. Mehr als 10 Reichsmark Bargeld durfte kein Kind mitnehmen.'],
+    ['Ein Lieblingsbuch', true, 'Ja. Kleine persönliche Dinge wie ein Buch oder Spielzeug durften mit, wenn sie in den Koffer passten.'],
+    ['Schmuck der Mutter', false, 'Nein. Wertsachen wie Schmuck, Gold oder Silber waren verboten. Die Gepäckstücke wurden an der Grenze kontrolliert.'],
+    ['Das Sparbuch', false, 'Nein. Jüdische Familien durften ihr Geld nicht ins Ausland bringen. Der NS-Staat nahm es ihnen weg.'],
+    ['Ein Musikinstrument', false, 'Meistens nein. Große oder wertvolle Dinge passten nicht ins erlaubte Gepäck oder galten als Wertsache.'],
+    ['Mama und Papa', false, 'Nein. Das war das Schwerste: Die Eltern durften nicht mitkommen. Die meisten Kinder sahen sie nie wieder.'],
+  ];
+  const box = document.getElementById('items'), inCase = document.getElementById('caseIn'), note = document.getElementById('caseNote');
+  if (!box) return;
+  ITEMS.forEach(([name, ok, why]) => {
+    const b = document.createElement('button'); b.className = 'item'; b.textContent = name;
+    b.addEventListener('click', () => {
+      b.disabled = true; b.classList.add(ok ? 'ok' : 'no');
+      note.textContent = why; note.className = 'case-note' + (ok ? '' : ' no');
+      if (ok) {
+        const empty = inCase.querySelector('.muted'); if (empty) empty.remove();
+        const li = document.createElement('li'); li.textContent = name; inCase.appendChild(li);
+        if (typeof gsap !== 'undefined') gsap.from(li, { y: -24, opacity: 0, duration: .4, ease: 'back.out(2)' });
+      } else if (typeof gsap !== 'undefined') gsap.fromTo('#caseBox', { x: -6 }, { x: 0, duration: .4, ease: 'elastic.out(1.2, .3)' });
+    });
+    box.appendChild(b);
+  });
+})();
+
+/* ---------- 25-word letter ---------- */
+(() => {
+  const ta = document.getElementById('letterText'), count = document.getElementById('wordCount'), send = document.getElementById('letterSend'), sent = document.getElementById('letterSent');
+  if (!ta) return;
+  const words = () => ta.value.trim().split(/\s+/).filter(Boolean).length;
+  ta.addEventListener('input', () => {
+    const n = words();
+    count.textContent = `${n} von 25 Wörtern`;
+    count.classList.toggle('over', n > 25);
+    send.disabled = n === 0 || n > 25;
+    if (n > 25) count.textContent += ' – zu lang';
+  });
+  send.addEventListener('click', () => { ta.readOnly = true; send.disabled = true; sent.hidden = false; });
+})();
+</script>
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hasGsap = typeof gsap !== 'undefined';
+  if (hasGsap && typeof ScrollTrigger !== 'undefined') gsap.registerPlugin(ScrollTrigger);
+
+  /* ---------- smooth scroll (Lenis) ---------- */
+  let lenis = null;
+  if (!reduce && typeof Lenis !== 'undefined') {
+    lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+    window.__lenis = lenis;
+    if (hasGsap) {
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add(t => lenis.raf(t * 1000));
+      gsap.ticker.lagSmoothing(0);
+    } else {
+      const raf = t => { lenis.raf(t); requestAnimationFrame(raf); };
+      requestAnimationFrame(raf);
+    }
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+    const id = a.getAttribute('href');
+    const el = id === '#top' ? document.body : document.querySelector(id);
+    if (!el) return;
+    e.preventDefault();
+    if (lenis) lenis.scrollTo(el, { offset: -64 });
+    else el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+  }));
+
+  /* ---------- reading progress + active chapter ---------- */
+  const bar = document.getElementById('progress');
+  const tocLinks = [...document.querySelectorAll('nav.toc a')];
+  const onScroll = () => {
+    const h = document.documentElement.scrollHeight - innerHeight;
+    bar.style.width = (h > 0 ? scrollY / h * 100 : 0) + '%';
+    let cur = null;
+    tocLinks.forEach(a => { const s = document.querySelector(a.getAttribute('href')); if (s && s.getBoundingClientRect().top < innerHeight * .4) cur = a; });
+    tocLinks.forEach(a => a.classList.toggle('on', a === cur));
+  };
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+
+  /* ---------- hero entrance ---------- */
+  if (hasGsap && !reduce) {
+    const h1 = document.querySelector('.hero h1');
+    gsap.from(h1, { y: 30, duration: 1.1, ease: 'power3.out' });
+    gsap.from('.hero .lede', { y: 20, duration: 1, delay: .2, ease: 'power3.out' });
+    gsap.from('#heroPhoto', { y: 60, rotate: -4, duration: 1.4, delay: .3, ease: 'power3.out' });
+    gsap.to('#heroPhoto', { rotate: -1.5, y: -30, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+  }
+
+
+  /* ---------- counters ---------- */
+  const fmt = (v, dec) => v.toLocaleString('de-DE', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+  document.querySelectorAll('[data-count]').forEach(el => {
+    const end = +el.dataset.count, dec = +(el.dataset.dec || 0), pre = el.dataset.prefix || '', suf = el.dataset.suffix || '';
+    if (!hasGsap || reduce) return;
+    const o = { v: 0 };
+    gsap.to(o, { v: end, duration: 1.6, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'top 85%', once: true },
+      onUpdate: () => { el.textContent = pre + fmt(o.v, dec) + suf; } });
+  });
+
+
+  /* ---------- people filter ---------- */
+  const chips = [...document.querySelectorAll('.chip')];
+  chips.forEach(c => c.addEventListener('click', () => {
+    chips.forEach(x => x.setAttribute('aria-pressed', String(x === c)));
+    document.querySelectorAll('.person').forEach(p => { p.hidden = !(c.dataset.filter === 'all' || p.dataset.side === c.dataset.filter); });
+  }));
+
+  /* ---------- horizontal timeline (desktop only) ---------- */
+  if (hasGsap && !reduce && typeof ScrollTrigger !== 'undefined') {
+    // Sticky + own scroll math instead of a ScrollTrigger pin: a pin keeps cached
+    // positions and gets stuck when the page height changes (map card, iframe resize).
+    const sticky = document.getElementById('tlSticky'), run = document.getElementById('tlRun');
+    const track = document.getElementById('tlTrack'), outer = document.getElementById('tlOuter');
+    const wide = matchMedia('(min-width: 761px)');
+    const setX = gsap.quickTo(track, 'x', { duration: .5, ease: 'power3.out' });
+    let dist = 0;
+    const measure = () => {
+      if (!wide.matches) { sticky.classList.remove('on'); run.style.height = '0px'; gsap.set(track, { x: 0 }); dist = 0; return; }
+      sticky.classList.add('on');
+      dist = Math.max(0, track.scrollWidth - outer.clientWidth);
+      run.style.height = dist + 'px';
+      update();
+    };
+    const update = () => {
+      if (!dist) return;
+      const top = run.getBoundingClientRect().top - sticky.offsetHeight;
+      setX(-Math.min(1, Math.max(0, (88 - top) / dist)) * dist);
+    };
+    addEventListener('scroll', update, { passive: true });
+    if (lenis) lenis.on('scroll', update);
+    addEventListener('resize', measure);
+    wide.addEventListener?.('change', measure);
+    document.fonts?.ready.then(measure);
+    measure();
+    // section headings rise slightly (they stay visible at rest)
+    gsap.utils.toArray('section h2').forEach(h => gsap.from(h, { y: 24, duration: .9, ease: 'power3.out', scrollTrigger: { trigger: h, start: 'top 90%', once: true } }));
+  }
+
+  /* ---------- quiz ---------- */
+  const POOL = [
+    ['In welchen Jahren fanden die Kindertransporte vor allem statt?', ['1933 bis 1935', '1938 bis 1939', '1941 bis 1943', '1945 bis 1946'], 1, 'Die Transporte fuhren vor allem von Dezember 1938 bis September 1939.'],
+    ['Wie alt durften die Kinder höchstens sein?', ['10 Jahre', '14 Jahre', '17 Jahre', '21 Jahre'], 2, 'Mitfahren durften Kinder und Jugendliche bis 17 Jahre.'],
+    ['In welches Land kamen die meisten Kinder?', ['USA', 'Großbritannien', 'Schweiz', 'Schweden'], 1, 'Rund 10.000 Kinder kamen nach Großbritannien. Kleinere Gruppen kamen auch in andere Länder.'],
+    ['Wie viel Bargeld durfte ein Kind mitnehmen?', ['Gar keins', '10 Reichsmark', '100 Reichsmark', 'So viel es wollte'], 1, 'Erlaubt waren höchstens 10 Reichsmark.'],
+    ['Welches Ereignis im November 1938 machte die Rettung so dringend?', ['Die Olympischen Spiele', 'Das Novemberpogrom', 'Der Beginn des Krieges', 'Der Bau der Berliner Mauer'], 1, 'Im Novemberpogrom am 9./10. November 1938 brannten Synagogen, und rund 30.000 jüdische Männer kamen in Konzentrationslager.'],
+    ['Wo kamen viele Kinder mit der Fähre in England an?', ['Dover', 'Harwich', 'Liverpool', 'Glasgow'], 1, 'Die Fähre aus Hoek van Holland fuhr nach Harwich an der Ostküste Englands.'],
+    ['Wer organisierte die Züge aus Prag?', ['Oskar Schindler', 'Nicholas Winton', 'Winston Churchill', 'Alf Dubs'], 1, 'Der Brite Nicholas Winton rettete 669 Kinder aus der Tschechoslowakei.'],
+    ['Warum fuhr der neunte Zug aus Prag nie ab?', ['Es gab keine Kinder mehr', 'Der Zweite Weltkrieg begann', 'Der Zug war kaputt', 'England wollte keine Kinder mehr'], 1, 'Am 1. September 1939 begann der Krieg. Die Grenzen wurden geschlossen.'],
+    ['Wie hieß der Londoner Bahnhof, an dem Pflegefamilien die Kinder abholten?', ['King’s Cross', 'Victoria', 'Liverpool Street', 'Paddington'], 2, 'An der Liverpool Street Station steht heute das Denkmal „Kindertransport – Die Ankunft“.'],
+    ['Wie viele Wörter durfte eine Nachricht über das Rote Kreuz höchstens haben?', ['10', '25', '100', 'beliebig viele'], 1, 'Die Nachrichten über das Rote Kreuz durften höchstens 25 Wörter haben.'],
+    ['Wer verhandelte in Wien mit Adolf Eichmann über die Ausreise von Kindern?', ['Truus Wijsmuller', 'Lore Segal', 'Ruth Westheimer', 'Anne Frank'], 0, 'Die Niederländerin Truus Wijsmuller erreichte, dass rund 600 Kinder aus Wien ausreisen durften.'],
+    ['Was geschah 1940 mit manchen älteren Jungen in Großbritannien?', ['Sie wurden Soldaten', 'Sie wurden als „feindliche Ausländer“ interniert', 'Sie wurden zurückgeschickt', 'Sie bekamen einen Orden'], 1, 'Weil sie aus Deutschland oder Österreich kamen, wurden viele ältere Jungen eine Zeit lang in Lagern festgehalten.'],
+    ['Was geschah mit den Eltern der meisten Kinder?', ['Sie kamen bald nach', 'Sie wurden im Holocaust ermordet', 'Sie zogen in die USA', 'Sie lebten unbeschadet weiter'], 1, 'Die meisten Kinder sahen ihre Eltern nie wieder. Viele Eltern wurden deportiert und ermordet.'],
+    ['Wer schuf die Denkmäler in Berlin und London?', ['Frank Meisler', 'Frank Auerbach', 'Flor Kent', 'Nicholas Winton'], 0, 'Der Bildhauer Frank Meisler kam 1939 selbst mit einem Kindertransport aus Danzig nach England.'],
+    ['Wann wurde die Hilfe von Nicholas Winton öffentlich bekannt?', ['1945', '1960', '1988', '2015'], 2, 'Erst 1988 erzählte eine britische Fernsehsendung von seiner Hilfe.'],
+    ['Was mussten Unterstützer in Großbritannien für jedes Kind hinterlegen?', ['Nichts', '50 Pfund', '1.000 Pfund', 'Ein Haus'], 1, 'Für jedes Kind mussten 50 Pfund als Sicherheit hinterlegt werden.'],
+  ];
+  const shuffle = a => { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [b[i], b[j]] = [b[j], b[i]]; } return b; };
+  const ROUND = 10;
+  const newRound = () => shuffle(POOL).slice(0, ROUND).map(([q, o, r, e]) => {
+    const order = shuffle(o.map((_, i) => i));
+    return [q, order.map(i => o[i]), order.indexOf(r), e];
+  });
+  let Q = newRound(), qi = 0, score = 0;
+  const box = document.getElementById('quizBox'), quizShell = box.innerHTML;
+  let qText, qA, qE, qN, qC, qS;
+  const bindQuiz = () => {
+    qText = document.getElementById('qText'); qA = document.getElementById('qAnswers'); qE = document.getElementById('qExplain');
+    qN = document.getElementById('qNext'); qC = document.getElementById('qCount'); qS = document.getElementById('qScore');
+    qN.addEventListener('click', onNext);
+  };
+  const render = () => {
+    const [q, opts] = Q[qi];
+    qC.textContent = `Frage ${qi + 1} von ${Q.length}`; qS.textContent = `${score} richtig`;
+    qText.textContent = q; qE.textContent = ''; qN.disabled = true;
+    qN.textContent = qi === Q.length - 1 ? 'Ergebnis zeigen' : 'Nächste Frage';
+    qA.innerHTML = '';
+    opts.forEach((o, i) => {
+      const b = document.createElement('button'); b.className = 'answer'; b.textContent = o;
+      b.addEventListener('click', () => {
+        const right = Q[qi][2];
+        if (i === right) score++;
+        [...qA.children].forEach((c, k) => { c.disabled = true; if (k === right) c.classList.add('right'); else if (k === i) c.classList.add('wrong'); });
+        qE.textContent = (i === right ? 'Richtig. ' : 'Leider falsch. ') + Q[qi][3];
+        qS.textContent = `${score} richtig`; qN.disabled = false; qN.focus({ preventScroll: true });
+      });
+      qA.appendChild(b);
+    });
+  };
+  function onNext() {
+    if (qi < Q.length - 1) { qi++; render(); return; }
+    const verdict = score >= 9 ? 'Sehr gut' : score >= 6 ? 'Gut gemacht' : 'Nochmal lesen';
+    box.innerHTML = `<div class="q-meta"><span>Ergebnis</span><span>${score} von ${Q.length}</span></div>
+      <p class="stamp-result">${verdict}</p>
+      <p class="explain" style="text-align:center">Du hast ${score} von ${Q.length} Fragen richtig beantwortet.</p>
+      <div class="quiz-actions" style="justify-content:center"><button class="btn" id="qAgain">Neue Runde mit anderen Fragen</button></div>`;
+    if (hasGsap && !reduce) gsap.from('.stamp-result', { scale: 2.4, opacity: 0, rotate: -20, duration: .5, ease: 'back.out(2)' });
+    document.getElementById('qAgain').addEventListener('click', () => {
+      box.innerHTML = quizShell; bindQuiz(); Q = newRound(); qi = 0; score = 0; render();
+    });
+  }
+  bindQuiz();
+  render();
+})();
+</script>
+<script>
+(() => {
+  const btn = document.getElementById('srcToggle'), body = document.getElementById('srcBody');
+  btn.addEventListener('click', () => {
+    const open = body.hidden;
+    body.hidden = !open;
+    btn.setAttribute('aria-expanded', String(open));
+    btn.textContent = open ? 'Quellen ausblenden' : 'Quellen anzeigen';
+    if (window.ScrollTrigger) ScrollTrigger.refresh();
+  });  const tBtn = document.getElementById('teamToggle'), tBody = document.getElementById('teamBody');
+  tBtn.addEventListener('click', () => {
+    const open = tBody.hidden;
+    tBody.hidden = !open;
+    tBtn.setAttribute('aria-expanded', String(open));
+    tBtn.textContent = open ? 'Projektgruppe ausblenden' : 'Projektgruppe';
+    if (window.ScrollTrigger) ScrollTrigger.refresh();
+  });
+})();
+</script>
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hasGsap = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
+
+  /* ---------- luggage tag at the start ---------- */
+  const intro = document.getElementById('intro');
+  if (!reduce && hasGsap) {
+    intro.hidden = false;
+    document.documentElement.style.overflow = 'hidden';
+    window.__lenis?.stop();
+    gsap.from('#folder', { y: 40, opacity: 0, duration: .9, ease: 'power3.out' });
+    let opened = false;
+    const open = () => {
+      if (opened) return; opened = true;
+      gsap.timeline({ onComplete: () => { intro.remove(); document.documentElement.style.overflow = ''; window.__lenis?.start(); ScrollTrigger.refresh(); } })
+        .to('#folder', { y: '-110vh', rotate: -6, duration: .9, ease: 'power3.in' })
+        .to(intro, { opacity: 0, duration: .45 }, '-=.3');
+    };
+    document.getElementById('introOpen').addEventListener('click', open);
+    intro.addEventListener('wheel', open, { passive: true });
+    intro.addEventListener('touchmove', open, { passive: true });
+    addEventListener('keydown', e => { if (['Enter', ' ', 'ArrowDown', 'PageDown', 'Escape'].includes(e.key)) open(); });
+    setTimeout(() => document.getElementById('introOpen').focus({ preventScroll: true }), 50);
+  } else intro.remove();
+
+  if (!hasGsap || reduce) return;
+
+  /* ---------- year badge follows the sections ---------- */
+  const badge = document.getElementById('yearBadge'), yearNow = document.getElementById('yearNow');
+  const setYear = y => {
+    if (!y) { badge.classList.remove('on'); return; }
+    badge.classList.add('on');
+    if (yearNow.textContent === y) return;
+    gsap.to(yearNow, { y: -10, opacity: 0, duration: .15, onComplete: () => { yearNow.textContent = y; gsap.fromTo(yearNow, { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: .25 }); } });
+  };
+  document.querySelectorAll('main section').forEach(sec => ScrollTrigger.create({
+    trigger: sec, start: 'top 55%', end: 'bottom 55%',
+    onToggle: st => { if (st.isActive) setYear(sec.dataset.year); }
+  }));
+
+  /* ---------- kickers type like a typewriter ---------- */
+  document.querySelectorAll('main section:not(.hero) .kicker').forEach(k => {
+    const full = k.textContent; k.setAttribute('aria-label', full);
+    k.style.minHeight = k.offsetHeight + 'px'; k.textContent = '';
+    const o = { n: 0 };
+    gsap.to(o, { n: full.length, duration: Math.min(1.4, full.length * .045), ease: 'none',
+      scrollTrigger: { trigger: k, start: 'top 88%', once: true },
+      onStart: () => k.classList.add('typing'),
+      onUpdate: () => { k.textContent = full.slice(0, Math.round(o.n)); },
+      onComplete: () => setTimeout(() => k.classList.remove('typing'), 900) });
+  });
+
+  /* ---------- photos uncover from top to bottom ---------- */
+  document.querySelectorAll('figure.photo img, img.portrait').forEach(img => gsap.fromTo(img,
+    { clipPath: 'inset(0 0 100% 0)', scale: 1.06 },
+    { clipPath: 'inset(0 0 0% 0)', scale: 1, duration: 1.3, ease: 'power3.out', scrollTrigger: { trigger: img, start: 'top 88%', once: true } }));
+
+  /* ---------- the quote lights up word by word ---------- */
+  document.querySelectorAll('.quote').forEach(q => {
+    q.innerHTML = q.textContent.split(' ').map(w => `<span class="w">${w}</span>`).join(' ');
+    gsap.fromTo(q.querySelectorAll('.w'), { opacity: .15 }, { opacity: 1, stagger: .1, ease: 'none',
+      scrollTrigger: { trigger: q, start: 'top 80%', end: 'bottom 50%', scrub: true } });
+  });
+})();
+</script>
