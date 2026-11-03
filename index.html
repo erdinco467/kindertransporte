@@ -308,6 +308,10 @@ footer { border-top: 1px solid var(--rule); padding-block: 2rem 3rem; font-size:
 .person img[src*="kohn"], .person img[src*="westheimer"] { object-position: 50% 15%; }
 .person img[src*="wijsmuller"] { object-position: 25% 20%; }
 .person img[src*="buncecourt"] { object-position: 50% 50%; filter: grayscale(.4); }
+.photo-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.4rem; align-items: start; }
+.photo-row .photo { margin: 0; }
+.photo-row .photo img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+#placeCard .photo img { width: 100%; max-height: 22rem; object-fit: cover; object-position: 50% 0%; }
 /* ---------- Kindertransport additions ---------- */
 .folder.tag { background: #cdb88c; border-radius: 6px; clip-path: polygon(14% 0, 86% 0, 100% 9%, 100% 100%, 0 100%, 0 9%); padding-top: 4.2rem; }
 .folder.tag::before { inset: 12px; border-style: dashed; }
@@ -445,7 +449,17 @@ footer { border-top: 1px solid var(--rule); padding-block: 2rem 3rem; font-size:
     <li><span class="by">9./10. Nov. 1938</span><span>Im Novemberpogrom brennen Synagogen, Geschäfte und Wohnungen werden zerstört. Rund 30.000 jüdische Männer kommen in Konzentrationslager.</span></li>
     <li><span class="by">15. Nov. 1938</span><span>Jüdische Kinder dürfen keine deutschen Schulen mehr besuchen.</span></li>
   </ol>
-  <figure class="photo" style="margin-top:2.4rem">
+  <div class="photo-row" style="margin-top:2.4rem">
+    <figure class="photo">
+      <img src="img/evian.jpg" width="900" height="643" alt="Ein Redner spricht an einem langen Tisch vor den Vertretern vieler Staaten in einem Saal" loading="lazy">
+      <figcaption>Konferenz von Évian, Juli 1938: Der US-Vertreter Myron Taylor spricht. Am Ende will fast kein Land mehr Flüchtlinge aufnehmen.</figcaption>
+    </figure>
+    <figure class="photo">
+      <img src="img/hof.jpg" width="900" height="583" alt="Zerschlagene Möbel und Bänke liegen auf der Straße vor der Synagoge in Hof" loading="lazy">
+      <figcaption>Hof (Saale), November 1938: Die Einrichtung der Synagoge wurde im Novemberpogrom auf die Straße geworfen.</figcaption>
+    </figure>
+  </div>
+  <figure class="photo" style="margin-top:1.6rem">
     <img src="img/pogrom.webp" width="787" height="538" alt="Passanten gehen in Magdeburg an einem jüdischen Geschäft mit zerstörten Schaufenstern vorbei" loading="lazy">
     <figcaption>Ein zerstörtes jüdisches Geschäft in Magdeburg nach dem Novemberpogrom, November 1938.</figcaption>
   </figure>
@@ -588,6 +602,16 @@ footer { border-top: 1px solid var(--rule); padding-block: 2rem 3rem; font-size:
     <p>Mit dem Beginn des Zweiten Weltkriegs am 1. September 1939 war die Flucht aus dem Deutschen Reich kaum noch möglich. Ab Oktober 1941 deportierten die Nationalsozialisten Jüdinnen und Juden aus Deutschland, Österreich und der Tschechoslowakei in Ghettos und Vernichtungslager.</p>
     <p>Die meisten Kinder der Kindertransporte sahen ihre Eltern nie wieder. Viele waren nach dem Krieg die einzigen Überlebenden ihrer ganzen Familie.</p>
   </div>
+  <div class="photo-row" style="margin-top:2.4rem">
+    <figure class="photo">
+      <img src="img/harwich.webp" alt="Jüdische Flüchtlingskinder nach der Ankunft in England" loading="lazy">
+      <figcaption>Gerettet: Jüdische Flüchtlingskinder nach der Ankunft in England, 1938/39.</figcaption>
+    </figure>
+    <figure class="photo">
+      <img src="img/wuerzburg.jpg" width="900" height="599" alt="Eine lange Reihe von Menschen mit Gepäck geht durch eine Straße, Polizisten begleiten sie" loading="lazy">
+      <figcaption>Zurückgeblieben: Jüdinnen und Juden aus Würzburg werden am 25. April 1942 zum Bahnhof getrieben und deportiert.</figcaption>
+    </figure>
+  </div>
   <p class="quote" style="margin-block:2.6rem">Gerettet wurden die Kinder. Ihre Eltern, Großeltern und Geschwister blieben zurück.</p>
   <div class="dilemma">
     <div><h3>Gerettet</h3><p>Rund 10.000 Kinder überlebten in Großbritannien den Holocaust. Ohne die Transporte wären die meisten von ihnen ermordet worden.</p></div>
@@ -703,6 +727,11 @@ footer { border-top: 1px solid var(--rule); padding-block: 2rem 3rem; font-size:
     <li>Ruth Westheimer: David Shankbone, CC BY-SA 3.0, Wikimedia Commons.</li>
     <li>Truus Wijsmuller 1965: Ron Kroon, Anefo / Nationaal Archief, CC0.</li>
     <li>Bunce Court, Kent: Penny Mayes, geograph.org.uk, CC BY-SA 2.0.</li>
+    <li>Konferenz von Évian 1938: unbekannter Fotograf, gemeinfrei, Wikimedia Commons „Myron Taylor addresses the Évian Conference.jpg“.</li>
+    <li>Synagoge Hof (Saale) 1938: unbekannter Fotograf, gemeinfrei, Wikimedia Commons „Hof (Saale), Synagoge, Novemberpogrom.jpg“.</li>
+    <li>Deportation aus Würzburg 1942: unbekannter Fotograf, gemeinfrei, Wikimedia Commons „Jews deported from Würzburg march towards train station.jpg“.</li>
+    <li>Ferienlager Dovercourt (Postkarte, 1965): Harwich &amp; Dovercourt (Flickr), CC BY-SA 2.0, Wikimedia Commons „Warners Holiday Camp (5695481356).jpg“.</li>
+    <li>Winton-Denkmal in Prag: Meloun1212, 2024, CC0, Wikimedia Commons „Praha hlavní nádraží - Nicolas Winton.jpg“.</li>
     <li>Denkmal Berlin: Avi1111 (Dr. Avishai Teicher), CC BY-SA 4.0, Wikimedia Commons.</li>
     <li>Denkmal London: Matt Brown, 2024, CC BY 2.0, Wikimedia Commons.</li>
     <li>Denkmal Wien: Wikimedia-Commons-Nutzer „Kindertransport“, CC BY-SA 3.0, „Fürdaskindvienna.JPG“.</li>
@@ -733,12 +762,13 @@ footer { border-top: 1px solid var(--rule); padding-block: 2rem 3rem; font-size:
       visit: ['Denkmal „Für das Kind“', 'Westbahnhof, Europaplatz 2, 1150 Wien, Österreich.'] },
     { n: 'Prag', lon: 14.435, lat: 50.083, when: 'März bis August 1939', what: 'Die Züge von Nicholas Winton',
       text: 'Im März 1939 besetzte die Wehrmacht Prag. Schon vorher hatte der Brite Nicholas Winton begonnen, Kinder aus der Tschechoslowakei zu retten. Acht Züge brachten 669 Kinder über Deutschland und die Niederlande nach England. Der neunte Zug sollte am 1. September 1939 fahren. Er fuhr nie ab.',
+      img: ['img/winton-denkmal.jpg', 'Das Denkmal für Nicholas Winton im Prager Hauptbahnhof'],
       visit: ['Denkmal für Nicholas Winton', 'Hauptbahnhof Prag (Praha hlavní nádraží), Tschechien.'] },
     { n: 'Hoek van Holland', lon: 4.13, lat: 51.98, when: 'nach der Grenze', what: 'Endlich in Sicherheit',
       text: 'Hinter der deutsch-niederländischen Grenze waren die Kinder in Sicherheit. Niederländische Helferinnen brachten ihnen Essen und Getränke. Im Hafen Hoek van Holland stiegen die Kinder auf die Fähre über die Nordsee.' },
     { n: 'Harwich', lon: 1.284, lat: 51.946, when: 'am nächsten Morgen', what: 'Ankunft in England',
       text: 'Nach der Nacht auf dem Schiff kamen die Kinder im Hafen von Harwich an. Kinder ohne Pflegefamilie kamen zuerst in ein Ferienlager in Dovercourt. Dort warteten sie im kalten Winter, bis eine Familie sie aufnahm.',
-      img: ['img/harwich.webp', 'Jüdische Flüchtlingskinder nach der Ankunft in England'] },
+      img: ['img/dovercourt.jpg', 'Der Eingang des Ferienlagers in Dovercourt (Postkarte, 1965). Hier wohnten 1938/39 viele Kinder'] },
     { n: 'London', lon: -0.081, lat: 51.518, when: 'Ende der Reise', what: 'Liverpool Street Station',
       text: 'Die anderen Kinder fuhren mit dem Zug weiter zur Liverpool Street Station in London. Dort holten Pflegefamilien oder Verwandte sie ab. Für viele Kinder war das der Beginn eines völlig neuen Lebens.',
       img: ['img/london.webp', 'Jüdische Flüchtlingskinder kommen in London an'],
