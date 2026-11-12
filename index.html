@@ -321,6 +321,9 @@ footer { border-top: 1px solid var(--rule); padding-block: 2rem 3rem; font-size:
 .t-fields dd { margin: 0; border-bottom: 1px solid rgba(29,30,34,.45); min-width: 8rem; }
 .hero-photo { margin: 0; justify-self: center; max-width: 30rem; background: var(--note); padding: .8rem .8rem 1rem; transform: rotate(1.6deg); box-shadow: 0 18px 34px color-mix(in srgb, var(--ink) 22%, transparent); display: grid; gap: .6rem; }
 .hero-photo img { width: 100%; height: auto; display: block; filter: grayscale(1) contrast(1.05); }
+.video-wrap { max-width: 22rem; margin: 0 auto; }
+.video-wrap video { display: block; width: 100%; height: auto; aspect-ratio: 9 / 16; background: #000; border-radius: .5rem; box-shadow: 0 18px 40px rgba(0,0,0,.25); }
+.video-wrap figcaption { font: .8rem var(--mono); color: var(--ink-soft); margin-top: .8rem; text-align: center; }
 .hero-photo figcaption { font: .82rem var(--mono); color: var(--note-ink); opacity: .8; }
 @media (min-width: 1000px) { .hero { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); } }
 .question { border-left: 3px solid var(--stamp); padding: .5rem 0 .5rem 1.1rem; display: grid; gap: .3rem; }
@@ -353,6 +356,8 @@ footer { border-top: 1px solid var(--rule); padding-block: 2rem 3rem; font-size:
 .l-foot { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; font: .9rem var(--mono); }
 .l-foot .over { color: #a3262a; }
 .l-sent { font-style: italic; border-top: 1px solid #b9b8ae; padding-top: .7rem; }
+.conditions { margin: 0; padding-left: 1.3rem; display: grid; gap: .4rem; }
+.conditions li::marker { color: var(--stamp); }
 .memorials { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 2rem; }
 .memorials img { aspect-ratio: 3 / 4; object-fit: cover; filter: grayscale(.3); }
 
@@ -379,6 +384,7 @@ footer { border-top: 1px solid var(--rule); padding-block: 2rem 3rem; font-size:
   <a class="brand" href="#top">Kindertransporte</a>
   <span class="yearbadge" id="yearBadge" aria-hidden="true"><span id="yearNow">1938</span></span>
   <nav class="toc" aria-label="Kapitel">
+    <a href="#video">Video</a>
     <a href="#warum">Warum</a>
     <a href="#reise">Die Reise</a>
     <a href="#kinder">Die Kinder</a>
@@ -406,6 +412,21 @@ footer { border-top: 1px solid var(--rule); padding-block: 2rem 3rem; font-size:
   <figure class="hero-photo" id="heroPhoto">
     <img src="img/ankunft.webp" width="937" height="1200" alt="Jüdische Kinder mit Mänteln, Mützen und Gepäck stehen nach der Ankunft in England an Deck eines Schiffes, daneben ein britischer Polizist">
     <figcaption>Jüdische Kinder kommen mit einem Kindertransport in England an, 1938/39. Viele trugen eine Nummer um den Hals.</figcaption>
+  </figure>
+</section>
+
+<!-- ================= VIDEO ================= -->
+<section id="video" data-year="1938/39" class="col video-section" aria-labelledby="t-video">
+  <div class="section-head">
+    <p class="kicker">Kurzvideo · 2:15 Minuten</p>
+    <h2 id="t-video">Die Kinder&shy;transporte in zwei Minuten</h2>
+  </div>
+  <figure class="video-wrap">
+    <video controls preload="metadata" playsinline width="1080" height="1920" poster="video/kindertransporte-poster.jpg" aria-describedby="videoNote">
+      <source src="video/kindertransporte.mp4" type="video/mp4">
+      <track kind="subtitles" srclang="de" label="Deutsch" src="video/kindertransporte.vtt">
+    </video>
+    <figcaption id="videoNote">Vom Kurs erstellt. Die Sprecherstimme ist eine KI-Stimme (ElevenLabs). Karte: Natural Earth, heutige Grenzen. Fotos: siehe Quellen.</figcaption>
   </figure>
 </section>
 
@@ -446,7 +467,9 @@ footer { border-top: 1px solid var(--rule); padding-block: 2rem 3rem; font-size:
     <li><span class="by">1935</span><span>Die „Nürnberger Gesetze“ machen Jüdinnen und Juden zu Menschen mit weniger Rechten. Ehen mit Nichtjuden werden verboten.</span></li>
     <li><span class="by">März 1938</span><span>Österreich wird an das Deutsche Reich „angeschlossen“. Auch in Wien beginnt sofort die Verfolgung.</span></li>
     <li><span class="by">Juli 1938</span><span>Auf der Konferenz von Évian beraten 32 Staaten über jüdische Flüchtlinge. Fast keiner will mehr Menschen aufnehmen.</span></li>
-    <li><span class="by">9./10. Nov. 1938</span><span>Im Novemberpogrom brennen Synagogen, Geschäfte und Wohnungen werden zerstört. Rund 30.000 jüdische Männer kommen in Konzentrationslager.</span></li>
+    <li><span class="by">Okt. 1938</span><span>„Polenaktion“: Rund 17.000 Jüdinnen und Juden mit polnischem Pass werden aus Deutschland an die polnische Grenze abgeschoben. Viele müssen dort wochenlang unter schlechten Bedingungen ausharren.</span></li>
+    <li><span class="by">7. Nov. 1938</span><span>Der 17-jährige Herschel Grynszpan schießt in Paris auf den deutschen Diplomaten Ernst vom Rath. Seine Familie war von der Polenaktion betroffen. Die NS-Führung nutzt das Attentat als Vorwand für Gewalt.</span></li>
+    <li><span class="by">9./10. Nov. 1938</span><span>Im Novemberpogrom werden über 1.400 Synagogen und Betstuben zerstört, dazu Geschäfte und Wohnungen. Mindestens 91 Menschen werden ermordet. Rund 30.000 jüdische Männer kommen in die Konzentrationslager Dachau, Buchenwald und Sachsenhausen.</span></li>
     <li><span class="by">15. Nov. 1938</span><span>Jüdische Kinder dürfen keine deutschen Schulen mehr besuchen.</span></li>
   </ol>
   <div class="photo-row" style="margin-top:2.4rem">
@@ -464,7 +487,15 @@ footer { border-top: 1px solid var(--rule); padding-block: 2rem 3rem; font-size:
     <figcaption>Ein zerstörtes jüdisches Geschäft in Magdeburg nach dem Novemberpogrom, November 1938.</figcaption>
   </figure>
   <div class="prose" style="margin-top:2rem">
-    <p>Nach dem Pogrom wollten viele jüdische Familien fliehen. Doch fast alle Länder hatten ihre Grenzen geschlossen. Jüdische Organisationen in Großbritannien baten ihre Regierung um Hilfe. Mitte November 1938 erlaubte die britische Regierung, dass Kinder ohne Visum einreisen dürfen. Ihre Eltern durften nicht mitkommen.</p>
+    <p>Nach dem Pogrom wollten viele jüdische Familien fliehen. Doch fast alle Länder hatten ihre Grenzen geschlossen. Jüdische Organisationen und die Quäker (eine christliche Glaubensgemeinschaft, die Verfolgten half) baten die britische Regierung um Hilfe.</p>
+    <p>Am 21. November 1938 wurde im britischen Unterhaus darüber gesprochen. Innenminister Samuel Hoare kündigte an, dass Kinder bis 17 Jahre ohne Visum einreisen dürfen. Dafür galten feste Bedingungen:</p>
+    <ul class="conditions">
+      <li>Die Kinder reisen ohne ihre Eltern.</li>
+      <li>Für jedes Kind werden 50 Pfund als Sicherheit hinterlegt.</li>
+      <li>Der britische Staat bezahlt nichts. Spender, Hilfsorganisationen und Pflegefamilien tragen alle Kosten.</li>
+      <li>Die Kinder sollen nur vorübergehend bleiben und später weiterreisen.</li>
+    </ul>
+    <p>Die Organisation „Refugee Children's Movement“ sammelte Geld, suchte Pflegefamilien und verteilte die Kinder. Im Deutschen Reich stellten die jüdischen Gemeinden die Listen zusammen. Zuerst kamen besonders gefährdete Kinder an die Reihe, zum Beispiel Waisen und Kinder, deren Väter in Konzentrationslagern waren.</p>
   </div>
 </section>
 
@@ -514,7 +545,7 @@ footer { border-top: 1px solid var(--rule); padding-block: 2rem 3rem; font-size:
   <div class="feelings">
     <div><h3>Abschied</h3><p>Am Bahnhof sahen viele Kinder ihre Eltern zum letzten Mal. Oft durften die Eltern nicht mit auf den Bahnsteig.</p></div>
     <div><h3>Fremdes Land</h3><p>Neue Sprache, neues Essen, neue Schule. Manche Kinder wurden in Familien aufgenommen, die eine andere Religion hatten.</p></div>
-    <div><h3>„Feindliche Ausländer“</h3><p>Als der Krieg begann, galten Deutsche und Österreicher in Großbritannien als verdächtig. 1940 wurden ältere Jungen ab 16 Jahren zum Teil in Lagern interniert.</p></div>
+    <div><h3>„Feindliche Ausländer“</h3><p>Als der Krieg begann, galten Deutsche und Österreicher in Großbritannien als verdächtig. Im Mai und Juni 1940 wurden ältere Jungen ab 16 Jahren zum Teil interniert, vor allem auf der Isle of Man. Einige wurden nach Kanada oder Australien gebracht. Viele traten später freiwillig in die britische Armee ein.</p></div>
     <div><h3>Warten auf Nachricht</h3><p>Ab September 1939 kamen kaum noch Briefe. Viele Kinder erfuhren erst nach 1945, was mit ihren Familien geschehen war.</p></div>
   </div>
 
@@ -637,7 +668,7 @@ footer { border-top: 1px solid var(--rule); padding-block: 2rem 3rem; font-size:
       <div class="tl-item"><p class="tl-date">1935<small>September</small></p><p>Die „Nürnberger Gesetze“ nehmen Jüdinnen und Juden viele Rechte.</p></div>
       <div class="tl-item"><p class="tl-date">1938<small>Juli</small></p><p>Konferenz von Évian: Fast kein Land will mehr jüdische Flüchtlinge aufnehmen.</p></div>
       <div class="tl-item key"><p class="tl-date">1938<small>9./10. November</small></p><p>Novemberpogrom. Synagogen brennen, rund 30.000 jüdische Männer werden verhaftet.</p></div>
-      <div class="tl-item"><p class="tl-date">1938<small>Mitte November</small></p><p>Die britische Regierung erlaubt die Einreise jüdischer Kinder ohne ihre Eltern.</p></div>
+      <div class="tl-item"><p class="tl-date">1938<small>21. November</small></p><p>Im britischen Unterhaus kündigt Innenminister Samuel Hoare an: Kinder bis 17 Jahre dürfen ohne Visum einreisen. Ihre Eltern dürfen nicht mitkommen.</p></div>
       <div class="tl-item key"><p class="tl-date">1938<small>1./2. Dezember</small></p><p>Der erste Transport mit fast 200 Kindern fährt von Berlin ab und kommt in Harwich an.</p></div>
       <div class="tl-item"><p class="tl-date">1938<small>10. Dezember</small></p><p>Der erste Transport aus Wien. Truus Wijsmuller hatte ihn mit Adolf Eichmann ausgehandelt.</p></div>
       <div class="tl-item"><p class="tl-date">1939<small>März bis August</small></p><p>Acht Züge aus Prag bringen 669 Kinder nach Großbritannien. Organisiert hat sie Nicholas Winton.</p></div>
@@ -677,7 +708,7 @@ footer { border-top: 1px solid var(--rule); padding-block: 2rem 3rem; font-size:
   <div class="prose col" style="margin:3rem 0 0">
     <h3>Warum ist das Thema heute noch wichtig?</h3>
     <p>Die Kindertransporte zeigen, dass Hilfe möglich war, als viele Länder wegsahen. Sie zeigen aber auch, wie wenig getan wurde: Die Eltern ließ man zurück.</p>
-    <p>Heute leben nur noch wenige Menschen, die als Kinder mit einem Transport kamen. Ihre Berichte sind in Büchern, Interviews und Museen gesammelt. Auch heute fliehen Kinder allein vor Krieg und Verfolgung. Darum erinnern Politiker wie Alf Dubs immer wieder an die Kindertransporte.</p>
+    <p>Heute leben nur noch wenige Menschen, die als Kinder mit einem Transport kamen. Ihre Berichte sind in Büchern, Interviews und Museen gesammelt. Auch heute fliehen Kinder allein vor Krieg und Verfolgung. Darum erinnern Politiker wie Alf Dubs immer wieder an die Kindertransporte. 2018 einigten sich die deutsche Regierung und die Claims Conference (eine Organisation, die Entschädigungen für jüdische NS-Opfer verhandelt) auf eine einmalige Zahlung von 2.500 Euro an jedes noch lebende Kind der Transporte.</p>
   </div>
 </section>
 
@@ -714,6 +745,8 @@ footer { border-top: 1px solid var(--rule); padding-block: 2rem 3rem; font-size:
     <li>Wikipedia: Artikel „Kindertransport“ (deutsch) und „Nicholas Winton“.</li>
     <li>Association of Jewish Refugees (AJR), London: Informationen zu den Kindertransporten und Berichte von Überlebenden.</li>
     <li>Bundeszentrale für politische Bildung: Informationen zum Novemberpogrom 1938.</li>
+    <li>UK Parliament, Hansard: Debatte im Unterhaus vom 21. November 1938, „Racial, Religious and Political Minorities“.</li>
+    <li>Claims Conference: Mitteilung vom Dezember 2018 zur Zahlung an Überlebende der Kindertransporte.</li>
   </ol>
   <h3 class="src-h" style="margin-top:2rem;font-size:1.1rem">Bilder</h3>
   <ol class="sources small">
@@ -736,6 +769,7 @@ footer { border-top: 1px solid var(--rule); padding-block: 2rem 3rem; font-size:
     <li>Denkmal London: Matt Brown, 2024, CC BY 2.0, Wikimedia Commons.</li>
     <li>Denkmal Wien: Wikimedia-Commons-Nutzer „Kindertransport“, CC BY-SA 3.0, „Fürdaskindvienna.JPG“.</li>
     <li>Karte: Natural Earth (gemeinfrei), heutige Grenzen.</li>
+    <li>Video: Sprecherstimme erzeugt mit ElevenLabs (KI-Stimme), Untertitel und Schnitt vom Projektkurs.</li>
   </ol>
   </div>
 </section>
@@ -999,6 +1033,10 @@ footer { border-top: 1px solid var(--rule); padding-block: 2rem 3rem; font-size:
     ['Was geschah mit den Eltern der meisten Kinder?', ['Sie kamen bald nach', 'Sie wurden im Holocaust ermordet', 'Sie zogen in die USA', 'Sie lebten unbeschadet weiter'], 1, 'Die meisten Kinder sahen ihre Eltern nie wieder. Viele Eltern wurden deportiert und ermordet.'],
     ['Wer schuf die Denkmäler in Berlin und London?', ['Frank Meisler', 'Frank Auerbach', 'Flor Kent', 'Nicholas Winton'], 0, 'Der Bildhauer Frank Meisler kam 1939 selbst mit einem Kindertransport aus Danzig nach England.'],
     ['Wann wurde die Hilfe von Nicholas Winton öffentlich bekannt?', ['1945', '1960', '1988', '2015'], 2, 'Erst 1988 erzählte eine britische Fernsehsendung von seiner Hilfe.'],
+    ['Wann kündigte die britische Regierung im Unterhaus die Aufnahme der Kinder an?', ['30. Januar 1933', '21. November 1938', '1. September 1939', '14. Mai 1940'], 1, 'Am 21. November 1938 kündigte Innenminister Samuel Hoare an, dass Kinder bis 17 Jahre ohne Visum einreisen dürfen.'],
+    ['Was war die „Polenaktion“ im Oktober 1938?', ['Ein Hilfsprogramm für Kinder', 'Die Abschiebung von rund 17.000 Juden mit polnischem Pass', 'Ein Abkommen mit Polen', 'Der Angriff auf Polen'], 1, 'Rund 17.000 Jüdinnen und Juden mit polnischem Pass wurden aus Deutschland an die polnische Grenze abgeschoben.'],
+    ['Wohin wurden 1940 viele internierte Jungen in Großbritannien gebracht?', ['Auf die Isle of Man', 'Nach Berlin', 'Nach Prag', 'Nach Wien'], 0, 'Die meisten Internierten kamen in Lager auf der Isle of Man. Einige wurden nach Kanada oder Australien gebracht.'],
+    ['Wer bezahlte die Kosten für die Kinder in Großbritannien?', ['Der britische Staat', 'Das Deutsche Reich', 'Spender, Hilfsorganisationen und Pflegefamilien', 'Die Kinder selbst'], 2, 'Der britische Staat bezahlte nichts. Alle Kosten trugen private Spender, Hilfsorganisationen und Pflegefamilien.'],
     ['Was mussten Unterstützer in Großbritannien für jedes Kind hinterlegen?', ['Nichts', '50 Pfund', '1.000 Pfund', 'Ein Haus'], 1, 'Für jedes Kind mussten 50 Pfund als Sicherheit hinterlegt werden.'],
   ];
   const shuffle = a => { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [b[i], b[j]] = [b[j], b[i]]; } return b; };
